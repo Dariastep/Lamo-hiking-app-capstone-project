@@ -1,7 +1,10 @@
+import RouteList from "@/components/RouteList/RouteList";
+import { routesData } from "@/routesData";
+
 export default function HomePage() {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <RouteList routesData={routesData} />
     </div>
   );
 }
