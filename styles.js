@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+:root {
+  --primary-color: #FBFBFB;
+  --secondary-color: #008bf8
+}
   *,
   *::before,
   *::after {
@@ -12,7 +16,7 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
-    background: #ffffff;
+    background: var(--primary-color);
      
   }
 

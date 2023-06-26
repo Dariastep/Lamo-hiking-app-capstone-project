@@ -5,7 +5,9 @@ import RouteCard from "../RouteCard/index.js";
 export default function RouteList() {
   return (
     <>
-      <Heading><h1>Routes</h1></Heading>
+      <Heading>
+        <h1>Routes</h1>
+      </Heading>
       <List role="list">
         {routesData.map((route) => {
           return (
@@ -24,7 +26,7 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin: 6rem 0.5rem;
+  margin: 7rem 0.5rem;
   overflow: hidden;
   z-index: 1;
 `;
@@ -47,6 +49,10 @@ const Heading = styled.div`
   left: 0;
   width: 100%;
   z-index: 2;
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   padding: 1rem;
+
+  h1 {
+    color: var(--primary-color);
+  }
 `;
