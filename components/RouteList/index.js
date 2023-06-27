@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { routesData } from "@/routesData.js";
 import RouteCard from "../RouteCard/index.js";
+import Link from "next/link.js";
 
 export default function RouteList() {
   return (
@@ -11,9 +12,11 @@ export default function RouteList() {
       <List role="list">
         {routesData.map((route) => {
           return (
-            <ListItem key={route.id}>
-              <RouteCard route={route} />
-            </ListItem>
+            <Link key={route.id} href={`/${route.id}`}>
+              <ListItem>
+                <RouteCard route={route} />
+              </ListItem>
+            </Link>
           );
         })}
       </List>
