@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { routesData } from "@/routesData.js";
 import RouteCard from "../RouteCard/index.js";
+import Link from "next/link.js";
 
 export default function RouteList() {
   return (
@@ -11,9 +12,11 @@ export default function RouteList() {
       <List role="list">
         {routesData.map((route) => {
           return (
-            <ListItem key={route.id}>
-              <RouteCard route={route} />
-            </ListItem>
+            <StyledLink key={route.id} href={`/${route.id}`}>
+              <ListItem>
+                <RouteCard route={route} />
+              </ListItem>
+            </StyledLink>
           );
         })}
       </List>
@@ -41,6 +44,11 @@ const ListItem = styled.li`
   margin: auto;
   justify-content: center;
   align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 `;
 
 const Heading = styled.div`
@@ -54,5 +62,15 @@ const Heading = styled.div`
 
   h1 {
     color: var(--primary-color);
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    text-decoration: none;
+    color: inherit;
   }
 `;
