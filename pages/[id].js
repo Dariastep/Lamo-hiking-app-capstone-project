@@ -2,18 +2,26 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { routesData } from "@/routesData";
 import RouteDetails from "@/components/RouteDetails";
+import { useEffect } from "react";
 
 export default function Route() {
   const router = useRouter();
   const { id } = router.query;
   const currentRoute = routesData.find((route) => route.id === id);
 
+  useEffect(() => {
+    if (!currentRoute) {
+      const timeout = setTimeout(() => {
+        router.push("/");
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentRoute, router]);
   if (!currentRoute) {
-    setTimeout(() => {
-      router.push("/");
-    }, 3000);
     return <h1>This route is not found</h1>;
   }
+
   const {
     name,
     activity,
