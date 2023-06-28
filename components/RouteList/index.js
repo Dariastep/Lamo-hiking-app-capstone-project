@@ -3,7 +3,7 @@ import { routesData } from "@/routesData.js";
 import RouteCard from "../RouteCard/index.js";
 import Link from "next/link.js";
 
-export default function RouteList() {
+export default function RouteList({isFavorite, onToggleFavorite}) {
   return (
     <>
       <Heading>
@@ -14,7 +14,7 @@ export default function RouteList() {
           return (
             <StyledLink key={route.id} href={`/${route.id}`}>
               <ListItem>
-                <RouteCard route={route} />
+                <RouteCard route={route} isFavorite={isFavorite} onToggleFavorite={onToggleFavorite}/>
               </ListItem>
             </StyledLink>
           );
@@ -68,6 +68,7 @@ const Heading = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+
 
   &:visited {
     text-decoration: none;

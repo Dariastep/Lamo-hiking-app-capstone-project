@@ -4,7 +4,6 @@ import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 
-
 export default function RouteDetails({
   name,
   activity,
@@ -13,6 +12,8 @@ export default function RouteDetails({
   altitude,
   description,
   imageUrl,
+  onToggleFavorite,
+  isFavorite,
 }) {
   return (
     <>
@@ -28,7 +29,7 @@ export default function RouteDetails({
       <RouteDetailsWrapper>
         <ImageContainer>
           <StyledImage src={imageUrl} alt={name} width={350} height={100} />
-          <FavoriteButton />
+          <FavoriteButton onToggleFavorite={onToggleFavorite} isFavorite={isFavorite} />
         </ImageContainer>
         <RouteInfo>
           <div>
@@ -96,9 +97,8 @@ const StyledImage = styled(Image)`
 `;
 const ImageContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: fit-content;
 `;
-
 
 const RouteInfo = styled.div`
   display: grid;
