@@ -4,7 +4,7 @@ import { routesData } from "@/routesData";
 import RouteDetails from "@/components/RouteDetails";
 import { useEffect } from "react";
 
-export default function Route() {
+export default function Route({isFavorite,onToggleFavorite }) {
   const router = useRouter();
   const { id } = router.query;
   const currentRoute = routesData.find((route) => route.id === id);
@@ -41,6 +41,8 @@ export default function Route() {
       altitude={altitude}
       description={description}
       imageUrl={imageUrl}
+      onToggleFavorite={onToggleFavorite}
+      isFavorite={isFavorite}
     />
   );
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 
-export default function RouteCard({ route }) {
+export default function RouteCard({ route, isFavorite, onToggleFavorite }) {
   
   
   return (
@@ -11,8 +11,7 @@ export default function RouteCard({ route }) {
         src={route.imageUrl}
         alt={route.name}
         width={250}
-        height={100} 
-        
+        height={100}  
       />
       <RouteCardHeading>{route.name}</RouteCardHeading>
 

@@ -4,7 +4,7 @@ export default createGlobalStyle`
 :root {
   --primary-color: #FBFBFB;
   --secondary-color: #008bf8;
-  --tercery-color: #ccc
+  --tercery-color: hsla(0, 0%, 80%, 0.69)
 }
   *,
   *::before,

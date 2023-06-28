@@ -6,7 +6,7 @@ export default function HomePage() {
   
   return (
     <div>
-      <RouteList routesData={routesData}  />
+      <RouteList routesData={routesData}   />
     </div>
   );
 }

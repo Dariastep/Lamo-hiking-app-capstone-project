@@ -2,7 +2,7 @@ import GlobalStyle from "../styles";
 import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(true);
 
   function onToggleFavorite() {
     setIsFavorite(!isFavorite);
