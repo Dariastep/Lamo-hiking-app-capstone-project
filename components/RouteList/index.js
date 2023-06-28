@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { routesData } from "@/routesData.js";
 import RouteCard from "../RouteCard/index.js";
 import Link from "next/link.js";
+import FavoriteButton from "../FavoriteButton/index.js";
 
-export default function RouteList({isFavorite, onToggleFavorite}) {
+export default function RouteList() {
   return (
     <>
       <Heading>
@@ -12,11 +13,12 @@ export default function RouteList({isFavorite, onToggleFavorite}) {
       <List role="list">
         {routesData.map((route) => {
           return (
-            <StyledLink key={route.id} href={`/${route.id}`}>
-              <ListItem>
-                <RouteCard route={route} isFavorite={isFavorite} onToggleFavorite={onToggleFavorite}/>
-              </ListItem>
-            </StyledLink>
+            <ListItem key={route.id}>
+              <RouteCard route={route} />
+              <StyledLink href={`/${route.id}`}>
+                <StyledButton>Details</StyledButton>
+              </StyledLink>
+            </ListItem>
           );
         })}
       </List>
@@ -34,6 +36,7 @@ const List = styled.ul`
   z-index: 1;
 `;
 const ListItem = styled.li`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -44,11 +47,12 @@ const ListItem = styled.li`
   margin: auto;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+  }
 `;
 
 const Heading = styled.div`
@@ -69,9 +73,23 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 
-
   &:visited {
     text-decoration: none;
     color: inherit;
+  }
+`;
+
+const StyledButton = styled.button`
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin: 1.5rem 1rem;
+  border: 1px var(--secondary-color);
+  padding: 0.5rem 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;
