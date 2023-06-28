@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
+
 
 export default function RouteDetails({
   name,
@@ -19,12 +21,15 @@ export default function RouteDetails({
       </Head>
       <Heading>
         <Link href="/">
-        <Back>&#8249;</Back>
-      </Link><h1>{name}</h1></Heading>
+          <Back>&#8249;</Back>
+        </Link>
+        <h1>{name}</h1>
+      </Heading>
       <RouteDetailsWrapper>
-        <StyledImage src={imageUrl} alt={name} width={350} height={100} />
-        
-
+        <ImageContainer>
+          <StyledImage src={imageUrl} alt={name} width={350} height={100} />
+          <FavoriteButton />
+        </ImageContainer>
         <RouteInfo>
           <div>
             <RouteCardKey>Activity:</RouteCardKey>
@@ -69,7 +74,7 @@ const Heading = styled.div`
 `;
 const Back = styled.span`
   display: inline-block;
-  background-color: #0170C4;
+  background-color: #0170c4;
   border-radius: 50%;
   color: white;
   padding: 1rem 1.5rem;
@@ -87,12 +92,19 @@ const StyledImage = styled(Image)`
   max-width: 100%;
   height: auto;
   border-radius: 10px;
+  position: relative;
 `;
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+
 const RouteInfo = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin: 1.5rem auto
+  margin: 1.5rem auto;
 `;
 
 const RouteCardKey = styled.p`
@@ -100,12 +112,11 @@ const RouteCardKey = styled.p`
   margin: 0;
 `;
 
-
 const RouteDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem;
-  margin: 7rem 1rem 1rem ;
+  margin: 7rem 1rem 1rem;
   justify-content: center;
   align-items: center;
 `;

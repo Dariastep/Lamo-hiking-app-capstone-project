@@ -3,7 +3,8 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 :root {
   --primary-color: #FBFBFB;
-  --secondary-color: #008bf8
+  --secondary-color: #008bf8;
+  --tercery-color: #ccc
 }
   *,
   *::before,

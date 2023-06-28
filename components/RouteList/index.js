@@ -37,10 +37,10 @@ const ListItem = styled.li`
   display: flex;
   flex-direction: column;
   width: 90%;
-  border: 1px solid #ccc;
+  border: 1px solid var(--tercery-color);
   border-radius: 10px;
   padding: 1rem;
-  background-color: #ccc;
+  background-color: var(--tercery-color);
   margin: auto;
   justify-content: center;
   align-items: center;
