@@ -1,15 +1,19 @@
 import Image from "next/image";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
-export default function RouteCard({ route }) {
+export default function RouteCard({ route, isFavorite, onToggleFavorite }) {
+  
+  
   return (
-    <>
+    <><ImageContainer>
       <StyledImage
         src={route.imageUrl}
         alt={route.name}
         width={250}
-        height={100}
+        height={100}  
       />
+      </ImageContainer>
       <RouteCardHeading>{route.name}</RouteCardHeading>
 
       <RouteInfo>
@@ -36,6 +40,10 @@ export default function RouteCard({ route }) {
     </>
   );
 }
+const ImageContainer=styled.div`
+position: relative;
+  width: fit-content;
+`
 const RouteCardHeading = styled.h2`
   font-size: 1.25rem;
   margin: 1rem;
