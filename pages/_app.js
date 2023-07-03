@@ -1,3 +1,4 @@
+import NavigationBar from "@/components/NavigationBar";
 import GlobalStyle from "../styles";
 
 export default function App({ Component, pageProps }) {
@@ -8,6 +9,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
       />
+      <NavigationBar />
     </>
   );
 }

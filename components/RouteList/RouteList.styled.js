@@ -34,7 +34,7 @@ export const Heading = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
   background-color: var(--secondary-color);
   padding: 1rem;
 

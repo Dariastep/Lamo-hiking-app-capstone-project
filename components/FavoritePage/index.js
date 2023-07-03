@@ -3,17 +3,22 @@ import RouteCard from "../RouteCard";
 import { ListItem, List } from "../RouteList/RouteList.styled.js";
 import { Heading } from "../RouteDetails/routeDetails.styled.js";
 import { routesData } from "@/routesData";
+import { useState, useEffect } from "react";
 
 export default function FavoritePage() {
-  let favoriteRoutes = [];
+  const [favoriteRoutes, setFavoriteRoutes] = useState([]);
 
-  if (typeof localStorage !== "undefined") {
-    favoriteRoutes = Object.keys(localStorage).filter(
-      (key) =>
-        key.startsWith("toggleFavoriteRoute-") &&
-        localStorage.getItem(key) === "true"
-    ); /*  Only keys that satisfy both conditions will be included in the favoriteRoutes array. */
-  }
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const filteredRoutes = Object.keys(localStorage).filter(
+        (key) =>
+          key.startsWith("toggleFavoriteRoute-") &&
+          localStorage.getItem(key) === "true"
+      );
+      setFavoriteRoutes(filteredRoutes);
+    }
+  }, []); /*  Only keys that satisfy both conditions will be included in the favoriteRoutes array. */
+
 
   return (
     <>
