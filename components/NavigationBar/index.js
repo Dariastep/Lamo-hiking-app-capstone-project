@@ -12,14 +12,14 @@ export default function NavigationBar() {
       <NavigationSection active={router.pathname === "/favorites"}>
         <NavigationLink href={"/favorites"}>Favorites</NavigationLink>
       </NavigationSection>
-      <NavigationSection active={router.pathname === "#"}>
-        <NavigationLink href={"#"}>My Profile</NavigationLink>
+      <NavigationSection active={router.pathname === "/myProfile"}>
+        <NavigationLink href={"/myProfile"}>My Profile</NavigationLink>
       </NavigationSection>
     </NavigationContainer>
   );
 }
 
-export const NavigationContainer = styled.div`
+export const NavigationContainer = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
