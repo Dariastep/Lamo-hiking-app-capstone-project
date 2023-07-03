@@ -23,7 +23,7 @@ export default createGlobalStyle`
 
   h1 {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 1rem auto;
   width: 100%;
   }
