@@ -25,7 +25,6 @@ export const NavigationContainer = styled.nav`
   left: 0;
   width: 100%;
   background-color: var(--secondary-color);
-  padding: 1.5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -40,6 +39,7 @@ export const NavigationSection = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  padding: 1.5rem;
   background-color: ${(isActive) => (isActive.active ? "grey" : "transparent")};
   transition: background-color 0.3s;
 `;
