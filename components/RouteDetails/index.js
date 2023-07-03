@@ -7,7 +7,7 @@ import {
   RouteInfo,
   RouteCardKey,
   Description,
-} from "./routeDetails.styled.js";
+} from "./routeDetails.styled";
 
 import FavoriteButton from "../FavoriteButton";
 import BackButton from "../BackButton";

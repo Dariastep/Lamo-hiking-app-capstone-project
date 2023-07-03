@@ -1,7 +1,7 @@
 import BackButton from "../BackButton";
 import RouteCard from "../RouteCard";
 import { ListItem, List } from "../RouteList/RouteList.styled.js";
-import { Heading } from "../RouteDetails.js";
+import { Heading } from "../RouteDetails/routeDetails.styled.js";
 import { routesData } from "@/routesData";
 
 export default function FavoritePage() {

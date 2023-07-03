@@ -1,5 +1,5 @@
-import FavoritePage from "@/components/FavoritePage";
-import { routesData } from "@/routesData";
+import FavoritePage from "../components/FavoritePage/index.js";
+
 
 export default function Favorites() {
 

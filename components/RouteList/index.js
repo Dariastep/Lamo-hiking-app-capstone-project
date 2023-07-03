@@ -1,6 +1,7 @@
 import RouteCard from "../RouteCard/index.js";
 
-import { ListItem, Heading, List } from "./RouteList.styled.js";
+import { ListItem, Heading, List } from "./RouteList.styled";
+
 
 export default function RouteList({ routesData }) {
   return (

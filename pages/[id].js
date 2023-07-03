@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import { routesData } from "@/routesData";
-import RouteDetails from "@/components/RouteDetails";
+import { routesData } from "../routesData.js";
+import RouteDetails from "../components/RouteDetails/index.js";
 import { useEffect } from "react";
 
 export default function Route() {
@@ -28,7 +28,7 @@ export default function Route() {
     length,
     altitude,
     description,
-    imageUrl
+    imageUrl,
   } = currentRoute;
 
   return (

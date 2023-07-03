@@ -1,4 +1,4 @@
-import RouteList from "@/components/RouteList/index.js";
+import RouteList from "../components/RouteList/index.js"
 import { routesData } from "@/routesData";
 
 
