@@ -8,9 +8,11 @@ export default function FavoritePage() {
   let favoriteRoutes = [];
 
   if (typeof localStorage !== "undefined") {
-    favoriteRoutes = Object.keys(localStorage).filter((key) =>
-      key.startsWith("toggleFavoriteRoute-")
-    );
+    favoriteRoutes = Object.keys(localStorage).filter(
+      (key) =>
+        key.startsWith("toggleFavoriteRoute-") &&
+        localStorage.getItem(key) === "true"
+    ); /*  Only keys that satisfy both conditions will be included in the favoriteRoutes array. */
   }
 
   return (
@@ -24,6 +26,7 @@ export default function FavoritePage() {
           favoriteRoutes.map((key) => {
             const id = key.replace("toggleFavoriteRoute-", "");
             const currentRoute = routesData.find((route) => route.id === id);
+            console.log(currentRoute);
             if (!currentRoute) return null;
 
             return (
