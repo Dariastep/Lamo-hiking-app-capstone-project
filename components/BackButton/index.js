@@ -4,23 +4,22 @@ import Link from "next/link";
 export default function BackButton() {
   return (
     <Link href="/">
-      <Back>&#8249;</Back>
+      <Back>&larr;</Back>
     </Link>
   );
 }
 
 const Back = styled.span`
   display: inline-block;
-  background-color: #0170c4;
-  border-radius: 50%;
   color: white;
-  padding: 1rem 1.5rem;
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-
+  transition: 0.3s ease-in-out;
   &:hover {
-    background-color: #015c9e;
+    background-color: var(--tercery-color);
+    border-radius: 30%;
   }
+`;
+const StyledLink = styled(Link)`
+  transition: 0.3s ease-in-out;
 `;
