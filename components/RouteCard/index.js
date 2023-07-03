@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
-export default function RouteCard({ route }) {
+export default function RouteCard({ route, id }) {
   return (
     <>
       <ImageContainer>
@@ -12,6 +13,7 @@ export default function RouteCard({ route }) {
           width={250}
           height={100}
         />
+        <FavoriteButton id={id} />
       </ImageContainer>
       <RouteCardHeading>{route.name}</RouteCardHeading>
 

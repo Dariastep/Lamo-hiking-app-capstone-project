@@ -3,14 +3,15 @@ import useLocalStorageState from "use-local-storage-state";
 
 export default function FavoriteButton({ id }) {
   const [toggleFavoriteRoute, setToggleFavoriteRoute] = useLocalStorageState(
-    `toggleFavoriteRoute-${id}`,false
+    `toggleFavoriteRoute-${id}`,
+    false
   );
   function handleFavoriteClick() {
     setToggleFavoriteRoute((prev) => !prev);
   }
 
   return (
-    <Bookmark name="favorite button" onClick={handleFavoriteClick}>
+    <Bookmark name="favorite button" onClick={handleFavoriteClick} toggleFavoriteRoute={toggleFavoriteRoute}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -36,7 +37,10 @@ const Bookmark = styled.button`
   z-index: 2;
   cursor: pointer;
   border-radius: 20%;
-  background-color: var(--tercery-color);
+  background-color: ${(props) =>
+    props.toggleFavoriteRoute
+    ? "var(--primary-color)"
+      : "var(--tercery-color)"};
 
   &:hover {
     border-radius: 20%;

@@ -31,12 +31,11 @@ export default function FavoritePage() {
           favoriteRoutes.map((key) => {
             const id = key.replace("toggleFavoriteRoute-", "");
             const currentRoute = routesData.find((route) => route.id === id);
-            console.log(currentRoute);
             if (!currentRoute) return null;
 
             return (
               <ListItem key={id} {...currentRoute} id={id}>
-                <RouteCard route={currentRoute} />
+                <RouteCard route={currentRoute} id={id} />
               </ListItem>
             );
           })

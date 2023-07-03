@@ -12,7 +12,7 @@ export default function RouteList({ routesData }) {
         {routesData.map((route) => {
           return (
             <ListItem key={route.id}>
-              <RouteCard route={route} />
+              <RouteCard route={route} id={route.id} />
             </ListItem>
           );
         })}
