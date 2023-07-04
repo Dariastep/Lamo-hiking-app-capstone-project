@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
+import RouteCard from "../RouteCard";
+import { List, ListItem } from "../RouteList/RouteList.styled";
+import { routesData } from "@/routesData";
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState([""]);
-  const [searchrResults, setSearchResults] = useState([]);
-  async function handleSearch(event) {
+  const [searchResults, setSearchResults] = useState([]);
+
+  function handleSearch(event) {
     event.preventDefault();
     const query = event.target.value;
     setSearchQuery(query);
@@ -12,18 +16,41 @@ export default function SearchBar() {
     const results = routesData.filter((route) =>
       route.name.toLowerCase().includes(query.toLowerCase())
     );
+    setSearchResults(results);
   }
-  setSearchResults(results);
-  return (
-    <div>
-        <input type="text" aria-label="search field" value={searchQuery} id="search" name="search" onChange={handleSearch}/>
-      <ul>
 
-      </ul>
-    </div>
+  return (
+    <SearchContainer>
+      <SearchInput
+        type="text"
+        aria-label="search field"
+        value={searchQuery}
+        id="search"
+        name="search"
+        onChange={handleSearch}
+      />
+      {searchResults.length > 0 && (
+        <List>
+          {searchResults.map((result) => {
+            return (
+              <ListItem key={result.id}>
+                <RouteCard route={result} id={result.id} />
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
+    </SearchContainer>
   );
 }
 
-const StyledSearchBar = styled(SearchBar)`
-  display: flex;
+const SearchContainer = styled.div`
+  position: relative;
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 3rem;
+  margin-top: 6rem;
+  margin: 6rem auto 0;
 `;

@@ -1,15 +1,13 @@
 import BackButton from "@/components/BackButton";
 import NavigationBar from "@/components/NavigationBar";
-import { Heading } from "../components/RouteDetails/routeDetails.styled";
+import Header from "@/components/Header";
 
 
 export default function MyProfile() {
   return (
     <div>
-         <Heading>
+      <Header title="My Profile" BackButton={BackButton}/>
         <BackButton />
-        <h1>My Profile</h1>
-      </Heading>
       <NavigationBar />
     </div>
   );

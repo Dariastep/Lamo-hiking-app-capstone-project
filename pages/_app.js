@@ -7,8 +7,8 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Component {...pageProps} />
-      
       <NavigationBar />
+      
     </>
   );
 }
