@@ -1,10 +1,11 @@
-import { createGlobalStyle } from "styled-components"; 
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 :root {
   --primary-color: #FBFBFB;
   --secondary-color: #008bf8;
-  --tercery-color: hsla(0, 0%, 80%, 0.80)
+  --tercery-color: hsla(0, 0%, 80%, 0.80);
+  --active-favorite-button-color: hsla(0, 0%, 90%, 0.80);
 }
   *,
   *::before,
@@ -23,7 +24,7 @@ export default createGlobalStyle`
 
   h1 {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 1rem auto;
   width: 100%;
   }

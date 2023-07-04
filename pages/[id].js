@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { routesData } from "@/routesData";
-import RouteDetails from "@/components/RouteDetails";
+import { routesData } from "../routesData.js";
+import RouteDetails from "../components/RouteDetails/index.js";
 import { useEffect } from "react";
 
-export default function Route({isFavorite,onToggleFavorite }) {
+export default function Route() {
   const router = useRouter();
   const { id } = router.query;
   const currentRoute = routesData.find((route) => route.id === id);
@@ -41,8 +40,7 @@ export default function Route({isFavorite,onToggleFavorite }) {
       altitude={altitude}
       description={description}
       imageUrl={imageUrl}
-      onToggleFavorite={onToggleFavorite}
-      isFavorite={isFavorite}
+      id={id}
     />
   );
 }

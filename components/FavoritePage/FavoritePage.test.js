@@ -1,11 +1,11 @@
+
 import { render, screen } from "@testing-library/react";
-import RouteList from "./index.js";
-import { routesData } from "@/routesData.js";
+import FavoritePage from ".";
 
 test("renders a heading", () => {
-  render(<RouteList />);
+  render(<FavoritePage />);
   const heading = screen.getByRole("heading", {
-    name: /routes/i,
+    name: /favorites/i,
   });
   expect(heading).toBeInTheDocument();
 });
