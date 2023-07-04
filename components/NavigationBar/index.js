@@ -21,9 +21,11 @@ export default function NavigationBar() {
 
 export const NavigationContainer = styled.nav`
   position: fixed;
+  height: 4rem;
   bottom: 0;
   left: 0;
   width: 100%;
+  z-index: 3;
   background-color: var(--secondary-color);
   display: flex;
   justify-content: space-around;
@@ -33,13 +35,15 @@ export const NavigationLink = styled(Link)`
   text-decoration: none;
   color: ${(isActive) => (isActive.active ? "green" : "var(--primary-color)")};
   font-weight: bold;
+  text-align: center;
 `;
 
 export const NavigationSection = styled.div`
   flex: 1;
   display: flex;
+  height: 100%;
   justify-content: center;
-  padding: 1.5rem;
   background-color: ${(isActive) => (isActive.active ? "grey" : "transparent")};
   transition: background-color 0.3s;
+  align-items: center;
 `;
