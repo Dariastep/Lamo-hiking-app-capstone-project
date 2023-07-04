@@ -9,7 +9,6 @@ export default function HomePage() {
   return (
     <Container>
       <Header title={<Logo />} />
-      <SearchBar />
       <RouteList routesData={routesData} />
     </Container>
   );

@@ -5,7 +5,7 @@ import { List, ListItem } from "../RouteList/RouteList.styled";
 import { routesData } from "@/routesData";
 
 export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = useState([""]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   function handleSearch(event) {
@@ -49,8 +49,7 @@ const SearchContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  width: 100%;
-  height: 3rem;
-  margin-top: 6rem;
+  width: 80%;
   margin: 6rem auto 0;
+  height: 3rem;
 `;
