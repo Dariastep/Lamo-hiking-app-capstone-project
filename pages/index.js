@@ -8,14 +8,14 @@ export default function HomePage() {
   return (
     <>
       <Header title={<Logo />} />
-      <Container>
+      <Main>
         <RouteList routesData={routesData} />
-      </Container>
+      </Main>
     </>
   );
 }
 
-const Container = styled.div`
+const Main = styled.div`
   margin-top: 6rem;
   display: flex;
   flex-direction: column;

@@ -19,7 +19,7 @@ const HeaderContainer = styled.div`
   z-index: 5;
   width: 100%;
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
   flex-direction: row;
   background-color: var(--primary-color);
@@ -33,7 +33,7 @@ const SpaceLeft = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   height: 100%;
 `;
 const Title = styled.h1`
