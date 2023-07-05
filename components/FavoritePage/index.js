@@ -1,7 +1,6 @@
-import BackButton from "../BackButton";
+
 import RouteCard from "../RouteCard";
 import { ListItem, List } from "../RouteList/RouteList.styled.js";
-import { Heading } from "../RouteDetails/routeDetails.styled.js";
 import { routesData } from "@/routesData";
 import { useState, useEffect } from "react";
 
