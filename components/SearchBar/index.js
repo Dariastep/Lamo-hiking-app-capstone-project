@@ -10,6 +10,7 @@ export default function SearchBar({
   return (
     <>
       <SearchInput
+      defaultValue={searchQuery}
         autoFocus={true}
         type="text"
         aria-label="search field"
