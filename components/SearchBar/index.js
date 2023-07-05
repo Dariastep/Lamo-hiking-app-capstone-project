@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-export default function SearchBar({searchQuery,handleSearch,searchResults  }) {
-
+export default function SearchBar({
+  searchQuery,
+  handleSearch,
+  searchResults,
+}) {
   return (
-    <SearchContainer>
+    <>
       <SearchInput
         type="text"
         aria-label="search field"
@@ -12,16 +15,25 @@ export default function SearchBar({searchQuery,handleSearch,searchResults  }) {
         name="search"
         onChange={handleSearch}
       />
-    </SearchContainer>
+      <StyledP isVisible={searchQuery !== "" && searchResults.length > 0}>
+        {searchResults.length > 0
+          ? `${searchResults.length} ${
+              searchResults.length !== 1 ? "results" : "result"
+            } found`
+          : ""}
+      </StyledP>
+    </>
   );
 }
 
-const SearchContainer = styled.div`
-  position: relative;
-`;
-
 const SearchInput = styled.input`
   width: 80%;
-  margin: 6rem auto 0;
+  margin: 0 auto;
+  border: 1px solid black;
   height: 3rem;
+`;
+const StyledP = styled.p`
+  text-align: center;
+  margin-top: 0.5rem;
+  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
 `;
