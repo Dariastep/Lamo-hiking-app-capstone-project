@@ -11,6 +11,7 @@ import {
 
 import FavoriteButton from "../FavoriteButton";
 import BackButton from "../BackButton";
+import Header from "../Header";
 
 export default function RouteDetails({
   name,
@@ -27,10 +28,7 @@ export default function RouteDetails({
       <Head>
         <title>{name}</title>
       </Head>
-      <Heading>
-        <BackButton />
-        <h1>{name}</h1>
-      </Heading>
+      <Header title={name} BackButton={BackButton}/>
       <RouteDetailsWrapper>
         <ImageContainer>
           <StyledImage src={imageUrl} alt={name} width={350} height={100} />

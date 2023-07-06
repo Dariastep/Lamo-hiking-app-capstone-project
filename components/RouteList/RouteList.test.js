@@ -3,9 +3,9 @@ import RouteList from "./index.js";
 import { routesData } from "@/routesData.js";
 
 test("renders a heading", () => {
-  render(<RouteList />);
+  render(<RouteList routesData={routesData} />);
   const heading = screen.getByRole("heading", {
-    name: /routes/i,
+    name: /lamo/i,
   });
   expect(heading).toBeInTheDocument();
 });

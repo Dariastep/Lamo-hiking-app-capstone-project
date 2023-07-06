@@ -11,7 +11,8 @@ export default function BackButton() {
 
 const Back = styled.span`
   display: inline-block;
-  color: white;
+
+  color: "black";
   font-size: 1.5rem;
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -22,4 +23,5 @@ const Back = styled.span`
 `;
 const StyledLink = styled(Link)`
   transition: 0.3s ease-in-out;
+
 `;

@@ -46,7 +46,8 @@ export default function RouteCard({ route, id }) {
 }
 const ImageContainer = styled.div`
   position: relative;
-  width: fit-content;
+  width: 100;
+  
 `;
 const RouteCardHeading = styled.h2`
   font-size: 1.25rem;
@@ -90,4 +91,6 @@ export const StyledButton = styled.button`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+
+ 
 `;

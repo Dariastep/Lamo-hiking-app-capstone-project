@@ -5,7 +5,7 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin: 7rem 0.5rem;
+  margin: 4rem 0.5rem;
   overflow: hidden;
   z-index: 1;
 `;
@@ -21,8 +21,7 @@ export const ListItem = styled.li`
   margin: auto;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 5px -5px;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -42,4 +41,3 @@ export const Heading = styled.div`
     color: var(--primary-color);
   }
 `;
-

@@ -11,6 +11,6 @@ test("renders a link", () => {
         pathname: "/",
       }));
   render(<NavigationBar />);
-  const link = screen.getByRole("link");
+  const link = screen.getByRole("link",  { name: /explore/i });
   expect(link).toBeInTheDocument();
 });
