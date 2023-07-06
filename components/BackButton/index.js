@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function BackButton() {
   return (
-    <Link href="/">
+    <StyledLink href="/">
       <Back>&larr;</Back>
-    </Link>
+    </StyledLink>
   );
 }
 

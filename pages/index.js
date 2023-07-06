@@ -8,14 +8,14 @@ export default function HomePage() {
   return (
     <>
       <Header title={<Logo />} />
-      <Main>
+      <MainSection>
         <RouteList routesData={routesData} />
-      </Main>
+      </MainSection>
     </>
   );
 }
 
-const Main = styled.div`
+const MainSection = styled.div`
   margin-top: 6rem;
   display: flex;
   flex-direction: column;
