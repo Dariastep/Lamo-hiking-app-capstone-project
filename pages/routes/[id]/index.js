@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import RouteDetails from "../components/RouteDetails/index.js";
-import { useEffect } from "react";
+import RouteDetails from "../../../components/RouteDetails/index.js";
 import useSWR from "swr";
 
 export default function Route() {
@@ -10,17 +9,6 @@ export default function Route() {
   const { data: route, isLoading, error } = useSWR(`/api/routes/${id}`);
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  /* const currentRoute = routesData.find((route) => route.id === id); */
-
-/*   async function deleteRoute() {
-    const response = await fetch(`/api/routes/${id}`, { method: "DELETE" });
-    if (response.ok) {
-      await response.json();
-      router.push("/");
-    } else {
-      console.log(response.status);
-    }
-  } */
 
 
   const {
@@ -32,6 +20,7 @@ export default function Route() {
     description,
     imageUrl,
   } = route;
+  console.log(route);
 
   return (
     <RouteDetails

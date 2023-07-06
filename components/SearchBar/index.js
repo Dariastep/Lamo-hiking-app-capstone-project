@@ -32,9 +32,9 @@ export default function SearchBar({
 
 const SearchBarWrapper = styled.div`
   position: fixed;
-  margin-top: 2rem;
   top: 4rem;
   width: 100%;
+  padding: 2rem 0;
   z-index: 3;
   background-color: var(--primary-color);
 `;
