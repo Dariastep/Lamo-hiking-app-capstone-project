@@ -1,24 +1,48 @@
 import Image from "next/image";
 import styled from "styled-components";
 import avatarImage from "./avatar.jpg";
-
+import { useState, useEffect } from "react";
 
 export default function Profile() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  
+  function handleNameChange(event) {
+    event.preventDefault();
+    const newName = event.target.value;
+    setName(newName);
+  }
+  function handleEmailChange(event) {
+    event.preventDefault();
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+  }
+
+  useEffect(() => {
+    //update the info every time when name and email changes.
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+  }, [name, email]);
+
+  useEffect(() => {
+    //initial mount -> take the name and the email, if the are stored in the local storage or leave it empty.
+    const storedName = localStorage.getItem("name", name);
+    const storedEmail = localStorage.getItem("email", email);
+    setName(storedName || "");
+    setEmail(storedEmail || "");
+  }, []);
+
   return (
     <ProfileWrapper>
       <AvatarWrapper>
-        <StyledImage
-          src={avatarImage}
-          alt="Avatar"
-          width={200}
-          height={200}
-        />
+        <StyledImage src={avatarImage} alt="Avatar" width={200} height={200} />
       </AvatarWrapper>
       <PersonalInfoWrapper>
         <label>Name</label>
-        <Input type="text" />
+        <Input type="text" value={name} onChange={handleNameChange} />
         <label>E-mail</label>
-        <Input type="email" />
+        <Input type="email" value={email} onChange={handleEmailChange} />
       </PersonalInfoWrapper>{" "}
     </ProfileWrapper>
   );
@@ -40,9 +64,7 @@ const AvatarWrapper = styled.div`
   align-content: center;
   justify-content: center;
 `;
-const StyledImage = styled(Image)`
-
-`;
+const StyledImage = styled(Image)``;
 
 const PersonalInfoWrapper = styled.div`
   display: flex;

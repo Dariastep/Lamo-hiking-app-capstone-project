@@ -27,8 +27,8 @@ export default function RouteList({ routesData }) {
       <List role="list">
         {searchQuery === "" ? (
           routesData.map((route) => (
-            <ListItem key={route.id}>
-              <RouteCard route={route} id={route.id} />
+            <ListItem key={route._id}>
+              <RouteCard route={route} id={route._id} />
             </ListItem>
           ))
         ) : searchResults.length > 0 ? (
