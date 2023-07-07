@@ -1,39 +1,27 @@
 import RouteCard from "../RouteCard";
-import { ListItem, List } from "../RouteList/RouteList.styled.js";
-import { routesData } from "@/routesData";
-import { useState, useEffect } from "react";
 import SearchBar from "../SearchBar";
+import { ListItem, List } from "../RouteList/RouteList.styled.js";
+import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 export default function FavoritePage() {
-  const [favoriteRoutes, setFavoriteRoutes] = useState([]);
-
-  useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      const filteredRoutes = Object.keys(localStorage).filter(
-        (key) =>
-          key.startsWith("toggleFavoriteRoute-") &&
-          localStorage.getItem(key) === "true"
-      );
-      setFavoriteRoutes(filteredRoutes);
-    }
-  }, []); /*  Only keys that satisfy both conditions will be included in the favoriteRoutes array. */
-
+  const { data: favoriteRoutes, error } = useSWR("/api/favorites");
   /* Search Bar states */
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Failed to load the favorite routes:", error);
+    }
+  }, [error]);
 
   function handleSearch(event) {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const results = favoriteRoutes.filter((route) => {
-      const currentRoute = routesData.find(
-        (routeData) => routeData.id === route
-      );
-      return (
-        currentRoute &&
-        currentRoute.name.toLowerCase().includes(query.toLowerCase())
-      );
+    const results = favoriteRoutes.filter((favoriteRoute) => {
+      favoriteRoute.name.toLowerCase().includes(query.toLowerCase());
     });
     setSearchResults(results);
   }
@@ -47,15 +35,14 @@ export default function FavoritePage() {
       />
       <List role="list">
         {searchQuery === "" ? (
-          favoriteRoutes.length > 0 ? (
-            favoriteRoutes.map((key) => {
-              const id = key.replace("toggleFavoriteRoute-", "");
-              const currentRoute = routesData.find((route) => route.id === id);
-              if (!currentRoute) return null;
-
+          favoriteRoutes && favoriteRoutes.length > 0 ? (
+            favoriteRoutes.map((favoriteRoute) => {
               return (
-                <ListItem key={id} {...currentRoute} id={id}>
-                  <RouteCard route={currentRoute} id={id} />
+                <ListItem key={favoriteRoute.id}>
+                  <RouteCard
+                    favoriteRoute={favoriteRoute}
+                    id={favoriteRoute.id}
+                  />
                 </ListItem>
               );
             })
@@ -65,12 +52,13 @@ export default function FavoritePage() {
             </ListItem>
           )
         ) : searchResults.length > 0 ? (
-          searchResults.map((route) => {
-            const currentRoute = routesData.find((routeData) => routeData.id === route);
-            if (!currentRoute) return null;
+          searchResults.map((favoriteRoute) => {
             return (
-              <ListItem key={id} {...currentRoute} id={id}>
-                <RouteCard route={currentRoute} id={id} />
+              <ListItem key={favoriteRoute.id} id={favoriteRoute.id}>
+                <RouteCard
+                  favoriteRoute={favoriteRoute}
+                  id={favoriteRoute.id}
+                />
               </ListItem>
             );
           })

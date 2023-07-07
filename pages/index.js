@@ -5,12 +5,15 @@ import Logo from "@/components/Logo/Logo.js";
 import useSWR from "swr";
 
 export default function HomePage() {
-  const { data: routesData } = useSWR("/api/routes", { fallbackData: [] });
+  const { data: routesData, error } = useSWR("/api/routes", {
+    fallbackData: [],
+  });
   console.log(routesData);
   if (!routesData) {
     return <div>Loading...</div>;
+  } else if (error) {
+    return <div>Error: {error.message}</div>;
   }
-
   return (
     <>
       <Header title={<Logo />} />

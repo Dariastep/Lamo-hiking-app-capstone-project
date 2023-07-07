@@ -1,13 +1,12 @@
 import dbConnect from "../../../lib/db/connect";
-import hikingApp from "@/lib/db/models/Route";
-
+import Route from "../../../lib/db/models/Route.js";
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
 
   if (request.method === "GET") {
     try {
-      const route = await hikingApp.findById(id);
+      const route = await Route.findById(id);
       if (!route) {
         return response.status(404).json({ status: "The route not found" });
       }
@@ -19,7 +18,7 @@ export default async function handler(request, response) {
   if (request.method === "PATCH") {
     const updatedRoute = request.body;
     try {
-      const route = await hikingApp.findByIdAndUpdate(id, updatedRoute);
+      const route = await Route.findByIdAndUpdate(id, updatedRoute);
       if (!route) {
         return response.status(404).json({ status: "The route not found" });
       }
@@ -30,7 +29,7 @@ export default async function handler(request, response) {
   }
   if (request.method === "DELETE") {
     try {
-      const route = await hikingApp.findByIdAndDelete(id);
+      const route = await Route.findByIdAndDelete(id);
       if (!route) {
         return response.status(404).json({ status: "The route not found" });
       }
