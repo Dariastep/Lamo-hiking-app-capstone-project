@@ -2,7 +2,8 @@ import RouteCard from "../RouteCard";
 import SearchBar from "../SearchBar";
 import { ListItem, List } from "../RouteList/RouteList.styled.js";
 import { useState, useEffect } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import { toggleFavorite } from "../../utils/toggleFavorite";
 
 export default function FavoritePage() {
   const { data: favoriteRoutes, error } = useSWR("/api/favorites");
@@ -25,6 +26,25 @@ export default function FavoritePage() {
     });
     setSearchResults(results);
   }
+  async function toggleFavorite(id, isFavorite) {
+    console.log(isFavorite);
+    try {
+      const response = await fetch("/api/favorites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, isFavorite }),
+      });
+      if (response.ok) {
+        mutate("/api/favorites");
+      } else {
+        console.error("Failed to toggle favorite status.");
+      }
+    } catch (error) {
+      console.error("Failed to toggle favorite status.");
+    }
+  }
 
   return (
     <>
@@ -40,8 +60,11 @@ export default function FavoritePage() {
               return (
                 <ListItem key={favoriteRoute.id}>
                   <RouteCard
-                    favoriteRoute={favoriteRoute}
+                    route={favoriteRoute}
                     id={favoriteRoute.id}
+                    toggleFavorite={() =>
+                      toggleFavorite(favoriteRoute.id, favoriteRoute.isFavorite)
+                    }
                   />
                 </ListItem>
               );
@@ -58,6 +81,7 @@ export default function FavoritePage() {
                 <RouteCard
                   favoriteRoute={favoriteRoute}
                   id={favoriteRoute.id}
+                  toggleFavorite={toggleFavorite}
                 />
               </ListItem>
             );

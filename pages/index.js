@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "@/components/Header/index.js";
 import Logo from "@/components/Logo/Logo.js";
 import useSWR from "swr";
+import { toggleFavorite } from "../utils/toggleFavorite.js";
 
 export default function HomePage() {
   const { data: routesData, error } = useSWR("/api/routes", {
@@ -18,7 +19,7 @@ export default function HomePage() {
     <>
       <Header title={<Logo />} />
       <MainSection>
-        <RouteList routesData={routesData} />
+        <RouteList routesData={routesData} toggleFavorite={toggleFavorite} />
       </MainSection>
     </>
   );

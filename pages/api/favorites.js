@@ -17,16 +17,17 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     try {
-      const { id } = request.body;
-      const newFavoriteRoute = await Route.findById({ id });
+      const { id, isFavorite} = request.body;
+      const newFavoriteRoute = await Route.findById(id);
       if (!newFavoriteRoute) {
         response.status(404).json({ error: "Route not found" });
       }
-      Route.isFavorite = true;
+      newFavoriteRoute.isFavorite = isFavorite;
       await newFavoriteRoute.save();
       response.status(201).json({ status: "Route added to favorites" });
     } catch (error) {
       response.status(400).json({ error: error.message });
     }
   }
+  response.status(405).json({ error: "Method not allowed" });
 }

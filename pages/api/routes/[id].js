@@ -16,9 +16,12 @@ export default async function handler(request, response) {
     }
   }
   if (request.method === "PATCH") {
-    const updatedRoute = request.body;
     try {
-      const route = await Route.findByIdAndUpdate(id, updatedRoute);
+      const route = await Route.findByIdAndUpdate(
+        id,
+        request.body,
+        { new: true }
+      );
       if (!route) {
         return response.status(404).json({ status: "The route not found" });
       }
