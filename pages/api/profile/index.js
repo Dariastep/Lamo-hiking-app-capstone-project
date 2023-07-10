@@ -18,12 +18,13 @@ export default async function handler(request, response) {
       const { name, email } = request.body;
       // Check if there is an existing user
       const existingUser = await User.findOne();
-
+      console.log(existingUser);
       if (existingUser) {
         existingUser.name = name;
         existingUser.email = email;
-       
+
         await existingUser.save();
+        console.log(existingUser);
       } else {
         // Otherwise create a user
         await User.create({ name, email });

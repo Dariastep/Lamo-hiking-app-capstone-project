@@ -5,15 +5,17 @@ import { useState, useEffect } from "react";
 import { mutate } from "swr";
 
 export default function Profile({ userProfile }) {
+  console.log("Test", userProfile);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   /* const [avatar, setAvatar] = useState(null); */
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    if (userProfile.name && userProfile.email) {
-      setName(userProfile.name);
-      setEmail(userProfile.email);
+    if (userProfile[0].name && userProfile[0].email) {
+      setName(userProfile[0].name);
+      console.log("State", name);
+      setEmail(userProfile[0].email);
       /*      setAvatar(userProfile.avatar); */
     } else {
       // Set default name and email if there is no data in the database
@@ -21,7 +23,7 @@ export default function Profile({ userProfile }) {
       setEmail("name@example.com");
       /*  setAvatar("./avatar.jpg"); */
     }
-  }, [userProfile]);
+  }, [userProfile[0]]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -44,7 +46,6 @@ export default function Profile({ userProfile }) {
         userProfile.name = name; // Update the userProfile object with the new name and email
         userProfile.email = email;
         /* userProfile.avatar = data.avatar; */
-
         mutate("/api/profile");
         console.log("response is OK");
         setEditMode(false);

@@ -6,12 +6,14 @@ import useSWR from "swr";
 
 export default function MyProfile() {
   const { data: userProfile, error } = useSWR("api/profile");
+
   if (error) {
     return <div>Error: Failed to load user profile data</div>;
   }
   if (!userProfile) {
     return <div>Loading...</div>;
   }
+  console.log(userProfile);
   return (
     <div>
       <Header title="My Profile" BackButton={BackButton} />
