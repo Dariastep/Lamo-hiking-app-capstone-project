@@ -22,6 +22,7 @@ export default async function handler(request, response) {
       if (existingUser) {
         existingUser.name = name;
         existingUser.email = email;
+       
         await existingUser.save();
       } else {
         // Otherwise create a user
