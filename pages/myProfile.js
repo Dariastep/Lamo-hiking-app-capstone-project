@@ -1,14 +1,31 @@
-import BackButton from "@/components/BackButton";
-import NavigationBar from "@/components/NavigationBar";
-import Header from "@/components/Header";
-
+import BackButton from "../components/BackButton/index.js";
+import Header from "../components/Header/index.js";
+import styled from "styled-components";
+import Profile from "../components/Profile";
+import useSWR from "swr";
 
 export default function MyProfile() {
+  const { data: userProfile, error } = useSWR("api/profile");
+
+  if (error) {
+    return <div>Error: Failed to load user profile data</div>;
+  }
+  if (!userProfile) {
+    return <div>Loading...</div>;
+  }
+  console.log(userProfile);
   return (
     <div>
-      <Header title="My Profile" BackButton={BackButton}/>
-        <BackButton />
-      <NavigationBar />
+      <Header title="My Profile" BackButton={BackButton} />
+      <MainSection>
+        <Profile userProfile={userProfile} />
+      </MainSection>
     </div>
   );
 }
+
+const MainSection = styled.div`
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+`;

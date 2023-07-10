@@ -1,6 +1,5 @@
 import Head from "next/head";
 import {
-  Heading,
   RouteDetailsWrapper,
   ImageContainer,
   StyledImage,

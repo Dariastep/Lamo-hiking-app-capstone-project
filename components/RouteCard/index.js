@@ -3,7 +3,8 @@ import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 
-export default function RouteCard({ route, id }) {
+export default function RouteCard({ route, id, toggleFavorite }) {
+  console.log(id);
   return (
     <>
       <ImageContainer>
@@ -13,7 +14,11 @@ export default function RouteCard({ route, id }) {
           width={250}
           height={100}
         />
-        <FavoriteButton id={id} />
+        <FavoriteButton
+          id={id}
+          toggleFavorite={toggleFavorite}
+          isFavorite={route.isFavorite}
+        />
       </ImageContainer>
       <RouteCardHeading>{route.name}</RouteCardHeading>
 
@@ -38,7 +43,7 @@ export default function RouteCard({ route, id }) {
           <p>{route.altitude}</p>
         </div>
       </RouteInfo>
-      <StyledLink href={`/${route.id}`}>
+      <StyledLink href={`routes/${id}`} passHref legacyBehavior>
         <StyledButton>Details</StyledButton>
       </StyledLink>
     </>
@@ -47,7 +52,6 @@ export default function RouteCard({ route, id }) {
 const ImageContainer = styled.div`
   position: relative;
   width: 100;
-  
 `;
 const RouteCardHeading = styled.h2`
   font-size: 1.25rem;
@@ -91,6 +95,4 @@ export const StyledButton = styled.button`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
-
- 
 `;

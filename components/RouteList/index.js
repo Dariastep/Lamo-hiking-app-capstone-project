@@ -3,7 +3,8 @@ import RouteCard from "../RouteCard/index.js";
 import SearchBar from "../SearchBar/index.js";
 import { ListItem, List } from "./RouteList.styled";
 
-export default function RouteList({ routesData }) {
+export default function RouteList({ routesData, toggleFavorite={toggleFavorite} }) {
+  console.log("routeList");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -27,8 +28,8 @@ export default function RouteList({ routesData }) {
       <List role="list">
         {searchQuery === "" ? (
           routesData.map((route) => (
-            <ListItem key={route.id}>
-              <RouteCard route={route} id={route.id} />
+            <ListItem key={route._id}>
+              <RouteCard route={route} id={route._id} toggleFavorite={toggleFavorite} />
             </ListItem>
           ))
         ) : searchResults.length > 0 ? (
