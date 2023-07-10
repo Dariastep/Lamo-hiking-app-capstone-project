@@ -1,13 +1,13 @@
-import BackButton from "@/components/BackButton";
-import Header from "@/components/Header";
+import BackButton from "../components/BackButton/index.js";
+import Header from "../components/Header/index.js";
 import styled from "styled-components";
 import Profile from "../components/Profile";
 import useSWR from "swr";
 
 export default function MyProfile() {
-  const {data: userProfile, error} = useSWR("api/profile");
+  const { data: userProfile, error } = useSWR("api/profile");
   if (error) {
-    return <div>Error: Failed to load user profile data</div>
+    return <div>Error: Failed to load user profile data</div>;
   }
   if (!userProfile) {
     return <div>Loading...</div>;

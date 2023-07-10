@@ -1,4 +1,4 @@
-import Header from "@/components/Header/index.js";
+import Header from "../components/Header/index.js";
 import FavoritePage from "../components/FavoritePage/index.js";
 import BackButton from "../components/BackButton/index.js"
 import styled from "styled-components";

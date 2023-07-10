@@ -1,7 +1,7 @@
 import RouteList from "../components/RouteList/index.js";
 import styled from "styled-components";
-import Header from "@/components/Header/index.js";
-import Logo from "@/components/Logo/Logo.js";
+import Header from "../components/Header/index.js";
+import Logo from "../components/Logo/Logo.js";
 import useSWR from "swr";
 import { toggleFavorite } from "../utils/toggleFavorite.js";
 

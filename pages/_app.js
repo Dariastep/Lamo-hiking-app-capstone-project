@@ -1,4 +1,4 @@
-import NavigationBar from "@/components/NavigationBar";
+import NavigationBar from "../components/NavigationBar/index.js";
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 
