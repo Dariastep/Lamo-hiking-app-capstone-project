@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { mutate } from "swr";
 
 export default function Profile({ userProfile }) {
-  console.log("Test", userProfile);
+  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   /* const [avatar, setAvatar] = useState(null); */
@@ -14,7 +14,6 @@ export default function Profile({ userProfile }) {
   useEffect(() => {
     if (userProfile[0].name && userProfile[0].email) {
       setName(userProfile[0].name);
-      console.log("State", name);
       setEmail(userProfile[0].email);
       /*      setAvatar(userProfile.avatar); */
     } else {
