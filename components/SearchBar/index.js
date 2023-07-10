@@ -34,7 +34,7 @@ const SearchBarWrapper = styled.div`
   position: fixed;
   top: 4rem;
   width: 100%;
-  padding: 2rem 0;
+  padding-top: 2rem;
   z-index: 3;
   background-color: var(--primary-color);
 `;

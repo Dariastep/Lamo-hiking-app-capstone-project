@@ -6,10 +6,10 @@ export default function Route() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
+
   const { data: route, isLoading, error } = useSWR(`/api/routes/${id}`);
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
-
-
+  console.log(id);
+  if (isLoading || error || !isReady || !id) return <h2>Loading...</h2>;
 
   const {
     name,

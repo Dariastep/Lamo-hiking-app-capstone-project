@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar";
 import { ListItem, List } from "../RouteList/RouteList.styled.js";
 import { useState, useEffect } from "react";
 import useSWR, { mutate } from "swr";
-import { toggleFavorite } from "../../utils/toggleFavorite";
+import { toggleFavorite } from "../../utils/toggleFavorite.js";
 
 export default function FavoritePage() {
   const { data: favoriteRoutes, error } = useSWR("/api/favorites");
@@ -27,14 +27,13 @@ export default function FavoritePage() {
     setSearchResults(results);
   }
   async function toggleFavorite(id, isFavorite) {
-    console.log(isFavorite);
     try {
-      const response = await fetch("/api/favorites", {
-        method: "POST",
+      const response = await fetch(`/api/routes/${id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, isFavorite }),
+        body: JSON.stringify({ isFavorite: !isFavorite }),
       });
       if (response.ok) {
         mutate("/api/favorites");
@@ -62,9 +61,7 @@ export default function FavoritePage() {
                   <RouteCard
                     route={favoriteRoute}
                     id={favoriteRoute.id}
-                    toggleFavorite={() =>
-                      toggleFavorite(favoriteRoute.id, favoriteRoute.isFavorite)
-                    }
+                    toggleFavorite={toggleFavorite}
                   />
                 </ListItem>
               );
@@ -79,9 +76,11 @@ export default function FavoritePage() {
             return (
               <ListItem key={favoriteRoute.id} id={favoriteRoute.id}>
                 <RouteCard
-                  favoriteRoute={favoriteRoute}
+                  route={favoriteRoute}
                   id={favoriteRoute.id}
-                  toggleFavorite={toggleFavorite}
+                  toggleFavorite={() =>
+                    toggleFavorite(favoriteRoute.id, favoriteRoute.isFavorite)
+                  }
                 />
               </ListItem>
             );

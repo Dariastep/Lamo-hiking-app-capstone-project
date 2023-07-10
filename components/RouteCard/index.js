@@ -3,8 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 
-export default function RouteCard({ route, id, toggleFavorite}) {
-  console.log("RouteCard");
+export default function RouteCard({ route, id, toggleFavorite }) {
   console.log(id);
   return (
     <>
@@ -15,7 +14,11 @@ export default function RouteCard({ route, id, toggleFavorite}) {
           width={250}
           height={100}
         />
-        <FavoriteButton id={id} toggleFavorite={toggleFavorite} isFavorite={route.isFavorite} />
+        <FavoriteButton
+          id={id}
+          toggleFavorite={toggleFavorite}
+          isFavorite={route.isFavorite}
+        />
       </ImageContainer>
       <RouteCardHeading>{route.name}</RouteCardHeading>
 

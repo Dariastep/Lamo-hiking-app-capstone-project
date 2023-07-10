@@ -1,5 +1,5 @@
-import dbConnect from "../../../lib/db/connect";
-import Route from "../../../lib/db/models/Route.js";
+import dbConnect from "../../../../lib/db/connect";
+import Route from "../../../../lib/db/models/Route.js";
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
@@ -17,11 +17,8 @@ export default async function handler(request, response) {
   }
   if (request.method === "PATCH") {
     try {
-      const route = await Route.findByIdAndUpdate(
-        id,
-        request.body,
-        { new: true }
-      );
+      const updatedRoute = request.body;
+      const route = await Route.findByIdAndUpdate(id, updatedRoute);
       if (!route) {
         return response.status(404).json({ status: "The route not found" });
       }
