@@ -3,9 +3,10 @@ import styled from "styled-components";
 import avatarImage from "./avatar.jpg";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
+import ImageUploadForm from "../ImageUploadForm";
+import ImageList from "../ImageList";
 
 export default function Profile({ userProfile }) {
-  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   /* const [avatar, setAvatar] = useState(null); */
@@ -75,42 +76,57 @@ export default function Profile({ userProfile }) {
     setEditMode(true); // Turn on editing mode when Edit button is clicked
   }
   return (
-    <ProfileWrapper>
-      <AvatarWrapper>
-        {/*   {editMode ? (
+    <>
+      <ProfileWrapper>
+        <AvatarWrapper>
+          {/*   {editMode ? (
           <input type="file" accept="image/*" onChange={handleAvatarChange} />
         ) : ( */}
-        <StyledImage src={avatarImage} alt="Avatar" width={200} height={200} />
-        {/* )} */}
-      </AvatarWrapper>
-      <PersonalInfoWrapper>
-        {editMode ? (
-          <form onSubmit={handleSubmit}>
-            <InfoGrid>
-              <label>Name:</label>
-              <Input type="text" value={name} onChange={handleNameChange} />
-              <label>E-mail:</label>
-              <Input type="email" value={email} onChange={handleEmailChange} />
-            </InfoGrid>
-            <ButtonWrapper>
-              <Button type="submit">Save</Button>
-            </ButtonWrapper>
-          </form>
-        ) : (
-          <>
-            <InfoGrid>
-              <label>Name:</label>
-              <div>{name}</div>
-              <label>E-mail:</label>
-              <div>{email}</div>
-            </InfoGrid>
-            <ButtonWrapper>
-              <Button onClick={handleEditClick}>Edit</Button>
-            </ButtonWrapper>
-          </>
-        )}
-      </PersonalInfoWrapper>
-    </ProfileWrapper>
+          <StyledImage
+            src={avatarImage}
+            alt="Avatar"
+            width={200}
+            height={200}
+          />
+          {/* )} */}
+        </AvatarWrapper>
+        <PersonalInfoWrapper>
+          {editMode ? (
+            <form onSubmit={handleSubmit}>
+              <InfoGrid>
+                <label>Name:</label>
+                <Input type="text" value={name} onChange={handleNameChange} />
+                <label>E-mail:</label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </InfoGrid>
+              <ButtonWrapper>
+                <Button type="submit">Save</Button>
+              </ButtonWrapper>
+            </form>
+          ) : (
+            <>
+              <InfoGrid>
+                <label>Name:</label>
+                <div>{name}</div>
+                <label>E-mail:</label>
+                <div>{email}</div>
+              </InfoGrid>
+              <ButtonWrapper>
+                <Button onClick={handleEditClick}>Edit</Button>
+              </ButtonWrapper>
+            </>
+          )}
+        </PersonalInfoWrapper>
+      </ProfileWrapper>
+      <StyledUpload>
+        <ImageUploadForm />
+      </StyledUpload>
+      <ImageList />{" "}
+    </>
   );
 }
 
@@ -166,4 +182,10 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+`;
+const StyledUpload = styled.div`
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 4rem;
 `;

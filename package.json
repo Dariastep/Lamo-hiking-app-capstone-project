@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@next/font": "^13.3.0",
+    "cloudinary": "^1.37.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "formidable": "^2.0.1",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
     "next": "13.3.0",
