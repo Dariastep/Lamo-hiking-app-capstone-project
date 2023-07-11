@@ -4,35 +4,36 @@ import avatarImage from "./avatar.jpg";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
-import ImageList from "../ImageList";
+import ImageList from "../Avatar";
+import Avatar from "../Avatar";
 
 export default function Profile({ userProfile }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  /* const [avatar, setAvatar] = useState(null); */
+  const [name, setName] = useState("ChangeTheName");
+  const [email, setEmail] = useState("name@example.com");
   const [editMode, setEditMode] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
     if (userProfile[0].name && userProfile[0].email) {
       setName(userProfile[0].name);
       setEmail(userProfile[0].email);
-      /*      setAvatar(userProfile.avatar); */
+      setAvatar(userProfile[0].avatar);
     } else {
-      // Set default name and email if there is no data in the database
+      // Set default values if there is no data in the database
       setName("ChangeTheName");
       setEmail("name@example.com");
-      /*  setAvatar("./avatar.jpg"); */
+      setAvatar("./avatar.jpg");
     }
   }, [userProfile[0]]);
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const requestBody = { name, email };
+      const requestBody = { name, email, avatar };
       const formData = new FormData();
       formData.append("name", name);
       formData.append("email", email);
-      /* formData.append("avatar", avatar); */
+      formData.append("avatar", avatar);
 
       const response = await fetch("/api/profile", {
         method: "PUT",
@@ -45,7 +46,7 @@ export default function Profile({ userProfile }) {
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name and email
         userProfile.email = email;
-        /* userProfile.avatar = data.avatar; */
+        userProfile.avatar = data.avatar;
         mutate("/api/profile");
         console.log("response is OK");
         setEditMode(false);
@@ -67,29 +68,18 @@ export default function Profile({ userProfile }) {
     const newEmail = event.target.value;
     setEmail(newEmail);
   }
-  /* function handleAvatarChange(event) {
+  function handleAvatarChange(event) {
     event.preventDefault();
     const newAvatar = event.target.files[0];
     setAvatar(newAvatar);
-  } */
+  }
   function handleEditClick() {
     setEditMode(true); // Turn on editing mode when Edit button is clicked
   }
   return (
     <>
       <ProfileWrapper>
-        <AvatarWrapper>
-          {/*   {editMode ? (
-          <input type="file" accept="image/*" onChange={handleAvatarChange} />
-        ) : ( */}
-          <StyledImage
-            src={avatarImage}
-            alt="Avatar"
-            width={200}
-            height={200}
-          />
-          {/* )} */}
-        </AvatarWrapper>
+        <Avatar />
         <PersonalInfoWrapper>
           {editMode ? (
             <form onSubmit={handleSubmit}>
@@ -106,6 +96,9 @@ export default function Profile({ userProfile }) {
               <ButtonWrapper>
                 <Button type="submit">Save</Button>
               </ButtonWrapper>
+              <StyledUpload>
+                <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+              </StyledUpload>
             </form>
           ) : (
             <>
@@ -122,10 +115,6 @@ export default function Profile({ userProfile }) {
           )}
         </PersonalInfoWrapper>
       </ProfileWrapper>
-      <StyledUpload>
-        <ImageUploadForm />
-      </StyledUpload>
-      <ImageList />{" "}
     </>
   );
 }
@@ -137,17 +126,6 @@ const ProfileWrapper = styled.div`
   align-items: center;
   justify-items: center;
   margin-top: 2rem;
-`;
-
-const AvatarWrapper = styled.div`
-  border-radius: 50%;
-  overflow: hidden;
-  height: 200px;
-  width: 200px;
-`;
-
-const StyledImage = styled(Image)`
-  display: block;
 `;
 
 const PersonalInfoWrapper = styled.div`

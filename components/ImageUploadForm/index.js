@@ -4,7 +4,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 
 
-function ImageUploadForm() {
+function ImageUploadForm({handleAvatarChange}) {
   const { mutate } = useSWR("/api/images/");
   // We define some states to give some feedback to the user what happened to our upload
   const [uploadStatus, setUploadStatus] = useState("");
@@ -38,7 +38,7 @@ function ImageUploadForm() {
       <h2>Image Upload</h2>
       <Form onSubmit={submitImage}>
         <input type="file" name="file" />
-        <StyledButton type="submit">Upload</StyledButton>
+        <StyledButton type="submit" handleAvatarChange={handleAvatarChange}>Upload</StyledButton>
         <p>{uploadStatus}</p>
         {/*we use conditional rendering */}
         {error && <p>{error.message}</p>}
