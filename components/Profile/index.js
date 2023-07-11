@@ -66,8 +66,7 @@ export default function Profile({ userProfile }) {
     const newEmail = event.target.value;
     setEmail(newEmail);
   }
-  /* 
-  function handleAvatarChange(event) {
+  /* function handleAvatarChange(event) {
     event.preventDefault();
     const newAvatar = event.target.files[0];
     setAvatar(newAvatar);
