@@ -9,6 +9,7 @@ function ImageUploadForm({handleAvatarChange}) {
   // We define some states to give some feedback to the user what happened to our upload
   const [uploadStatus, setUploadStatus] = useState("");
   const [error, setError] = useState(undefined);
+  console.log(uploadStatus);
   // a kind of 'standard' form handler
   async function submitImage(event) {
     event.preventDefault();

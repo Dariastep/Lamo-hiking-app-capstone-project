@@ -3,18 +3,20 @@ import useSWR from "swr";
 import Image from "next/image";
 import styled from "styled-components";
 // When setting up a detail page use the Next Link component to add the Linking
+import Link from "next/link";
+import { useState } from "react";
+
 
 export default function Avatar() {
- 
+  const [avatar, setAvatar] = useState(null);
   // get image data (and error for error handling) via useSWR hook from the next api route
   const { data, error } = useSWR("/api/images");
-  console.log(data);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
   return (
     <AvatarWrapper>
       <StyledAvatar
-        src={data.resources[0].url}
+        src={data}
         alt="Default avatar"
         width={200}
         height={200}
@@ -32,3 +34,5 @@ const AvatarWrapper = styled.div`
   height: 200px;
   width: 200px;
 `;
+
+

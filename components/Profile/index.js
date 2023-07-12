@@ -4,7 +4,6 @@ import avatarImage from "./avatar.jpg";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
-import ImageList from "../Avatar";
 import Avatar from "../Avatar";
 
 export default function Profile({ userProfile }) {
@@ -71,6 +70,7 @@ export default function Profile({ userProfile }) {
   function handleAvatarChange(event) {
     event.preventDefault();
     const newAvatar = event.target.files[0];
+    console.log(newAvatar);
     setAvatar(newAvatar);
   }
   function handleEditClick() {
@@ -79,7 +79,7 @@ export default function Profile({ userProfile }) {
   return (
     <>
       <ProfileWrapper>
-        <Avatar />
+        <Avatar userProfile={userProfile} />
         <PersonalInfoWrapper>
           {editMode ? (
             <form onSubmit={handleSubmit}>
