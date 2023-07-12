@@ -1,11 +1,6 @@
-import useSWR, { mutate } from "swr";
-// we want to use the next Image component to display our cloudinary images
 import Image from "next/image";
 import styled from "styled-components";
 import AvatarImage from "../../public/avatar.jpg";
-import { useEffect, useState } from "react";
-// When setting up a detail page use the Next Link component to add the Linking
-import Link from "next/link";
 
 export default function Avatar({ data, error, avatar }) {
   if (error) return <div>failed to load</div>;
