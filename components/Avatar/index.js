@@ -1,26 +1,31 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 // we want to use the next Image component to display our cloudinary images
 import Image from "next/image";
 import styled from "styled-components";
+import AvatarImage from "../../public/avatar.jpg";
+import { useEffect, useState } from "react";
 // When setting up a detail page use the Next Link component to add the Linking
 
-export default function Avatar() {
- 
-  // get image data (and error for error handling) via useSWR hook from the next api route
-  const { data, error } = useSWR("/api/images");
-  console.log(data);
+export default function Avatar({ data, error }) {
+  const [updatedData, setUpdatedData] = useState([data]);
+  useEffect(() => {
+    setUpdatedData(data);
+  }, [data]);
+  mutate("/api/images");
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
+  const imageUrl = data.resources[0]?.url || AvatarImage;
   return (
     <AvatarWrapper>
       <StyledAvatar
-        src={data.resources[0].url}
+        src={imageUrl}
         alt="Default avatar"
         width={200}
         height={200}
       />
-    
-  </AvatarWrapper>)};
+    </AvatarWrapper>
+  );
+}
 const StyledAvatar = styled(Image)`
   border-radius: 0.5rem;
   border-color: aliceblue;

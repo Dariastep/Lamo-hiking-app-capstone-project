@@ -1,39 +1,42 @@
 import Image from "next/image";
 import styled from "styled-components";
-import avatarImage from "./avatar.jpg";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
-import ImageList from "../Avatar";
 import Avatar from "../Avatar";
+import AvatarImage from "../../public/avatar.jpg";
+import useSWR from "swr";
 
 export default function Profile({ userProfile }) {
-  const [name, setName] = useState("ChangeTheName");
-  const [email, setEmail] = useState("name@example.com");
-  const [editMode, setEditMode] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     if (userProfile[0].name && userProfile[0].email) {
       setName(userProfile[0].name);
       setEmail(userProfile[0].email);
-      setAvatar(userProfile[0].avatar);
     } else {
-      // Set default values if there is no data in the database
+      // Set default name and email if there is no data in the database
       setName("ChangeTheName");
       setEmail("name@example.com");
-      setAvatar("./avatar.jpg");
     }
   }, [userProfile[0]]);
+
+  // get image data (and error for error handling) via useSWR hook from the next api route
+  const { data, error } = useSWR("/api/images");
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const requestBody = { name, email, avatar };
+      const requestBody = { name, email };
       const formData = new FormData();
       formData.append("name", name);
       formData.append("email", email);
-      formData.append("avatar", avatar);
+      
 
       const response = await fetch("/api/profile", {
         method: "PUT",
@@ -42,11 +45,11 @@ export default function Profile({ userProfile }) {
         },
         body: JSON.stringify(requestBody),
       });
-
+      console.log("response1:", response);
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name and email
         userProfile.email = email;
-        userProfile.avatar = data.avatar;
+
         mutate("/api/profile");
         console.log("response is OK");
         setEditMode(false);
@@ -68,18 +71,43 @@ export default function Profile({ userProfile }) {
     const newEmail = event.target.value;
     setEmail(newEmail);
   }
-  function handleAvatarChange(event) {
-    event.preventDefault();
-    const newAvatar = event.target.files[0];
-    setAvatar(newAvatar);
+  async function handleAvatarChange(imageURL) {
+    try {
+      const requestBody = { avatar : imageURL };
+      console.log("reqBody:", requestBody);
+      const response = await fetch("/api/images", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+      console.log("response:", response);
+
+      if (response.ok) {
+        setAvatar(imageURL);
+        mutate("/api/profile");
+        console.log("Avatar updated in MongoDB:", imageURL);
+      } else {
+        console.error("Unfortunately failed to update avatar in MongoDB", error);
+      }
+    } catch (error) {
+      console.error("Failed to update avatar in MongoDB", error);
+    }
   }
+
   function handleEditClick() {
     setEditMode(true); // Turn on editing mode when Edit button is clicked
   }
   return (
     <>
       <ProfileWrapper>
-        <Avatar />
+        <AvatarWrapper>
+          {/*   {editMode ? (
+          <input type="file" accept="image/*" onChange={handleAvatarChange} />
+        ) : ( */}
+          <Avatar data={data} error={error} />
+        </AvatarWrapper>
         <PersonalInfoWrapper>
           {editMode ? (
             <form onSubmit={handleSubmit}>
@@ -96,9 +124,6 @@ export default function Profile({ userProfile }) {
               <ButtonWrapper>
                 <Button type="submit">Save</Button>
               </ButtonWrapper>
-              <StyledUpload>
-                <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-              </StyledUpload>
             </form>
           ) : (
             <>
@@ -115,6 +140,9 @@ export default function Profile({ userProfile }) {
           )}
         </PersonalInfoWrapper>
       </ProfileWrapper>
+      <StyledUpload>
+        <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+      </StyledUpload>
     </>
   );
 }
@@ -126,6 +154,17 @@ const ProfileWrapper = styled.div`
   align-items: center;
   justify-items: center;
   margin-top: 2rem;
+`;
+
+const AvatarWrapper = styled.div`
+  border-radius: 50%;
+  overflow: hidden;
+  height: 200px;
+  width: 200px;
+`;
+
+const StyledImage = styled(Image)`
+  display: block;
 `;
 
 const PersonalInfoWrapper = styled.div`
@@ -167,3 +206,4 @@ const StyledUpload = styled.div`
   border-radius: 0.5rem;
   padding: 4rem;
 `;
+
