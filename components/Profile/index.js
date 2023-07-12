@@ -46,13 +46,13 @@ export default function Profile({ userProfile }) {
         },
         body: JSON.stringify(requestBody),
       });
-      console.log("response1:", response);
+      
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name and email
         userProfile.email = email;
 
         mutate("/api/profile");
-        console.log("response is OK");
+        
         setEditMode(false);
       } else {
         console.error("Failed to save the  information");
@@ -75,7 +75,6 @@ export default function Profile({ userProfile }) {
   async function handleAvatarChange(imageURL) {
     try {
       const requestBody = { imageURL: imageURL };
-      console.log(requestBody.imageURL);
       const response = await fetch("/api/images/imagesChange", {
         method: "PUT",
         headers: {
@@ -87,7 +86,6 @@ export default function Profile({ userProfile }) {
       if (response.ok) {
         setAvatar(imageURL);
         mutate();
-        console.log("Avatar updated in MongoDB:", imageURL);
       } else {
         console.error(
           "Unfortunately failed to update avatar in MongoDB",

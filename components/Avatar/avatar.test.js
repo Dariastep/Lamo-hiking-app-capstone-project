@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import Avatar from ".";
+import Avatar from "./";
 
 
-test("renders an image, () => {
-
+test("alt contains correct value", () => {
   render(<Avatar />);
-  const searchField = screen.getByRole("textbox", { name: "search field" }
-  );
-  expect(searchField).toBeInTheDocument();
+  const testImage = screen.getByAltText("Default avatar");
+
+
+  expect(testImage).toBeInTheDocument();
 });

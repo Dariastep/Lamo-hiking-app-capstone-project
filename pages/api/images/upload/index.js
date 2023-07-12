@@ -37,7 +37,6 @@ export default async function handler(request, response) {
             const result = await cloudinary.v2.uploader.upload(filepath, {
               public_id: newFilename
             });
-            console.log("API: response from cloudinary: ", result);
             response.status(201).json(result);
             // As our request is successful, we call the promises' resolve()-method (fulfilling the try block in our upload form handler)
             resolve();

@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar/index.js";
 import { ListItem, List } from "./RouteList.styled";
 
 export default function RouteList({ routesData, toggleFavorite={toggleFavorite} }) {
-  console.log("routeList");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 

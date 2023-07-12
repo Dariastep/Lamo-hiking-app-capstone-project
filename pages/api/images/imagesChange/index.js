@@ -16,7 +16,6 @@ export default async function handler(request, response) {
       if (existingUser) {
         existingUser.imageURL = imageURL;
         await existingUser.save();
-        console.log("Avatar in PUT", imageURL);
       } else {
         await User.create({ imageURL });
       }

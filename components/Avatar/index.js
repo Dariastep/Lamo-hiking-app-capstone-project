@@ -6,7 +6,6 @@ export default function Avatar({ data, error, avatar }) {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
   const imageUrl = avatar || data.resources[0]?.url || AvatarImage;
-  console.log("avatar", imageUrl);
   return (
     <AvatarWrapper>
       <StyledAvatar
