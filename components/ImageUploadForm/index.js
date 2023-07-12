@@ -8,7 +8,6 @@ function ImageUploadForm({ handleAvatarChange }) {
   // We define some states to give some feedback to the user what happened to our upload
   const [uploadStatus, setUploadStatus] = useState("");
   const [error, setError] = useState(undefined);
-  console.log(uploadStatus);
   // a kind of 'standard' form handler
   async function submitImage(event) {
     event.preventDefault();
@@ -24,11 +23,11 @@ function ImageUploadForm({ handleAvatarChange }) {
       if (response.status === 201) {
         // we call mutate to refresh our image data
         const result = await response.json();
-        const imageURL = result.url; // Annahme: 'url' enthält die URL des hochgeladenen Bildes
-        handleAvatarChange(imageURL);
-        mutate();
+        const imageURL = result.url; // 'url' enthält die URL des hochgeladenen Bildes
+
         // and set a successful state
         setUploadStatus("Upload complete!");
+        handleAvatarChange(imageURL);
       }
     } catch (error) {
       // in case of error, we set the state accordingly
@@ -38,7 +37,7 @@ function ImageUploadForm({ handleAvatarChange }) {
 
   return (
     <>
-      <p>Change Avatar</p>
+      <strong>Change Avatar</strong>
       <Form onSubmit={submitImage}>
         <input type="file" name="file" />
         <StyledButton type="submit" onClick={handleAvatarChange}>
@@ -53,12 +52,15 @@ function ImageUploadForm({ handleAvatarChange }) {
 }
 const Form = styled.form`
   margin: 2rem auto;
+  border: none;
 `;
 const StyledButton = styled.button`
-  background-color: green;
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
-  padding: 0.25rem 1rem;
-  color: white;
+margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: #ccc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
 `;
 export default ImageUploadForm;

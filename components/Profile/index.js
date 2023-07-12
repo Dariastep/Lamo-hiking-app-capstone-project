@@ -17,15 +17,17 @@ export default function Profile({ userProfile }) {
     if (userProfile[0].name && userProfile[0].email) {
       setName(userProfile[0].name);
       setEmail(userProfile[0].email);
+      setAvatar(userProfile[0].avatar);
     } else {
       // Set default name and email if there is no data in the database
       setName("ChangeTheName");
       setEmail("name@example.com");
+      setAvatar(AvatarImage);
     }
   }, [userProfile[0]]);
 
   // get image data (and error for error handling) via useSWR hook from the next api route
-  const { data, error } = useSWR("/api/images");
+  const { data, error } = useSWR("/api/images/");
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
@@ -36,7 +38,6 @@ export default function Profile({ userProfile }) {
       const formData = new FormData();
       formData.append("name", name);
       formData.append("email", email);
-      
 
       const response = await fetch("/api/profile", {
         method: "PUT",
@@ -73,23 +74,25 @@ export default function Profile({ userProfile }) {
   }
   async function handleAvatarChange(imageURL) {
     try {
-      const requestBody = { avatar : imageURL };
-      console.log("reqBody:", requestBody);
-      const response = await fetch("/api/images", {
+      const requestBody = { imageURL: imageURL };
+      console.log(requestBody.imageURL);
+      const response = await fetch("/api/images/imagesChange", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
       });
-      console.log("response:", response);
 
       if (response.ok) {
         setAvatar(imageURL);
-        mutate("/api/profile");
+        mutate();
         console.log("Avatar updated in MongoDB:", imageURL);
       } else {
-        console.error("Unfortunately failed to update avatar in MongoDB", error);
+        console.error(
+          "Unfortunately failed to update avatar in MongoDB",
+          error
+        );
       }
     } catch (error) {
       console.error("Failed to update avatar in MongoDB", error);
@@ -106,7 +109,7 @@ export default function Profile({ userProfile }) {
           {/*   {editMode ? (
           <input type="file" accept="image/*" onChange={handleAvatarChange} />
         ) : ( */}
-          <Avatar data={data} error={error} />
+          <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
         <PersonalInfoWrapper>
           {editMode ? (
@@ -206,4 +209,3 @@ const StyledUpload = styled.div`
   border-radius: 0.5rem;
   padding: 4rem;
 `;
-

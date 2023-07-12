@@ -18,7 +18,7 @@ cloudinary.config({
 });
 
 export default async function handler(request, response) {
-  await dbConnect();
+  /*  await dbConnect(); */
   if (request.method === "GET") {
     try {
       // we use cloudinary search API to retrieve images
@@ -30,6 +30,7 @@ export default async function handler(request, response) {
       // finally we deliver the response with the result as JSON
       response.status(200).json(result);
     } catch (error) {
+      console.error(error);
       response.status(500).json({ message: error.message });
     }
   }
