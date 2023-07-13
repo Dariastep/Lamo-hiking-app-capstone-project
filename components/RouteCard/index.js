@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
+import CommonButton from "../CommonButton";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
   return (
@@ -42,8 +43,8 @@ export default function RouteCard({ route, id, toggleFavorite }) {
           <p>{route.altitude}</p>
         </div>
       </RouteInfo>
-      <StyledLink href={`routes/${id}`} passHref legacyBehavior>
-        <StyledButton>Details</StyledButton>
+      <StyledLink href={`routes/${id}`} passHref>
+        <CommonButton ButtonName="Details" />
       </StyledLink>
     </>
   );
@@ -79,19 +80,5 @@ export const StyledLink = styled(Link)`
   &:visited {
     text-decoration: none;
     color: inherit;
-  }
-`;
-export const StyledButton = styled.button`
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  font-size: 1.1rem;
-  margin: 1.5rem 1rem;
-  border: 1px var(--secondary-color);
-  padding: 0.5rem 1rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;

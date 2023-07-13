@@ -9,7 +9,7 @@ export default function NavigationBar() {
       <NavigationSection active={router.pathname === "/"}>
         <NavigationLink href={"/"}>Explore</NavigationLink>
       </NavigationSection>
-      <NavigationSection active={router.pathname === "/my routes"}>
+      <NavigationSection active={router.pathname === "/myRoutes"}>
         <NavigationLink href={"/myRoutes"}>My routes</NavigationLink>
       </NavigationSection>
       <NavigationSection active={router.pathname === "/favorites"}>
