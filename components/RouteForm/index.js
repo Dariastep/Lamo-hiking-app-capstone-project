@@ -14,6 +14,7 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
   }
 
   async function handleSubmit(event) {
+    console.log("handleSubmit called");
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -26,8 +27,10 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
         },
         body: JSON.stringify(data),
       });
+      console.log("Response:", response);
       if (response.ok) {
         const newRoute = await response.json();
+        console.log("New Route:", newRoute);
         onRouteCreated(newRoute);
       }
     } catch (error) {
