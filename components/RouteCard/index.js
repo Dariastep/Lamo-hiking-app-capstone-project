@@ -3,13 +3,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 import CommonButton from "../CommonButton";
+import defaultImage from "../../public/defaultImage.jpg";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
   return (
     <>
       <ImageContainer>
         <StyledImage
-          src={route.imageUrl}
+          src={route.imageUrl || defaultImage}
           alt={route.name}
           width={250}
           height={100}
@@ -35,12 +36,12 @@ export default function RouteCard({ route, id, toggleFavorite }) {
 
         <div>
           <RouteCardKey>Length:</RouteCardKey>
-          <p>{route.length}</p>
+          <p>{route.length} km</p>
         </div>
 
         <div>
           <RouteCardKey>Altitude:</RouteCardKey>
-          <p>{route.altitude}</p>
+          <p>{route.altitude} hm</p>
         </div>
       </RouteInfo>
       <StyledLink href={`routes/${id}`} passHref>

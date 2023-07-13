@@ -6,27 +6,32 @@ const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
 const maxDescriptionLength = 235;
 
-export default function RouteForm() {
+export default function RouteForm({ onRouteCreated, myRoutes }) {
   const [description, setDescription] = useState("");
 
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
-    console.log(event.target.value);
   }
 
-   async function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const dataForm = new DataForm();
-    const data = event.target.value;
-    console.log(event);
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
 
     try {
-
-      if(response.ok) {
-
+      const response = await fetch("/api/routes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        const newRoute = await response.json();
+        onRouteCreated(newRoute);
       }
     } catch (error) {
-      console.error("error", error)
+      console.error("Failed to create a new route:", error);
     }
   }
 
@@ -37,7 +42,7 @@ export default function RouteForm() {
       </FormLabel>
       <FormInput
         id="name"
-        name="route_name"
+        name="name"
         type="text"
         placeholder="e.g. Zugspitze via Höllental"
         required
@@ -59,11 +64,11 @@ export default function RouteForm() {
       <FormLabel htmlFor="length">Length, km</FormLabel>
       <FormInput id="length" name="length" type="number" required />
       <FormLabel htmlFor="altitude">Altitude, hm</FormLabel>
-      <FormInput id="altitude" name="altitude_route" type="number" required />
+      <FormInput id="altitude" name="altitude" type="number" required />
       <FormLabel htmlFor="description">Description</FormLabel>
       <FormTextArea
         id="description"
-        name="length_route"
+        name="description"
         placeholder={descriptonPlaceholder}
         required
         value={description}
@@ -97,7 +102,6 @@ const FormInput = styled.input`
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   font-size: 1rem;
-  color: #888;
 `;
 
 const FormSelect = styled.select`
