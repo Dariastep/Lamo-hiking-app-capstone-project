@@ -2,14 +2,14 @@ import Header from "../components/Header/index.js";
 import BackButton from "../components/BackButton/index.js";
 import styled from "styled-components";
 import CommonButton from "../components/CommonButton/index.js";
-import MyRoutesPage from "../components/MyRoutesPage/index.js";
+import RoutesPage from "../components/RoutesPage/index.js";
 
 export default function MyRoutes() {
   return (
     <>
       <Header title="My Routes" BackButton={BackButton} />
       <MainSection>
-        <MyRoutesPage />
+        <RoutesPage />
         <CommonButton ButtonName="Create a new route" />
       </MainSection>
     </>
