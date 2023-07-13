@@ -9,7 +9,6 @@ export default function HomePage() {
   const { data: routesData, error } = useSWR("/api/routes", {
     fallbackData: [],
   });
-  console.log(routesData);
   if (!routesData) {
     return <div>Loading...</div>;
   } else if (error) {

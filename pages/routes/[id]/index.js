@@ -8,7 +8,6 @@ export default function Route() {
   const { id } = router.query;
 
   const { data: route, isLoading, error } = useSWR(`/api/routes/${id}`);
-  console.log(id);
   if (isLoading || error || !isReady || !id) return <h2>Loading...</h2>;
 
   const {
@@ -20,7 +19,7 @@ export default function Route() {
     description,
     imageUrl,
   } = route;
-  console.log(route);
+  
 
   return (
     <RouteDetails

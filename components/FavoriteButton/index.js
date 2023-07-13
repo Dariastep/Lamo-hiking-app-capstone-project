@@ -22,7 +22,6 @@ export default function FavoriteButton({ id }) {
   }, [id]);
 
   async function handleFavoriteClick() {
-    
     try {
       const response = await fetch(`/api/routes/${id}`, {
         method: "PATCH",
@@ -73,9 +72,7 @@ const Bookmark = styled.button`
   cursor: pointer;
   border-radius: 20%;
   background-color: ${(props) =>
-    props.isFavorite
-      ? "var(--primary-color)"
-      : "var(--tercery-color)"};
+    props.isFavorite ? "var(--primary-color)" : "var(--tercery-color)"};
 
   &:hover {
     border-radius: 20%;

@@ -13,7 +13,7 @@ export default function MyProfile() {
   if (!userProfile) {
     return <div>Loading...</div>;
   }
-  console.log(userProfile);
+
   return (
     <div>
       <Header title="My Profile" BackButton={BackButton} />

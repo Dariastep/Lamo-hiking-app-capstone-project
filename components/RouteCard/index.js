@@ -4,7 +4,6 @@ import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
-  console.log(id);
   return (
     <>
       <ImageContainer>
