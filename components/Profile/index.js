@@ -6,6 +6,7 @@ import ImageUploadForm from "../ImageUploadForm";
 import Avatar from "../Avatar";
 import AvatarImage from "../../public/avatar.jpg";
 import useSWR from "swr";
+import Loader from "../Loader";
 
 export default function Profile({ userProfile }) {
   const [name, setName] = useState("");
@@ -29,7 +30,7 @@ export default function Profile({ userProfile }) {
   // get image data (and error for error handling) via useSWR hook from the next api route
   const { data, error } = useSWR("/api/images/");
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  if (!data) return <Loader />>;
 
   async function handleSubmit(event) {
     event.preventDefault();
