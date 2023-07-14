@@ -1,32 +1,26 @@
-import { useState, useEffect } from "react";
+import Loader from "../Loader";
 import RouteCard from "../RouteCard";
-import RouteForm from "../RouteForm";
 import { List, ListItem } from "../RouteList/RouteList.styled";
+import useSWR from "swr";
 
 export default function RoutesPage() {
-  const [myRoutes, setMyRoutes] = useState([]);
-
-  useEffect(() => {
-    fetchRoutes(); // Daten beim Initialisieren der Komponente abrufen
-  }, []);
+  const { data: myRoutes, error } = useSWR("/api/routes", fetchRoutes);
 
   async function fetchRoutes() {
-    try {
-      const response = await fetch("/api/routes");
-      const data = await response.json();
-      setMyRoutes(data.reverse()); // Umkehren der Route List
-    } catch (error) {
-      console.error("Failed to fetch routes:", error);
-    }
+    const response = await fetch("/api/routes");
+    const data = await response.json();
+    return data.reverse();
   }
 
-  function handleRouteCreated(newRoute) {
-    setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
+  if (!myRoutes) {
+    return <Loader />; // Render the loader component while data is being fetched
   }
-
+  if (error) {
+    console.error("Failed to fetch my routes", error);
+  }
   return (
     <>
-      {myRoutes.length > 0 && (
+      {myRoutes && myRoutes.length > 0 && (
         <List role="list">
           {myRoutes.map((route) => (
             <ListItem key={route._id}>
