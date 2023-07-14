@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export default function BackButton() {
+  function handleBack() {
+    window.history.back();
+  }
+
   return (
-    <StyledLink href="/">
+    <BackButtonContainer onClick={handleBack}>
       <Back>&larr;</Back>
-    </StyledLink>
+    </BackButtonContainer>
   );
 }
-
 const Back = styled.span`
   display: inline-block;
 
@@ -21,7 +23,7 @@ const Back = styled.span`
     border-radius: 30%;
   }
 `;
-const StyledLink = styled(Link)`
-  transition: 0.3s ease-in-out;
 
+const BackButtonContainer = styled.div`
+  cursor: pointer;
 `;

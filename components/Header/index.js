@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Logo from "../Logo/Logo.js";
 
 export default function Header({ title, BackButton }) {
   return (
