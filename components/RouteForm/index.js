@@ -29,6 +29,8 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
       if (response.ok) {
         const newRoute = await response.json();
         onRouteCreated(newRoute);
+        event.target.reset(); // Reset the form fields
+        event.target.elements[0].focus();
       }
     } catch (error) {
       console.error("Failed to create a new route:", error);
