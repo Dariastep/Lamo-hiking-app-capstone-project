@@ -1,9 +1,10 @@
 import dbConnect from "../../../../lib/db/connect";
 import Route from "../../../../lib/db/models/Route.js";
+
+
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
-
   if (request.method === "GET") {
     try {
       const route = await Route.findById(id);

@@ -17,7 +17,7 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     try {
-      const newRoute = await createRoute(request.body);
+      const newRoute = await request.body;
       await Route.create(newRoute);
       response.status(201).json(newRoute);
     } catch (error) {
