@@ -50,7 +50,7 @@ export default function MyRoutes() {
             {myRoutes.length > 0 ? (
               <RoutesPage routes={myRoutes} />
             ) : (
-              <P>You haven't created any routes yet.</P>
+              <P>You haven&apos;t created any routes yet.</P>
             )}
           </>
         )}
