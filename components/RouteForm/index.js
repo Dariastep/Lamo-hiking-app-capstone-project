@@ -44,9 +44,7 @@ export default function RouteForm({ onRouteCreated }) {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <FormLabel htmlFor="name" autocomplete="on">
-        Route name
-      </FormLabel>
+      <FormLabel htmlFor="name">Route name</FormLabel>
       <FormInput
         id="name"
         name="name"
@@ -55,6 +53,7 @@ export default function RouteForm({ onRouteCreated }) {
         required
         minLength="10"
         maxLength="35"
+        autoComplete="on"
       />
       <FormLabel htmlFor="activity">Activity</FormLabel>
       <FormSelect id="activity" name="activity" required>
@@ -69,9 +68,21 @@ export default function RouteForm({ onRouteCreated }) {
         <option value="difficult">difficult</option>
       </FormSelect>
       <FormLabel htmlFor="length">Length, km</FormLabel>
-      <FormInput id="length" name="length" type="number" required />
+      <FormInput
+        id="length"
+        name="length"
+        type="number"
+        autoComplete="on"
+        required
+      />
       <FormLabel htmlFor="altitude">Altitude, hm</FormLabel>
-      <FormInput id="altitude" name="altitude" type="number" required />
+      <FormInput
+        id="altitude"
+        name="altitude"
+        type="number"
+        autoComplete="on"
+        required
+      />
       <FormLabel htmlFor="description">Description</FormLabel>
       <FormTextArea
         id="description"
@@ -86,9 +97,10 @@ export default function RouteForm({ onRouteCreated }) {
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
       </CharactersLeft>
-      <CommonButton ButtonName="Create a new route" disabled={isDisabled}>
-        {/*  {defaultData ? "Update place" : "Add place"} */}
-      </CommonButton>
+      <CommonButton
+        ButtonName="Create a new route"
+        disabled={isDisabled}
+      ></CommonButton>
     </FormContainer>
   );
 }

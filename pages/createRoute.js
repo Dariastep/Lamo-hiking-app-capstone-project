@@ -6,20 +6,20 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function CreateRoutePage() {
-    const [myRoutes, setMyRoutes] = useState([]);
-    const router = useRouter();
-  
-    function handleRouteCreated(newRoute) {
-      setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
-      router.push("/myRoutes");
-    }
-return (
-    <div>
+  const [myRoutes, setMyRoutes] = useState([]);
+  const router = useRouter();
+
+  function handleRouteCreated(newRoute) {
+    setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
+    router.push("/myRoutes");
+  }
+  return (
+    <>
       <Header title="New Route" BackButton={BackButton} />
       <MainSection>
-      <RouteForm  onRouteCreated={handleRouteCreated} />
+        <RouteForm onRouteCreated={handleRouteCreated} />
       </MainSection>
-    </div>
+    </>
   );
 }
 

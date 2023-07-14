@@ -26,7 +26,6 @@ export default function RoutesPage() {
 
   return (
     <>
-      {/*   <RouteForm onRouteCreated={handleRouteCreated} myRoutes={myRoutes} /> */}
       {myRoutes.length > 0 && (
         <List role="list">
           {myRoutes.map((route) => (

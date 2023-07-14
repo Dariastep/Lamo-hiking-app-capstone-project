@@ -3,36 +3,27 @@ import BackButton from "../components/BackButton/index.js";
 import styled from "styled-components";
 import CommonButton from "../components/CommonButton/index.js";
 import RoutesPage from "../components/RoutesPage/index.js";
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 import { useRouter } from "next/router";
 import RouteForm from "../components/RouteForm/index.js";
+import Loader from "../components/Loader/index.js";
 
 export default function MyRoutes() {
-  const [myRoutes, setMyRoutes] = useState([]);
+  const { data: myRoutes, error } = useSWR("/api/routes"); //replace the fetch on useSWR
   const router = useRouter();
 
-  async function fetchRoutes() {
-    try {
-      const response = await fetch("/api/routes");
-      const data = await response.json();
-      setMyRoutes(data);
-    } catch (error) {
-      console.error("Failed to fetch my routes", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchRoutes();
-  }, []);
-
   function handleRouteCreated(newRoute) {
-    setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
-    console.log("New route:", newRoute);
     router.push("/");
   }
 
   function handleCreateRoute() {
     router.push("/createRoute"); // Navigate to the route creation page
+  }
+  if (error) {
+    console.error("Failed to fetch my routes", error);
+  }
+  if (!myRoutes) {
+    return <Loader />;
   }
 
   return (
@@ -47,7 +38,7 @@ export default function MyRoutes() {
               ButtonName="Create a new route"
               onClick={handleCreateRoute}
             />
-            {myRoutes.length > 0 ? (
+            {myRoutes ? (
               <RoutesPage routes={myRoutes} />
             ) : (
               <P>You have not created any routes yet.</P>
