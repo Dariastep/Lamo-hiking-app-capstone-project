@@ -62,6 +62,7 @@ const RouteCardHeading = styled.h2`
 const StyledImage = styled(Image)`
   max-width: 100%;
   height: auto;
+  width: auto;
   border-radius: 10px;
 `;
 const RouteInfo = styled.div`

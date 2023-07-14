@@ -9,7 +9,6 @@ export default function SearchBar({
   return (
     <SearchBarWrapper>
       <SearchInput
-        defaultValue={searchQuery}
         autoFocus={true}
         type="text"
         aria-label="search field"

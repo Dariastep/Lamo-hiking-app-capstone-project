@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import CommonButton from "../CommonButton";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
 const maxDescriptionLength = 235;
 
-export default function RouteForm({ onRouteCreated, myRoutes }) {
+export default function RouteForm({ onRouteCreated }) {
+  const router = useRouter();
   const [description, setDescription] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
@@ -17,6 +20,7 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    setIsDisabled(!isDisabled);
 
     try {
       const response = await fetch("/api/routes/", {
@@ -30,7 +34,8 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
         const newRoute = await response.json();
         onRouteCreated(newRoute);
         event.target.reset(); // Reset the form fields
-        event.target.elements[0].focus();
+        setDescription(""); // Reset the description state
+        router.push("/myRoutes");
       }
     } catch (error) {
       console.error("Failed to create a new route:", error);
@@ -74,15 +79,14 @@ export default function RouteForm({ onRouteCreated, myRoutes }) {
         placeholder={descriptonPlaceholder}
         required
         value={description}
-        minLength="10"
         maxLength={maxDescriptionLength}
-        rows="10"
+        rows="7"
         onChange={handleDescriptionChange}
       />
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
       </CharactersLeft>
-      <CommonButton type="submit" ButtonName="Create a new route">
+      <CommonButton ButtonName="Create a new route" disabled={isDisabled}>
         {/*  {defaultData ? "Update place" : "Add place"} */}
       </CommonButton>
     </FormContainer>
@@ -118,6 +122,13 @@ const FormTextArea = styled.textarea`
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   font-size: 1rem;
+  resize: none;
+
+  ::placeholder {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
 `;
 const CharactersLeft = styled.p`
   text-align: right;

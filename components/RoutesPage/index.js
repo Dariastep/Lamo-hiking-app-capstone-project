@@ -22,12 +22,11 @@ export default function RoutesPage() {
 
   function handleRouteCreated(newRoute) {
     setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
-    console.log("New route:", newRoute);
   }
 
   return (
     <>
-      <RouteForm onRouteCreated={handleRouteCreated} myRoutes={myRoutes} />
+      {/*   <RouteForm onRouteCreated={handleRouteCreated} myRoutes={myRoutes} /> */}
       {myRoutes.length > 0 && (
         <List role="list">
           {myRoutes.map((route) => (

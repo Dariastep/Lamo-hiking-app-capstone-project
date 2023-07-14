@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Profile from "../components/Profile";
 import useSWR from "swr";
 
+
 export default function MyProfile() {
   const { data: userProfile, error } = useSWR("api/profile");
 

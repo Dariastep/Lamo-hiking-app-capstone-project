@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export default function CommonButton({ ButtonName }) {
-  return <StyledButton>{ButtonName}</StyledButton>;
+export default function CommonButton({ ButtonName, disabled, onClick }) {
+  return (
+    <StyledButton type="submit" disabled={disabled} onClick={onClick}>
+      {ButtonName}
+    </StyledButton>
+  );
 }
 
 const StyledButton = styled.button`
@@ -17,4 +21,11 @@ const StyledButton = styled.button`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+
+  ${(props) =>
+    props.disabled &&
+    `
+  opacity: 1;
+    cursor: pointer;
+  `}
 `;
