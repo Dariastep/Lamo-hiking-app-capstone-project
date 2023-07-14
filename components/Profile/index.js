@@ -30,7 +30,7 @@ export default function Profile({ userProfile }) {
   // get image data (and error for error handling) via useSWR hook from the next api route
   const { data, error } = useSWR("/api/images/");
   if (error) return <div>failed to load</div>;
-  if (!data) return <Loader />>;
+  if (!data) return <Loader />;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -47,13 +47,13 @@ export default function Profile({ userProfile }) {
         },
         body: JSON.stringify(requestBody),
       });
-      
+
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name and email
         userProfile.email = email;
 
         mutate("/api/profile");
-        
+
         setEditMode(false);
       } else {
         console.error("Failed to save the  information");
