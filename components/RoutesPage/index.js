@@ -5,9 +5,6 @@ import { List, ListItem } from "../RouteList/RouteList.styled";
 
 export default function RoutesPage() {
   const [myRoutes, setMyRoutes] = useState([]);
-  useEffect(() => {
-    console.log("myRoutes updated:", myRoutes); //console log will show the correct value of myRoutes after the state has been updated.
-  }, [myRoutes]);
 
   useEffect(() => {
     fetchRoutes(); // Daten beim Initialisieren der Komponente abrufen
@@ -17,7 +14,7 @@ export default function RoutesPage() {
     try {
       const response = await fetch("/api/routes");
       const data = await response.json();
-      setMyRoutes(data);
+      setMyRoutes(data.reverse()); // Umkehren der Route List
     } catch (error) {
       console.error("Failed to fetch routes:", error);
     }
