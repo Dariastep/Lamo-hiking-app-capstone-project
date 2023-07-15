@@ -1,4 +1,5 @@
 import Head from "next/head";
+import defaultImage from "../../public/defaultImage.jpg"
 import {
   RouteDetailsWrapper,
   ImageContainer,
@@ -30,7 +31,7 @@ export default function RouteDetails({
       <Header title={name} BackButton={BackButton}/>
       <RouteDetailsWrapper>
         <ImageContainer>
-          <StyledImage src={imageUrl} alt={name} width={350} height={100} />
+          <StyledImage src={imageUrl || defaultImage} alt={name} width={350} height={100} />
           <FavoriteButton id={id} />
         </ImageContainer>
         <RouteInfo>

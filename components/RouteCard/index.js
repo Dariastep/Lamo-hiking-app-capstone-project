@@ -2,16 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
+import CommonButton from "../CommonButton";
+import defaultImage from "../../public/defaultImage.jpg";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
   return (
     <>
       <ImageContainer>
         <StyledImage
-          src={route.imageUrl}
+          src={route.imageUrl || defaultImage}
           alt={route.name}
           width={250}
           height={100}
+          priority
+          
         />
         <FavoriteButton
           id={id}
@@ -34,16 +38,16 @@ export default function RouteCard({ route, id, toggleFavorite }) {
 
         <div>
           <RouteCardKey>Length:</RouteCardKey>
-          <p>{route.length}</p>
+          <p>{route.length} km</p>
         </div>
 
         <div>
           <RouteCardKey>Altitude:</RouteCardKey>
-          <p>{route.altitude}</p>
+          <p>{route.altitude} hm</p>
         </div>
       </RouteInfo>
-      <StyledLink href={`routes/${id}`} passHref legacyBehavior>
-        <StyledButton>Details</StyledButton>
+      <StyledLink href={`routes/${id}`} passHref>
+        <CommonButton ButtonName="Details" />
       </StyledLink>
     </>
   );
@@ -60,6 +64,7 @@ const RouteCardHeading = styled.h2`
 const StyledImage = styled(Image)`
   max-width: 100%;
   height: auto;
+  width: auto;
   border-radius: 10px;
 `;
 const RouteInfo = styled.div`
@@ -79,19 +84,5 @@ export const StyledLink = styled(Link)`
   &:visited {
     text-decoration: none;
     color: inherit;
-  }
-`;
-export const StyledButton = styled.button`
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  font-size: 1.1rem;
-  margin: 1.5rem 1rem;
-  border: 1px var(--secondary-color);
-  padding: 0.5rem 1rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;

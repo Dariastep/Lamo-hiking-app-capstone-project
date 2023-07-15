@@ -3,6 +3,7 @@ import Header from "../components/Header/index.js";
 import styled from "styled-components";
 import Profile from "../components/Profile";
 import useSWR from "swr";
+import Loader from "../components/Loader/index.js";
 
 export default function MyProfile() {
   const { data: userProfile, error } = useSWR("api/profile");
@@ -11,7 +12,7 @@ export default function MyProfile() {
     return <div>Error: Failed to load user profile data</div>;
   }
   if (!userProfile) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

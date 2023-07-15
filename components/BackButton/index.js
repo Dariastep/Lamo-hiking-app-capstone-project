@@ -1,27 +1,41 @@
-import styled from "styled-components";
 import Link from "next/link";
+import styled from "styled-components";
 
 export default function BackButton() {
   return (
-    <StyledLink href="/">
-      <Back>&larr;</Back>
-    </StyledLink>
+    <BackLink href="#" onClick={() => window.history.back()}>
+      <BackArrow>&larr;</BackArrow>
+      <BackText>Go Back</BackText>
+    </BackLink>
   );
 }
 
-const Back = styled.span`
-  display: inline-block;
-
-  color: "black";
+const BackLink = styled.a`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
   font-size: 1.5rem;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+
   &:hover {
     background-color: var(--tercery-color);
     border-radius: 30%;
   }
 `;
-const StyledLink = styled(Link)`
-  transition: 0.3s ease-in-out;
 
+const BackArrow = styled.span`
+  display: inline-block;
+  margin-right: 0.5rem;
 `;
+
+const BackText = styled.span` //for the screen readers 
+   display: inline-block;
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+`;
+  
