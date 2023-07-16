@@ -4,7 +4,7 @@ export default function Header({ title, BackButton }) {
   return (
     <HeaderContainer>
       <SpaceLeft>
-        <SpaceLeft>{BackButton && <BackButton />}</SpaceLeft>
+       {BackButton && <BackButton />}
       </SpaceLeft>
       <Title>{title}</Title>
       <SpaceRight />
