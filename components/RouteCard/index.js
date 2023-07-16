@@ -15,7 +15,6 @@ export default function RouteCard({ route, id, toggleFavorite }) {
           width={250}
           height={100}
           priority
-          
         />
         <FavoriteButton
           id={id}

@@ -6,34 +6,52 @@ import { useState } from "react";
 import Login from "../components/Login/index.js";
 import Loader from "../components/Loader/index.js";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function Favorites() {
+  const { data: session, status } = useSession();
+
   const { data: favoriteRoutes, error } = useSWR("/api/favorites");
   const [locked, setIsLocked] = useState(false);
-  console.log(favoriteRoutes);
-  if (!favoriteRoutes) {
+  if (!favoriteRoutes || !status) {
     return <Loader />;
   } else if (error) {
     setIsLocked(true);
-    <div>Error: {error.message}</div>;
+    return <div>Error: {error.message}</div>;
   }
 
   return (
     <>
-      <Header title="Favorites" BackButton={BackButton} Login={<Login />} />
+      <Header
+        title="Favorites"
+        BackButton={BackButton}
+        Login={<Login session={session} />}
+      />
       <MainSection>
-        {locked ? (
+        {session ? (
           <>
-            <p>You are not authorized, please log in.</p>
-            <Login />
+            {locked ? (
+              <>
+                <p>You are not authorized, please log in.</p>
+                <Login />
+              </>
+            ) : (
+              <FavoritePage favoriteRoutes={favoriteRoutes} />
+            )}
           </>
         ) : (
-          <FavoritePage favoriteRoutes={favoriteRoutes} />
+          <>
+            <p>
+              You are not logged in. Please log in to view your favorite routes.
+            </p>
+            <Login />
+          </>
         )}
       </MainSection>
     </>
   );
 }
+
 const MainSection = styled.div`
   margin-top: 6rem;
   display: flex;

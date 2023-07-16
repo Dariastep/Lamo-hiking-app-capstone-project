@@ -3,9 +3,7 @@ import styled from "styled-components";
 export default function Header({ title, BackButton, Login }) {
   return (
     <HeaderContainer>
-      <SpaceLeft>
-       {BackButton && <BackButton />}
-      </SpaceLeft>
+      <SpaceLeft>{BackButton && <BackButton />}</SpaceLeft>
       <Title>{title}</Title>
       <SpaceRight>{Login}</SpaceRight>
     </HeaderContainer>
