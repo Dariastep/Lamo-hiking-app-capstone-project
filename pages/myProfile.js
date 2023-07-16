@@ -4,8 +4,11 @@ import styled from "styled-components";
 import Profile from "../components/Profile";
 import useSWR from "swr";
 import Loader from "../components/Loader/index.js";
+import { useSession } from "next-auth/react";
+import Login from "../components/Login/index.js";
 
 export default function MyProfile() {
+  const { data: session } = useSession();
   const { data: userProfile, error } = useSWR("api/profile");
 
   if (error) {
@@ -16,12 +19,22 @@ export default function MyProfile() {
   }
 
   return (
-    <div>
-      <Header title="My Profile" BackButton={BackButton} />
-      <MainSection>
-        <Profile userProfile={userProfile} />
-      </MainSection>
-    </div>
+    <>
+      <Header
+        title="My Profile"
+        BackButton={BackButton}
+        Login={<Login session={session} />}
+      />
+     
+        <MainSection>
+        {session ? (
+          <Profile userProfile={userProfile} />        
+      ) : (<>
+          <p>You are not authorized, please log in.</p>
+          <Login /></>
+        
+      )}</MainSection>
+    </>
   );
 }
 
