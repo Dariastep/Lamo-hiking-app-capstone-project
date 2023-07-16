@@ -1,15 +1,16 @@
-export async function toggleFavorite({ id, isFavorite }) {
+export async function toggleFavorite({ _id, isFavorite }) {
   try {
-    const requestBody = { isFavorite, id };
+    const requestBody = { isFavorite, _id };
     const response = await fetch("/api/favorites", {
-      method: "PATCH",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     });
+    console.log(response);
     if (response.ok) {
-      mutate("/api/favorites"); // Pass the updated data here
+      mutate(); // Pass the updated data here
     } else {
       console.error("Failed to toggle favorite status.");
     }
