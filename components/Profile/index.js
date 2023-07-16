@@ -105,9 +105,6 @@ export default function Profile({ userProfile }) {
     <>
       <ProfileWrapper>
         <AvatarWrapper>
-          {/*   {editMode ? (
-          <input type="file" accept="image/*" onChange={handleAvatarChange} />
-        ) : ( */}
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
         <PersonalInfoWrapper>

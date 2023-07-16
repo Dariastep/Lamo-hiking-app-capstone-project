@@ -9,15 +9,16 @@ export default async function handler(request, response) {
       if (!favoriteRoutes) {
         response.status(404).json({ status: "No favorite routes found" });
       }
+
       return response.status(200).json(favoriteRoutes);
     } catch (error) {
-      return response.status(405).json({ message: error });
+      response.status(405).json({ error: error.message });
     }
   }
 
   if (request.method === "POST") {
     try {
-      const { id, isFavorite} = request.body;
+      const { id, isFavorite } = request.body;
       const newFavoriteRoute = await Route.findById(id);
       if (!newFavoriteRoute) {
         response.status(404).json({ error: "Route not found" });
@@ -26,8 +27,23 @@ export default async function handler(request, response) {
       await newFavoriteRoute.save();
       response.status(201).json({ status: "Route added to favorites" });
     } catch (error) {
-      response.status(400).json({ error: error.message });
+      response.status(405).json({ error: error.message });
     }
   }
+
+  if (request.method === "PATCH") {
+    try {
+      const { id, isFavorite } = request.body;
+      const updatedRoute = await Route.findByIdAndUpdate(id, { isFavorite });
+      
+      if (!updatedRoute) {
+        response.status(404).json({ status: "The route not found" });
+      }
+      response.status(201).json({ status: "The route is updated" });
+    } catch (error) {
+      response.status(405).json({ message: error });
+    }
+  }
+
   response.status(405).json({ error: "Method not allowed" });
 }

@@ -22,13 +22,12 @@ export default function HomePage() {
 
   return (
     <>
-      <Header title={<Logo />} />
+      <Header title={<Logo />} Login={<Login session={session} />} />
       <MainSection>
-        <Login session={session} />
-        {session && (
+        
           <RouteList routesData={routesData} toggleFavorite={toggleFavorite} />
-        )}
-        {/* Render the RouteList component only if the user is authorized */}
+        
+    
       </MainSection>
     </>
   );
