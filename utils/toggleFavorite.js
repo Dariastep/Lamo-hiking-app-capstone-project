@@ -8,7 +8,7 @@ export async function toggleFavorite({ _id, isFavorite }) {
       },
       body: JSON.stringify(requestBody),
     });
-    console.log(response);
+    
     if (response.ok) {
       mutate(); // Pass the updated data here
     } else {

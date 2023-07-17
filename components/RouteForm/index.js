@@ -37,7 +37,7 @@ export default function RouteForm({ onRouteCreated, session }) {
         event.target.reset(); // Reset the form fields
         setDescription(""); // Reset the description state
         router.push("/myRoutes");
-        console.log(newRoute);
+        
       }
     } catch (error) {
       console.error("Failed to create a new route:", error);
