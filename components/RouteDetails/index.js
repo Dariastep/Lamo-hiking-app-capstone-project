@@ -1,5 +1,5 @@
-import Head from "next/head";
-import defaultImage from "../../public/defaultImage.jpg"
+import defaultImage from "../../public/defaultImage.jpg";
+import FavoriteButton from "../FavoriteButton";
 import {
   RouteDetailsWrapper,
   ImageContainer,
@@ -8,10 +8,7 @@ import {
   RouteCardKey,
   Description,
 } from "./routeDetails.styled";
-
-import FavoriteButton from "../FavoriteButton";
-import BackButton from "../BackButton";
-import Header from "../Header";
+import CommonButton from "../CommonButton";
 
 export default function RouteDetails({
   name,
@@ -22,42 +19,47 @@ export default function RouteDetails({
   description,
   imageUrl,
   id,
+  createdBy,
+  session,
 }) {
+  /* console.log(session.user.mail); */
   return (
-    <>
-      <Head>
-        <title>{name}</title>
-      </Head>
-      <Header title={name} BackButton={BackButton}/>
-      <RouteDetailsWrapper>
-        <ImageContainer>
-          <StyledImage src={imageUrl || defaultImage} alt={name} width={350} height={100} />
-          <FavoriteButton id={id} />
-        </ImageContainer>
-        <RouteInfo>
-          <div>
-            <RouteCardKey>Activity:</RouteCardKey>
-            <p>{activity}</p>
-          </div>
+    <RouteDetailsWrapper>
+      <ImageContainer>
+        <StyledImage
+          src={imageUrl || defaultImage}
+          alt={name}
+          width={350}
+          height={100}
+        />
+        <FavoriteButton id={id} />
+      </ImageContainer>
+      <RouteInfo>
+        <div>
+          <RouteCardKey>Activity:</RouteCardKey>
+          <p>{activity}</p>
+        </div>
 
-          <div>
-            <RouteCardKey>Difficulty:</RouteCardKey>
-            <p>{difficulty}</p>
-          </div>
+        <div>
+          <RouteCardKey>Difficulty:</RouteCardKey>
+          <p>{difficulty}</p>
+        </div>
 
-          <div>
-            <RouteCardKey>Length:</RouteCardKey>
-            <p>{length}</p>
-          </div>
+        <div>
+          <RouteCardKey>Length:</RouteCardKey>
+          <p>{length}</p>
+        </div>
 
-          <div>
-            <RouteCardKey>Altitude:</RouteCardKey>
-            <p>{altitude}</p>
-          </div>
-        </RouteInfo>
-        <Description>Description:</Description>
-        <p>{description}</p>
-      </RouteDetailsWrapper>
-    </>
+        <div>
+          <RouteCardKey>Altitude:</RouteCardKey>
+          <p>{altitude}</p>
+        </div>
+      </RouteInfo>
+      <Description>Description:</Description>
+      <p>{description}</p>
+      {session && session.user.email === createdBy ? (
+        <CommonButton ButtonName="Edit" />
+      ) : null}
+    </RouteDetailsWrapper>
   );
 }
