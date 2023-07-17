@@ -10,19 +10,16 @@ import Loader from "../Loader";
 
 export default function Profile({ userProfile }) {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     if (userProfile[0].name && userProfile[0].email) {
       setName(userProfile[0].name);
-      setEmail(userProfile[0].email);
       setAvatar(userProfile[0].avatar);
     } else {
       // Set default name and email if there is no data in the database
       setName("ChangeTheName");
-      setEmail("name@example.com");
       setAvatar(AvatarImage);
     }
   }, [userProfile[0]]);
@@ -35,10 +32,9 @@ export default function Profile({ userProfile }) {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const requestBody = { name, email };
+      const requestBody = { name };
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("email", email);
 
       const response = await fetch("/api/profile", {
         method: "PUT",
@@ -49,14 +45,13 @@ export default function Profile({ userProfile }) {
       });
 
       if (response.ok) {
-        userProfile.name = name; // Update the userProfile object with the new name and email
-        userProfile.email = email;
+        userProfile.name = name; // Update the userProfile object with the new name
 
         mutate("/api/profile");
 
         setEditMode(false);
       } else {
-        console.error("Failed to save the  information");
+        console.error("Failed to save the information");
       }
     } catch (error) {
       console.error("Failed to save the personal information", error);
@@ -68,11 +63,7 @@ export default function Profile({ userProfile }) {
     const newName = event.target.value;
     setName(newName);
   }
-  function handleEmailChange(event) {
-    event.preventDefault();
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-  }
+
   async function handleAvatarChange(imageURL) {
     try {
       const requestBody = { imageURL: imageURL };
@@ -113,12 +104,6 @@ export default function Profile({ userProfile }) {
               <InfoGrid>
                 <label>Name:</label>
                 <Input type="text" value={name} onChange={handleNameChange} />
-                <label>E-mail:</label>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
               </InfoGrid>
               <ButtonWrapper>
                 <Button type="submit">Save</Button>
@@ -129,8 +114,6 @@ export default function Profile({ userProfile }) {
               <InfoGrid>
                 <label>Name:</label>
                 <div>{name}</div>
-                <label>E-mail:</label>
-                <div>{email}</div>
               </InfoGrid>
               <ButtonWrapper>
                 <Button onClick={handleEditClick}>Edit</Button>

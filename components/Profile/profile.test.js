@@ -5,7 +5,7 @@ describe("Profile", () => {
   it("renders a name", () => {
     const userProfile = {
       name: "John Doe",
-      email: "johndoe@example.com",
+      
     };
 
     render(<Profile userProfile={userProfile} />);
