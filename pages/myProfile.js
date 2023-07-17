@@ -6,6 +6,7 @@ import useSWR from "swr";
 import Loader from "../components/Loader/index.js";
 import { useSession } from "next-auth/react";
 import Login from "../components/Login/index.js";
+import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 
 export default function MyProfile() {
   const { data: session } = useSession();
@@ -33,10 +34,7 @@ export default function MyProfile() {
             <Profile userProfile={userProfile} />{" "}
           </>
         ) : (
-          <>
-            <p>You are not authorized, please log in.</p>
-            <Login />
-          </>
+          <NonAuthorizedUser />
         )}
       </MainSection>
     </>

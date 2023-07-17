@@ -9,6 +9,7 @@ import RouteForm from "../components/RouteForm/index.js";
 import Loader from "../components/Loader/index.js";
 import Login from "../components/Login/index.js";
 import { useSession } from "next-auth/react";
+import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 
 export default function MyRoutes() {
   const { data: session } = useSession();
@@ -56,10 +57,7 @@ export default function MyRoutes() {
             )}
           </>
         ) : (
-          <>
-            <p>You are not authorized, please log in.</p>
-            <Login />
-          </>
+          <NonAuthorizedUser />
         )}{" "}
       </MainSection>
     </>

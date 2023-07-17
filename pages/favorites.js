@@ -6,6 +6,7 @@ import Loader from "../components/Loader/index.js";
 import useSWR from "swr";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
+import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 
 export default function Favorites() {
   const { data: session, status } = useSession();
@@ -28,10 +29,7 @@ export default function Favorites() {
         {session ? (
           <FavoritePage favoriteRoutes={favoriteRoutes} />
         ) : (
-          <>
-            <p>You are not authorized, please log in.</p>
-            <Login />
-          </>
+          <NonAuthorizedUser />
         )}
       </MainSection>
     </>
