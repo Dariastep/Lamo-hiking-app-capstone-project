@@ -16,36 +16,21 @@ export default function Route() {
   const { data: session } = useSession();
 
   const {
-    data: route,
+    data,
     isLoading,
     error,
   } = useSWR(isReady && id ? `/api/routes/${id}` : null);
   if (isLoading || error || !isReady || !id) return <Loader />;
 
-  
-async function editRoute(route) {
-    const response = await fetch(`/api/routes/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(route),
-      });
-      if (response.ok) {
-        await response.json();
-        router.push(`/routes/${id}`);
-      }
-    }
-
   return (
     <>
       <Header
-        title={route.name}
+        title={data.name}
         BackButton={BackButton}
         Login={<Login session={session} />}
       />
       <MainSection>
-        <RouteForm session={session} onSubmit = {editRoute} formName={"edit-route"} defaultData={route}/>
+        <RouteForm formName={"edit-route"} data={data} routeId={id} />
       </MainSection>
     </>
   );

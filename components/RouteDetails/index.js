@@ -10,6 +10,7 @@ import {
 } from "./routeDetails.styled";
 import CommonButton from "../CommonButton";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
 export default function RouteDetails({
   name,
@@ -22,6 +23,7 @@ export default function RouteDetails({
   id,
   createdBy,
   session,
+  deleteRoute,
 }) {
   const router = useRouter();
   const handleEdit = () => {
@@ -64,8 +66,16 @@ export default function RouteDetails({
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
-        <CommonButton ButtonName="Edit" onClick={handleEdit} />
+        <ButtonWrapper>
+          <CommonButton ButtonName="Edit" onClick={handleEdit} />
+          <CommonButton ButtonName="Delete" onClick={deleteRoute} />
+        </ButtonWrapper>
       ) : null}
     </RouteDetailsWrapper>
   );
 }
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;

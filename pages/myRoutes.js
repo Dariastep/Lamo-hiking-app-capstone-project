@@ -41,11 +41,11 @@ export default function MyRoutes() {
         {session ? (
           <>
             {router.pathname === "/createRoute" ? (
-              <RouteForm onRouteCreated={handleRouteCreated} />
+              <RouteForm />
             ) : (
               <>
                 <CommonButton
-                  ButtonName="Create a new route"
+                  ButtonName="Create new route"
                   onClick={handleCreateRoute}
                 />
                 {myRoutes ? (
