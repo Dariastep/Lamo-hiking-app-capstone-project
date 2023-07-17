@@ -1,7 +1,8 @@
-import NavigationBar from "../components/NavigationBar/index.js";
-import GlobalStyle from "../styles";
+
+import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
+import NavigationBar from "../components/NavigationBar/index.js";
 
 export default function App({
   Component,

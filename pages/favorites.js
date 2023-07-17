@@ -1,11 +1,10 @@
 import Header from "../components/Header/index.js";
 import FavoritePage from "../components/FavoritePage/index.js";
 import BackButton from "../components/BackButton/index.js";
-import styled from "styled-components";
-import { useState } from "react";
 import Login from "../components/Login/index.js";
 import Loader from "../components/Loader/index.js";
 import useSWR from "swr";
+import styled from "styled-components";
 import { useSession } from "next-auth/react";
 
 export default function Favorites() {

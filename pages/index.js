@@ -4,7 +4,7 @@ import Header from "../components/Header/index.js";
 import Logo from "../components/Logo/Logo.js";
 import useSWR from "swr";
 import { toggleFavorite } from "../utils/toggleFavorite.js";
-import Loader from "../components/Loader/";
+import Loader from "../components/Loader/index.js";
 import Login from "../components/Login/index.js";
 import { useSession } from "next-auth/react";
 
@@ -24,10 +24,7 @@ export default function HomePage() {
     <>
       <Header title={<Logo />} Login={<Login session={session} />} />
       <MainSection>
-        
-          <RouteList routesData={routesData} toggleFavorite={toggleFavorite} />
-        
-    
+        <RouteList routesData={routesData} toggleFavorite={toggleFavorite} />
       </MainSection>
     </>
   );

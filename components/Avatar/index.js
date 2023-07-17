@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import AvatarImage from "../../public/avatar.jpg";
+import AvatarImage from "../../public/avatar.jpg"; 
 import Loader from "../Loader";
 
 export default function Avatar({ data, error, avatar }) {

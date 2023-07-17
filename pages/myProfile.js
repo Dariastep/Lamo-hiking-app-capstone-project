@@ -1,7 +1,7 @@
 import BackButton from "../components/BackButton/index.js";
 import Header from "../components/Header/index.js";
 import styled from "styled-components";
-import Profile from "../components/Profile";
+import Profile from "../components/Profile/index.js";
 import useSWR from "swr";
 import Loader from "../components/Loader/index.js";
 import { useSession } from "next-auth/react";
@@ -23,18 +23,22 @@ export default function MyProfile() {
       <Header
         title="My Profile"
         BackButton={BackButton}
-        Login={<Login session={session} />} 
-      /> 
-     
-        <MainSection>
-        {session ? (<>
-          <p>You are signed in as {session.user.email}</p>
-          <Profile userProfile={userProfile} /> </>       
-      ) : (<>
-          <p>You are not authorized, please log in.</p>
-          <Login /></>
-        
-      )}</MainSection>
+        Login={<Login session={session} />}
+      />
+
+      <MainSection>
+        {session ? (
+          <>
+            <p>You are signed in as {session.user.email}</p>
+            <Profile userProfile={userProfile} />{" "}
+          </>
+        ) : (
+          <>
+            <p>You are not authorized, please log in.</p>
+            <Login />
+          </>
+        )}
+      </MainSection>
     </>
   );
 }

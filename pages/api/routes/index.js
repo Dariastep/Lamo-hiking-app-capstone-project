@@ -1,13 +1,11 @@
 import dbConnect from "../../../lib/db/connect";
 import Route from "../../../lib/db/models/Route.js";
 
-
 export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
     try {
-      
       const route = await Route.find();
       if (route.length === 0) {
         response.status(404).json({ status: "The route are not found" });

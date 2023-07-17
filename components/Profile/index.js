@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
-import Avatar from "../Avatar";
+import Avatar from "../Avatar/index.js";
 import AvatarImage from "../../public/avatar.jpg";
 import useSWR from "swr";
 import Loader from "../Loader";
