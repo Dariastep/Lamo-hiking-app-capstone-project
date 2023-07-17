@@ -15,18 +15,18 @@ export default async function handler(request, response) {
     }
   } else if (request.method === "PUT") {
     try {
-      const { name, email, imageURL } = request.body;
+      const { name, imageURL } = request.body;
       // Check if there is an existing user
       const existingUser = await User.findOne();
       if (existingUser) {
         existingUser.name = name;
-        existingUser.email = email;
+
         existingUser.imageURL = imageURL;
 
         await existingUser.save();
       } else {
         // Otherwise create a user
-        await User.create({ name, email, imageURL });
+        await User.create({ name, imageURL });
       }
       response
         .status(201)

@@ -7,8 +7,12 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import RouteForm from "../components/RouteForm/index.js";
 import Loader from "../components/Loader/index.js";
+import Login from "../components/Login/index.js";
+import { useSession } from "next-auth/react";
+import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 
 export default function MyRoutes() {
+  const { data: session } = useSession();
   const { data: myRoutes, error } = useSWR("/api/routes"); //replace the fetch on useSWR
   const router = useRouter();
 
@@ -28,23 +32,33 @@ export default function MyRoutes() {
 
   return (
     <>
-      <Header title="My Routes" BackButton={BackButton} />
+      <Header
+        title="My Routes"
+        BackButton={BackButton}
+        Login={<Login session={session} />}
+      />
       <MainSection>
-        {router.pathname === "/createRoute" ? (
-          <RouteForm onRouteCreated={handleRouteCreated} />
-        ) : (
+        {session ? (
           <>
-            <CommonButton
-              ButtonName="Create a new route"
-              onClick={handleCreateRoute}
-            />
-            {myRoutes ? (
-              <RoutesPage routes={myRoutes} />
+            {router.pathname === "/createRoute" ? (
+              <RouteForm onRouteCreated={handleRouteCreated} />
             ) : (
-              <P>You have not created any routes yet.</P>
+              <>
+                <CommonButton
+                  ButtonName="Create a new route"
+                  onClick={handleCreateRoute}
+                />
+                {myRoutes ? (
+                  <RoutesPage routes={myRoutes} session={session} />
+                ) : (
+                  <P>You have not created any routes yet.</P>
+                )}
+              </>
             )}
           </>
-        )}
+        ) : (
+          <NonAuthorizedUser />
+        )}{" "}
       </MainSection>
     </>
   );

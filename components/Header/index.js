@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
-export default function Header({ title, BackButton }) {
+export default function Header({ title, BackButton, Login }) {
   return (
     <HeaderContainer>
-      <SpaceLeft>
-        <SpaceLeft>{BackButton && <BackButton />}</SpaceLeft>
-      </SpaceLeft>
+      <SpaceLeft>{BackButton && <BackButton />}</SpaceLeft>
       <Title>{title}</Title>
-      <SpaceRight />
+      <SpaceRight>{Login}</SpaceRight>
     </HeaderContainer>
   );
 }

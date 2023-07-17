@@ -3,7 +3,7 @@ import RouteCard from "../RouteCard";
 import { List, ListItem } from "../RouteList/RouteList.styled";
 import useSWR from "swr";
 
-export default function RoutesPage() {
+export default function RoutesPage({ session }) {
   const { data: myRoutes, error } = useSWR("/api/routes", fetchRoutes);
 
   async function fetchRoutes() {
@@ -18,16 +18,22 @@ export default function RoutesPage() {
   if (error) {
     console.error("Failed to fetch my routes", error);
   }
+
+  const userRoutes = myRoutes.filter(
+    (route) => route.createdBy === session.user.email
+  );
   return (
     <>
-      {myRoutes && myRoutes.length > 0 && (
+      {userRoutes && userRoutes.length > 0 ? (
         <List role="list">
-          {myRoutes.map((route) => (
+          {userRoutes.map((route) => (
             <ListItem key={route._id}>
               <RouteCard route={route} id={route._id} />
             </ListItem>
           ))}
         </List>
+      ) : (
+        <p>No routes found for the current user.</p>
       )}
     </>
   );

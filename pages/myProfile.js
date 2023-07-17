@@ -1,11 +1,15 @@
 import BackButton from "../components/BackButton/index.js";
 import Header from "../components/Header/index.js";
 import styled from "styled-components";
-import Profile from "../components/Profile";
+import Profile from "../components/Profile/index.js";
 import useSWR from "swr";
 import Loader from "../components/Loader/index.js";
+import { useSession } from "next-auth/react";
+import Login from "../components/Login/index.js";
+import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 
 export default function MyProfile() {
+  const { data: session } = useSession();
   const { data: userProfile, error } = useSWR("api/profile");
 
   if (error) {
@@ -16,12 +20,24 @@ export default function MyProfile() {
   }
 
   return (
-    <div>
-      <Header title="My Profile" BackButton={BackButton} />
+    <>
+      <Header
+        title="My Profile"
+        BackButton={BackButton}
+        Login={<Login session={session} />}
+      />
+
       <MainSection>
-        <Profile userProfile={userProfile} />
+        {session ? (
+          <>
+            <p>You are signed in as {session.user.email}</p>
+            <Profile userProfile={userProfile} />{" "}
+          </>
+        ) : (
+          <NonAuthorizedUser />
+        )}
       </MainSection>
-    </div>
+    </>
   );
 }
 
