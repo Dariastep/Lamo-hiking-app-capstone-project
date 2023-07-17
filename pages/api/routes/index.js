@@ -24,4 +24,19 @@ export default async function handler(request, response) {
       response.status(400).json({ error: error.message });
     }
   }
+  if (request.method === "PATCH") {
+    const updatedRoute = request.body;
+    const routes = await Route.findByIdAndUpdate(id, updatedPlace);
+    if (!routes) {
+      return response.status(404).json({ status: "Not found" });
+    }
+    response.status(201).json({ status: "The route is edited" });
+  }
+  /*   if (request.method === "DELETE") {
+    const places = await Place.findByIdAndDelete(id);
+    if (!places) {
+      return response.status(404).json({ status: "Not found" });
+    }
+    response.status(201).json({ status: "The place is deleted" });
+  } */
 }

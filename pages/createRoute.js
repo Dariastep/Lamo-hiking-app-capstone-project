@@ -15,7 +15,7 @@ export default function CreateRoutePage() {
 
   function handleRouteCreated(newRoute) {
     setMyRoutes((prevRoutes) => [...prevRoutes, newRoute]);
-    router.push("/myRoutes");
+    router.push("/");
   }
   return (
     <>
@@ -26,7 +26,7 @@ export default function CreateRoutePage() {
       />
       <MainSection>
         {session ? (
-          <RouteForm onRouteCreated={handleRouteCreated} session={session} />
+          <RouteForm onSubmit={handleRouteCreated} session={session} />
         ) : (
           <>
             <NonAuthorizedUser />

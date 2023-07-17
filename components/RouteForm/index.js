@@ -7,7 +7,12 @@ const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
 const maxDescriptionLength = 235;
 
-export default function RouteForm({ onRouteCreated, session }) {
+export default function RouteForm({
+  session,
+  onSubmit,
+  formName,
+  defaultData,
+}) {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -22,6 +27,7 @@ export default function RouteForm({ onRouteCreated, session }) {
     const data = Object.fromEntries(formData);
     data.createdBy = session.user.email;
     setIsDisabled(!isDisabled);
+    onSubmit(data);
 
     try {
       const response = await fetch("/api/routes/", {
@@ -33,11 +39,10 @@ export default function RouteForm({ onRouteCreated, session }) {
       });
       if (response.ok) {
         const newRoute = await response.json();
-        onRouteCreated(newRoute);
+        onSubmit(newRoute);
         event.target.reset(); // Reset the form fields
         setDescription(""); // Reset the description state
         router.push("/myRoutes");
-        
       }
     } catch (error) {
       console.error("Failed to create a new route:", error);
@@ -45,7 +50,7 @@ export default function RouteForm({ onRouteCreated, session }) {
   }
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit} aria-labelledby={formName}>
       <FormLabel htmlFor="name">Route name</FormLabel>
       <FormInput
         id="name"
@@ -56,15 +61,26 @@ export default function RouteForm({ onRouteCreated, session }) {
         minLength="10"
         maxLength="35"
         autoComplete="on"
+        defaultValue={defaultData?.name}
       />
       <FormLabel htmlFor="activity">Activity</FormLabel>
-      <FormSelect id="activity" name="activity" required>
+      <FormSelect
+        id="activity"
+        name="activity"
+        required
+        defaultValue={defaultData?.activity}
+      >
         <option value="hiking">hiking</option>
         <option value="trailrunning">trailrunning</option>
         <option value="cycling">cycling</option>
       </FormSelect>
       <FormLabel htmlFor="difficulty">Difficulty</FormLabel>
-      <FormSelect id="difficulty" name="difficulty" required>
+      <FormSelect
+        id="difficulty"
+        name="difficulty"
+        required
+        defaultValue={defaultData?.difficulty}
+      >
         <option value="easy">easy</option>
         <option value="moderate">moderate</option>
         <option value="difficult">difficult</option>
@@ -76,6 +92,7 @@ export default function RouteForm({ onRouteCreated, session }) {
         type="number"
         autoComplete="on"
         required
+        defaultValue={defaultData?.length}
       />
       <FormLabel htmlFor="altitude">Altitude, hm</FormLabel>
       <FormInput
@@ -84,6 +101,7 @@ export default function RouteForm({ onRouteCreated, session }) {
         type="number"
         autoComplete="on"
         required
+        defaultValue={defaultData?.altitude}
       />
       <FormLabel htmlFor="description">Description</FormLabel>
       <FormTextArea
@@ -91,10 +109,10 @@ export default function RouteForm({ onRouteCreated, session }) {
         name="description"
         placeholder={descriptonPlaceholder}
         required
-        value={description}
         maxLength={maxDescriptionLength}
         rows="4"
         onChange={handleDescriptionChange}
+        defaultValue={defaultData?.description}
       />
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
@@ -104,12 +122,12 @@ export default function RouteForm({ onRouteCreated, session }) {
         id="createdBy"
         name="createdBy"
         type="text"
-        value={session.user.email}
         readOnly
         disabled
+        defaultValue={defaultData ? session.user.email : defaultData}
       />
       <CommonButton
-        ButtonName="Create a new route"
+        ButtonName={defaultData ? "Edit a route" : "Create new route"}
         disabled={isDisabled}
       ></CommonButton>
     </FormContainer>

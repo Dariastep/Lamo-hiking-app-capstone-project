@@ -9,6 +9,7 @@ import {
   Description,
 } from "./routeDetails.styled";
 import CommonButton from "../CommonButton";
+import { useRouter } from "next/router";
 
 export default function RouteDetails({
   name,
@@ -22,7 +23,12 @@ export default function RouteDetails({
   createdBy,
   session,
 }) {
-  /* console.log(session.user.mail); */
+  const router = useRouter();
+  const handleEdit = () => {
+    // Redirect to the edit page for the specific route
+    router.push(`/routes/${id}/edit`);
+  };
+
   return (
     <RouteDetailsWrapper>
       <ImageContainer>
@@ -58,7 +64,7 @@ export default function RouteDetails({
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
-        <CommonButton ButtonName="Edit" />
+        <CommonButton ButtonName="Edit" onClick={handleEdit} />
       ) : null}
     </RouteDetailsWrapper>
   );
