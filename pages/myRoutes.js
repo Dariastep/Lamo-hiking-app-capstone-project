@@ -48,7 +48,7 @@ export default function MyRoutes() {
                   onClick={handleCreateRoute}
                 />
                 {myRoutes ? (
-                  <RoutesPage routes={myRoutes} />
+                  <RoutesPage routes={myRoutes} session={session} />
                 ) : (
                   <P>You have not created any routes yet.</P>
                 )}

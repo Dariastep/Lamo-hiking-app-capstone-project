@@ -7,7 +7,7 @@ const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
 const maxDescriptionLength = 235;
 
-export default function RouteForm({ onRouteCreated }) {
+export default function RouteForm({ onRouteCreated, session }) {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -20,6 +20,7 @@ export default function RouteForm({ onRouteCreated }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.createdBy = session.user.email;
     setIsDisabled(!isDisabled);
 
     try {
@@ -36,6 +37,7 @@ export default function RouteForm({ onRouteCreated }) {
         event.target.reset(); // Reset the form fields
         setDescription(""); // Reset the description state
         router.push("/myRoutes");
+        console.log(newRoute);
       }
     } catch (error) {
       console.error("Failed to create a new route:", error);
@@ -91,12 +93,21 @@ export default function RouteForm({ onRouteCreated }) {
         required
         value={description}
         maxLength={maxDescriptionLength}
-        rows="7"
+        rows="4"
         onChange={handleDescriptionChange}
       />
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
       </CharactersLeft>
+      <FormLabel htmlFor="createdBy">Created by</FormLabel>
+      <FormInput
+        id="createdBy"
+        name="createdBy"
+        type="text"
+        value={session.user.email}
+        readOnly
+        disabled
+      />
       <CommonButton
         ButtonName="Create a new route"
         disabled={isDisabled}
@@ -108,7 +119,7 @@ export default function RouteForm({ onRouteCreated }) {
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
-  margin: 1rem 2rem;
+  margin: 1rem 2rem 7rem;
 `;
 
 const FormLabel = styled.label`
@@ -146,5 +157,5 @@ const CharactersLeft = styled.p`
   text-align: right;
   color: #888;
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
 `;

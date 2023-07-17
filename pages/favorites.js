@@ -10,13 +10,11 @@ import { useSession } from "next-auth/react";
 
 export default function Favorites() {
   const { data: session, status } = useSession();
-
   const { data: favoriteRoutes, error } = useSWR("/api/favorites");
-  const [locked, setIsLocked] = useState(false);
+
   if (!favoriteRoutes || !status) {
     return <Loader />;
   } else if (error) {
-    setIsLocked(true);
     return <div>Error: {error.message}</div>;
   }
 
@@ -29,21 +27,10 @@ export default function Favorites() {
       />
       <MainSection>
         {session ? (
-          <>
-            {locked ? (
-              <>
-                <p>You are not authorized, please log in.</p>
-                <Login />
-              </>
-            ) : (
-              <FavoritePage favoriteRoutes={favoriteRoutes} />
-            )}
-          </>
+          <FavoritePage favoriteRoutes={favoriteRoutes} />
         ) : (
           <>
-            <p>
-              You are not logged in. Please log in to view your favorite routes.
-            </p>
+            <p>You are not authorized, please log in.</p>
             <Login />
           </>
         )}

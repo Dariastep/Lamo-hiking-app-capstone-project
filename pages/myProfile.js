@@ -23,12 +23,13 @@ export default function MyProfile() {
       <Header
         title="My Profile"
         BackButton={BackButton}
-        Login={<Login session={session} />}
-      />
+        Login={<Login session={session} />} 
+      /> 
      
         <MainSection>
-        {session ? (
-          <Profile userProfile={userProfile} />        
+        {session ? (<>
+          <p>You are signed in as {session.user.email}</p>
+          <Profile userProfile={userProfile} /> </>       
       ) : (<>
           <p>You are not authorized, please log in.</p>
           <Login /></>
