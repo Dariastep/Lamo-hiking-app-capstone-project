@@ -3,14 +3,14 @@ import styled from "styled-components";
 
 export default function BackButton() {
   return (
-    <BackLink href="#" onClick={() => window.history.back()}>
+    <BackLink href={"/"}>
       <BackArrow>&larr;</BackArrow>
       <BackText>Go Back</BackText>
     </BackLink>
   );
 }
 
-const BackLink = styled.a`
+const BackLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -30,12 +30,12 @@ const BackArrow = styled.span`
   margin-right: 0.5rem;
 `;
 
-const BackText = styled.span` //for the screen readers 
-   display: inline-block;
+const BackText = styled.span`
+  //for the screen readers
+  display: inline-block;
   visibility: hidden;
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
 `;
-  

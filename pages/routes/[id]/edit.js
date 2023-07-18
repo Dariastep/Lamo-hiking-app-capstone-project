@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import RouteDetails from "../../../components/RouteDetails/index.js";
 import useSWR from "swr";
 import Loader from "../../../components/Loader/index.js";
 import Header from "../../../components/Header/index.js";

@@ -63,7 +63,6 @@ export default function RouteForm({ formName, data, routeId }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    data.createdBy = session.user.email;
     setIsDisabled(!isDisabled);
 
     if (formName === "create-route") {
@@ -160,7 +159,7 @@ export default function RouteForm({ formName, data, routeId }) {
         type="text"
         readOnly
         disabled
-        defaultValue={data ? session.user.email : data}
+        defaultValue={session.user.email}
       />
       <CommonButton
         ButtonName={data ? "Save changes" : "Create new route"}

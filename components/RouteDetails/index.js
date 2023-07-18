@@ -68,7 +68,7 @@ export default function RouteDetails({
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
           <CommonButton ButtonName="Edit" onClick={handleEdit} />
-          <CommonButton ButtonName="Delete" onClick={deleteRoute} />
+          <CommonButton ButtonName="Delete" onClick={deleteRoute} isDeleteButton />
         </ButtonWrapper>
       ) : null}
     </RouteDetailsWrapper>
