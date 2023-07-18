@@ -20,7 +20,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   flex-direction: row;
   background-color: var(--primary-color);
-  height: 4rem;
+  height: 5rem;
 
   h1 {
     color: black;

@@ -1,8 +1,18 @@
 import styled from "styled-components";
 
-export default function CommonButton({ ButtonName, disabled, onClick }) {
+export default function CommonButton({
+  ButtonName,
+  disabled,
+  onClick,
+  warningButton,
+}) {
   return (
-    <StyledButton type="submit" disabled={disabled} onClick={onClick}>
+    <StyledButton
+      type="submit"
+      disabled={disabled}
+      onClick={onClick}
+      warningButton={warningButton}
+    >
       {ButtonName}
     </StyledButton>
   );
@@ -11,7 +21,7 @@ export default function CommonButton({ ButtonName, disabled, onClick }) {
 const StyledButton = styled.button`
   cursor: pointer;
   border-radius: 5px;
-  background-color: var(--secondary-color);
+  background-color: ${props => (props.warningButton ? "#CE6D7F" : "var(--secondary-color)")};
   color: var(--primary-color);
   font-size: 1.1rem;
   margin: 1.5rem 1rem;
@@ -24,8 +34,7 @@ const StyledButton = styled.button`
 
   ${(props) =>
     props.disabled &&
-    `
-  opacity: 1;
+    `opacity: 1;
     cursor: pointer;
   `}
 `;

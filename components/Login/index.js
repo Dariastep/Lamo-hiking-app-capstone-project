@@ -8,11 +8,11 @@ export default function Login({ session }) {
       {session ? ( // check if we have session data (= user is already signed in => display a logout button)
         <>
           <CommonButton ButtonName="Logout" onClick={signOut} />
-         {/*  <p>Signed in as {session.user.email}</p> */}
+       
         </>
       ) : (
         // no session data available yet, display a login button
-        <CommonButton ButtonName="Login" onClick={() => signIn("github")} />
+        <CommonButton ButtonName="Login" onClick={() => signIn("github")} warningButton/>
       )}
     </StyledSection>
   );
