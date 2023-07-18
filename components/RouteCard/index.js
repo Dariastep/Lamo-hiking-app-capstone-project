@@ -59,6 +59,7 @@ const RouteCardHeading = styled.h2`
   font-size: 1.25rem;
   margin: 1rem;
   text-align: center;
+  font-weight: 550;
 `;
 const StyledImage = styled(Image)`
   max-width: 100%;

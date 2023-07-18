@@ -156,11 +156,14 @@ export default function RouteForm({ formName, data, id }) {
         readOnly
         disabled
         value={session?.user.email}
-      />
-      <CommonButton
-        ButtonName={data ? "Save changes" : "Create new route"}
-        disabled={isDisabled}
-      ></CommonButton>
+      />{" "}
+      <ButtonContainer>
+        <CommonButton
+          ButtonName={data ? "save changes" : "create"}
+          disabled={isDisabled}
+          actionButton
+        ></CommonButton>
+      </ButtonContainer>
     </FormContainer>
   );
 }
@@ -207,4 +210,9 @@ const CharactersLeft = styled.p`
   color: #888;
   font-size: 1rem;
   margin-top: 0.2rem;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

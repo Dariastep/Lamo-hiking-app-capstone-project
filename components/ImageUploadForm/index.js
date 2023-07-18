@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 // we are using useSWR to mutate the data once a file has been uploaded
 import useSWR from "swr";
+import CommonButton from "../CommonButton";
 
 function ImageUploadForm({ handleAvatarChange }) {
   const { mutate } = useSWR("/api/images/");
@@ -37,14 +38,11 @@ function ImageUploadForm({ handleAvatarChange }) {
 
   return (
     <>
-      <strong>Change Avatar</strong>
       <Form onSubmit={submitImage}>
         <input type="file" name="file" />
-        <StyledButton type="submit" onClick={handleAvatarChange}>
-          Upload avatar
-        </StyledButton>
+        <CommonButton type="submit" onClick={handleAvatarChange} ButtonName="change avatar"/>
+         
         <p>{uploadStatus}</p>
-        {/*we use conditional rendering */}
         {error && <p>{error.message}</p>}
       </Form>
     </>
@@ -54,13 +52,5 @@ const Form = styled.form`
   margin: 2rem auto;
   border: none;
 `;
-const StyledButton = styled.button`
-margin: 1rem auto;
-  padding: 0.5rem 1rem;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  
-`;
+
 export default ImageUploadForm;

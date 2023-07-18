@@ -38,6 +38,7 @@ const Title = styled.h1`
   text-align: center;
   flex: 2;
   color: var(--primary-color);
+  font-weight: 550;
 `;
 const SpaceRight = styled.div`
   flex: 1;

@@ -45,6 +45,11 @@ export default function MyRoutes() {
           <CommonButton
             ButtonName="Create new route"
             onClick={handleCreateRoute}
+            actionButton
+            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} >
+            <title>plus</title>
+            <path fill="var(--main-text-color)" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+          </svg>}
           />
           {userRoutes.length > 0 ? (
             <List role="list">
@@ -69,5 +74,9 @@ const P = styled.p`
   text-align: center;
 `;
 const ContentWrapper = styled.div`
-  margin-top: 2rem; /* Adjust the margin as needed */
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+
 `;

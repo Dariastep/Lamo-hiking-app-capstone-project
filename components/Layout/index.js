@@ -17,11 +17,11 @@ export default function Layout({ children, headerProps }) {
 }
 const GridLayout = styled.div`
   display: grid;
-  grid-template-rows: 5rem auto 4rem;
+  grid-template-rows: 5rem auto 5rem;
 `;
 
 const HeaderWrapper = styled.div`
-  height: 4rem;
+  height: 5rem;
 `;
 
 const MainSection = styled.main`
@@ -29,5 +29,5 @@ const MainSection = styled.main`
 `;
 
 const NavigationBarWrapper = styled.div`
-  height: 4rem;
+  height: 5rem;
 `;

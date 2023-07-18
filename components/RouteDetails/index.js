@@ -12,7 +12,6 @@ import CommonButton from "../CommonButton";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-
 export default function RouteDetails({
   name,
   activity,
@@ -50,7 +49,7 @@ export default function RouteDetails({
         />
         <FavoriteButton id={id} />
       </ImageContainer>
-      
+
       <RouteInfo>
         <div>
           <RouteCardKey>Activity:</RouteCardKey>
@@ -74,18 +73,16 @@ export default function RouteDetails({
       </RouteInfo>
       <Description>Description:</Description>
       <p>{description}</p>
-     
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
-          <CommonButton ButtonName="Edit" onClick={handleEdit} />
+          <CommonButton ButtonName=" edit" onClick={handleEdit} />
           <CommonButton
-            ButtonName="Delete"
+            ButtonName="delete"
             onClick={deleteRoute}
             warningButton
           />
         </ButtonWrapper>
       ) : null}
-
     </RouteDetailsWrapper>
   );
 }

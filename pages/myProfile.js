@@ -1,6 +1,4 @@
 import BackButton from "../components/BackButton/index.js";
-import Header from "../components/Header/index.js";
-import styled from "styled-components";
 import Profile from "../components/Profile/index.js";
 import useSWR from "swr";
 import Loader from "../components/Loader/index.js";

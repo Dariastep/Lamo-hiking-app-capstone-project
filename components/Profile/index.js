@@ -98,6 +98,7 @@ export default function Profile({ userProfile }) {
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
+        <ImageUploadForm handleAvatarChange={handleAvatarChange} />
         <PersonalInfoWrapper>
           {editMode ? (
             <form onSubmit={handleSubmit}>
@@ -122,9 +123,9 @@ export default function Profile({ userProfile }) {
           )}
         </PersonalInfoWrapper>
       </ProfileWrapper>
-      <StyledUpload>
-        <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-      </StyledUpload>
+      
+       
+      
     </>
   );
 }
@@ -183,8 +184,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 const StyledUpload = styled.div`
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 4rem;
+
+ 
 `;

@@ -44,12 +44,12 @@ const SearchInput = styled.input`
   height: 2.5rem;
   border-radius: 10px;
   padding-left: 2.5rem;
-  margin: 0 auto;
   font-size: 1rem;
   background-image: url(${icon.src});
   background-repeat: no-repeat;
   background-position: 0.5rem center;
   background-size: 1rem;
+  
 
   &:focus {
     outline: 1.25px solid var(--secondary-color);

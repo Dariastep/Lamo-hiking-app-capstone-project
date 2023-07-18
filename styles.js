@@ -1,11 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
 :root {
-  --primary-color: #FBFBFB;
-  --secondary-color: #008bf8;
+  --primary-color: #FDFDFD;
+  --secondary-color: #0496ff;
   --tercery-color: hsla(0, 0%, 80%, 0.80);
   --active-favorite-button-color: hsla(0, 0%, 90%, 0.80);
+  --action-color: #ff6700;
+  --main-text-color:#393838; 
+  --warning-color: #CE6D7F;
 }
   *,
   *::before,
@@ -18,7 +22,7 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: system-ui;
+    font-family: 'Manrope', sans-serif;
     background: var(--primary-color);
     overflow-y: scroll;
      
@@ -29,6 +33,6 @@ export default createGlobalStyle`
   font-size: 1.25rem;
   margin: 1rem auto;
   width: 100%;
+  font-weight: 500;
   }
 `;
-
