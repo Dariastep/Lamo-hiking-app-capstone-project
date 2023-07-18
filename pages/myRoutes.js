@@ -27,7 +27,7 @@ export default function MyRoutes() {
   }
 
   const userRoutes = routes.filter(
-    (route) => route.createdBy === session.user.email
+    (route) => route.createdBy === session?.user.email
   );
   return (
     <>

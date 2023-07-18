@@ -143,7 +143,7 @@ export default function RouteForm({ formName, data, id }) {
         maxLength={maxDescriptionLength}
         rows="4"
         onChange={handleDescriptionChange}
-        value={data?.description}
+        defaultValue={data?.description}
       />
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
@@ -155,7 +155,7 @@ export default function RouteForm({ formName, data, id }) {
         type="text"
         readOnly
         disabled
-        defaultValue={session.user.email}
+        value={session?.user.email}
       />
       <CommonButton
         ButtonName={data ? "Save changes" : "Create new route"}
