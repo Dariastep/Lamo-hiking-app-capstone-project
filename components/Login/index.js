@@ -7,7 +7,7 @@ export default function Login({ session }) {
     <StyledSection>
       {session ? ( // check if we have session data (= user is already signed in => display a logout button)
         <>
-          <CommonButton ButtonName="Logout" onClick={signOut} />
+          <CommonButton ButtonName="Logout" onClick={signOut} loginButton />
        
         </>
       ) : (

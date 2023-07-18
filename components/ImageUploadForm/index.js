@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState, useRef } from "react";
 import styled from "styled-components";
 // we are using useSWR to mutate the data once a file has been uploaded
 import useSWR from "swr";
@@ -9,48 +9,83 @@ function ImageUploadForm({ handleAvatarChange }) {
   // We define some states to give some feedback to the user what happened to our upload
   const [uploadStatus, setUploadStatus] = useState("");
   const [error, setError] = useState(undefined);
+  const fileInputRef = useRef(null);
+  const [showBanner, setShowBanner] = useState(false); // New state for controlling the banner visibility
   // a kind of 'standard' form handler
-  async function submitImage(event) {
-    event.preventDefault();
+  async function submitImage(formData) {
     setUploadStatus("Uploading...");
-    const formData = new FormData(event.target);
-    // we use fetch to call our API and pass the form data and request method
     try {
       const response = await fetch("/api/images/upload", {
         method: "post",
         body: formData,
       });
-      // once the file is uploaded (= the promise in our api upload is resolved)
       if (response.status === 201) {
-        // we call mutate to refresh our image data
         const result = await response.json();
-        const imageURL = result.url; // 'url' enthält die URL des hochgeladenen Bildes
-
-        // and set a successful state
+        const imageURL = result.url;
         setUploadStatus("Upload complete!");
         handleAvatarChange(imageURL);
+        setShowBanner(true); // Show the banner
+        setTimeout(() => {
+          setShowBanner(false); // Hide the banner after 3 seconds (adjust as needed)
+        }, 3000);
+      
       }
     } catch (error) {
-      // in case of error, we set the state accordingly
       setError(error);
     }
   }
 
+    function handleUploadClick() {
+    fileInputRef.current.click();
+
+  }
+  function handleFileChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      submitImage(formData);
+    }
+  }
+
   return (
-    <>
-      <Form onSubmit={submitImage}>
-        <input type="file" name="file" />
-        <CommonButton type="submit" onClick={handleAvatarChange} ButtonName="change avatar"/>
-         
-        <p>{uploadStatus}</p>
-        {error && <p>{error.message}</p>}
-      </Form>
-    </>
+    <>{showBanner && <Banner>{uploadStatus}</Banner>}
+    {error && <p>{error.message}</p>}
+    <FileInput
+      type="file"
+      name="file"
+      ref={fileInputRef}
+      onChange={handleFileChange}
+    />
+    <CommonButton
+      type="button"
+      onClick={handleUploadClick}
+      ButtonName="Change image"
+    />
+    <Form onSubmit={submitImage}>
+    
+    </Form>
+  </>
   );
 }
+
 const Form = styled.form`
   margin: 2rem auto;
   border: none;
+`;
+const FileInput = styled.input`
+  display: none;
+`;
+const Banner = styled.div`
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  width: 100%;
+  background-color: var(--action-color); 
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--main-text-color); 
 `;
 
 export default ImageUploadForm;

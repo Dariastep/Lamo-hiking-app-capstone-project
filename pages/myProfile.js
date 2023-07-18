@@ -25,10 +25,7 @@ export default function MyProfile() {
   return (
     <Layout headerProps={headerProps}>
       {session ? (
-        <>
-          <p>You are signed in as {session.user.email}</p>
-          <Profile userProfile={userProfile} />{" "}
-        </>
+          <Profile userProfile={userProfile} session={session}/>
       ) : (
         <NonAuthorizedUser />
       )}

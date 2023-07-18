@@ -1,26 +1,26 @@
-import Image from "next/image";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
 import Avatar from "../Avatar/index.js";
-import AvatarImage from "../../public/avatar.jpg";
 import useSWR from "swr";
 import Loader from "../Loader";
+import CommonButton from "../CommonButton";
 
-export default function Profile({ userProfile }) {
+export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const [showNameInput, setShowNameInput] = useState(false);
 
   useEffect(() => {
-    if (userProfile[0].name && userProfile[0].email) {
+    if (userProfile[0].name) {
       setName(userProfile[0].name);
       setAvatar(userProfile[0].avatar);
     } else {
       // Set default name and email if there is no data in the database
-      setName("ChangeTheName");
-      setAvatar(AvatarImage);
+      setName("Stranger");
+      setAvatar(null);
     }
   }, [userProfile[0]]);
 
@@ -50,6 +50,7 @@ export default function Profile({ userProfile }) {
         mutate("/api/profile");
 
         setEditMode(false);
+        setShowNameInput(false);
       } else {
         console.error("Failed to save the information");
       }
@@ -91,52 +92,55 @@ export default function Profile({ userProfile }) {
 
   function handleEditClick() {
     setEditMode(true); // Turn on editing mode when Edit button is clicked
+    setShowNameInput(true); // Show the name input field
   }
   return (
     <>
       <ProfileWrapper>
+        <GreetText>{`Hello ${name}!`}</GreetText>
+        <P>{`You are signed in as ${session.user.email}`}</P>
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
+        <ButtonWrapper>
+          <CommonButton onClick={handleEditClick} ButtonName="Change name" />
+        </ButtonWrapper>
         <ImageUploadForm handleAvatarChange={handleAvatarChange} />
         <PersonalInfoWrapper>
-          {editMode ? (
+          {editMode && (
             <form onSubmit={handleSubmit}>
               <InfoGrid>
-                <label>Name:</label>
-                <Input type="text" value={name} onChange={handleNameChange} />
+                {showNameInput && (
+                  <Input type="text" value={name} onChange={handleNameChange} />
+                )}
               </InfoGrid>
               <ButtonWrapper>
-                <Button type="submit">Save</Button>
+                <CommonButton type="submit" ButtonName="Save" />
               </ButtonWrapper>
             </form>
-          ) : (
-            <>
-              <InfoGrid>
-                <label>Name:</label>
-                <div>{name}</div>
-              </InfoGrid>
-              <ButtonWrapper>
-                <Button onClick={handleEditClick}>Edit</Button>
-              </ButtonWrapper>
-            </>
           )}
         </PersonalInfoWrapper>
       </ProfileWrapper>
-      
-       
-      
     </>
   );
 }
 
 const ProfileWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-items: center;
-  margin-top: 2rem;
+`;
+const GreetText = styled.h1`
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+`;
+
+const P = styled.p`
+  text-align: left;
+  font-size: 1rem;
 `;
 
 const AvatarWrapper = styled.div`
@@ -146,20 +150,16 @@ const AvatarWrapper = styled.div`
   width: 200px;
 `;
 
-const StyledImage = styled(Image)`
-  display: block;
-`;
-
 const PersonalInfoWrapper = styled.div`
   display: grid;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 `;
 
 const InfoGrid = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 `;
 
@@ -174,16 +174,4 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 1rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-const StyledUpload = styled.div`
-
- 
 `;
