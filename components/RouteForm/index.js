@@ -159,7 +159,7 @@ export default function RouteForm({ formName, data, id }) {
       />{" "}
       <ButtonContainer>
         <CommonButton
-          ButtonName={data ? "save changes" : "create"}
+          ButtonName={data ? "Save changes" : "Create"}
           disabled={isDisabled}
           actionButton
         ></CommonButton>

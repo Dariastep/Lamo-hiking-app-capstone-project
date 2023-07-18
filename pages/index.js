@@ -24,7 +24,6 @@ export default function HomePage() {
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
 
-  
   function handleSearch(event) {
     const query = event.target.value;
     setSearchQuery(query);
@@ -49,8 +48,11 @@ export default function HomePage() {
         handleSearch={handleSearch}
         searchResults={searchResults}
       />
-   {/*  <LeafletMap /> 
-      <DropdownSearch /> */}
+      <MapWrapper>
+        <LeafletMap />{" "}
+      </MapWrapper>
+
+      <DropdownSearch />
       <RouteList
         routesData={routesData}
         toggleFavorite={toggleFavorite}
@@ -61,3 +63,10 @@ export default function HomePage() {
   );
 }
 
+const MapWrapper = styled.div`
+  display: grid;
+  flex-direction: column;
+  margin: 4rem 2rem;
+  justify-content: center;
+  align-items: center;
+`;
