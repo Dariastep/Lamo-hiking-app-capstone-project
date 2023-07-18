@@ -11,6 +11,11 @@ import {
 import CommonButton from "../CommonButton";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
+// Import Leaflet and react-leaflet components dynamically
+const LeafletMap = dynamic(() => import("../LeafletMap"), {
+  ssr: false, // Disable server-side rendering
+});
 
 export default function RouteDetails({
   name,
@@ -40,6 +45,7 @@ export default function RouteDetails({
   }
   return (
     <RouteDetailsWrapper>
+      <LeafletMap />
       <ImageContainer>
         <StyledImage
           src={imageUrl || defaultImage}
@@ -49,6 +55,7 @@ export default function RouteDetails({
         />
         <FavoriteButton id={id} />
       </ImageContainer>
+      
       <RouteInfo>
         <div>
           <RouteCardKey>Activity:</RouteCardKey>
@@ -72,6 +79,7 @@ export default function RouteDetails({
       </RouteInfo>
       <Description>Description:</Description>
       <p>{description}</p>
+     
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
           <CommonButton ButtonName="Edit" onClick={handleEdit} />
@@ -82,6 +90,7 @@ export default function RouteDetails({
           />
         </ButtonWrapper>
       ) : null}
+
     </RouteDetailsWrapper>
   );
 }
