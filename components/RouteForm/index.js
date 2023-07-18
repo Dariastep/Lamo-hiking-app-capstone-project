@@ -20,6 +20,7 @@ export default function RouteForm({ formName, data, id }) {
 
   async function createRoute(data) {
     try {
+      data.createdBy = session.user.email;
       const response = await fetch("/api/routes/", {
         method: "POST",
         headers: {
@@ -142,7 +143,7 @@ export default function RouteForm({ formName, data, id }) {
         maxLength={maxDescriptionLength}
         rows="4"
         onChange={handleDescriptionChange}
-        defaultValue={data?.description}
+        value={data?.description}
       />
       <CharactersLeft>
         {maxDescriptionLength - description.length} characters remaining
