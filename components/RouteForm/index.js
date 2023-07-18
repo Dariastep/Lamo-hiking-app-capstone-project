@@ -8,15 +8,11 @@ const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
 const maxDescriptionLength = 235;
 
-export default function RouteForm({ formName, data, routeId }) {
+export default function RouteForm({ formName, data, id }) {
   const { data: session } = useSession();
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-
-  const isEditedRoute = formName === "edit-route";
-
-  console.log("session", session);
 
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
@@ -40,9 +36,9 @@ export default function RouteForm({ formName, data, routeId }) {
       return { status: "fail" };
     }
   }
-  async function editRoute(data, routeId) {
+  async function editRoute(data, id) {
     try {
-      const response = await fetch(`/api/routes/${routeId}`, {
+      const response = await fetch(`/api/routes/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -76,10 +72,9 @@ export default function RouteForm({ formName, data, routeId }) {
     }
 
     if (formName === "edit-route") {
-      console.log("routeId", routeId);
-      const { status } = await editRoute(data, routeId);
+      const { status } = await editRoute(data, id);
       if (status === "success") {
-        router.push(`/routes/${routeId}`);
+        router.push(`/routes/${id}`);
       }
     }
   }

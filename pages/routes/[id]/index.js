@@ -32,15 +32,6 @@ export default function Route() {
     createdBy,
   } = route;
 
-  async function deleteRoute() {
-    const response = await fetch(`/api/routes/${id}`, { method: "DELETE" });
-    if (response.ok) {
-      await response.json();
-      router.push("/myRoutes");
-    } else {
-      console.log(response.status);
-    }
-  }
   return (
     <>
       <Header
@@ -60,7 +51,6 @@ export default function Route() {
           id={id}
           createdBy={createdBy}
           session={session}
-          deleteRoute={deleteRoute}
         />{" "}
       </MainSection>
     </>

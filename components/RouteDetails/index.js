@@ -23,14 +23,21 @@ export default function RouteDetails({
   id,
   createdBy,
   session,
-  deleteRoute,
 }) {
   const router = useRouter();
-  const handleEdit = () => {
-    // Redirect to the edit page for the specific route
+  function handleEdit() {
     router.push(`/routes/${id}/edit`);
-  };
+  }
 
+  async function deleteRoute() {
+    const response = await fetch(`/api/routes/${id}`, { method: "DELETE" });
+    if (response.ok) {
+      await response.json();
+      router.push("/myRoutes");
+    } else {
+      console.log(response.status);
+    }
+  }
   return (
     <RouteDetailsWrapper>
       <ImageContainer>
@@ -68,7 +75,11 @@ export default function RouteDetails({
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
           <CommonButton ButtonName="Edit" onClick={handleEdit} />
-          <CommonButton ButtonName="Delete" onClick={deleteRoute} isDeleteButton />
+          <CommonButton
+            ButtonName="Delete"
+            onClick={deleteRoute}
+            warningButton
+          />
         </ButtonWrapper>
       ) : null}
     </RouteDetailsWrapper>

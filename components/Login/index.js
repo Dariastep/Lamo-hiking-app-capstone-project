@@ -12,7 +12,7 @@ export default function Login({ session }) {
         </>
       ) : (
         // no session data available yet, display a login button
-        <CommonButton ButtonName="Login" onClick={() => signIn("github")} />
+        <CommonButton ButtonName="Login" onClick={() => signIn("github")} warningButton/>
       )}
     </StyledSection>
   );

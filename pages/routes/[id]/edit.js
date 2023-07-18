@@ -14,11 +14,9 @@ export default function Route() {
   const { id } = router.query;
   const { data: session } = useSession();
 
-  const {
-    data,
-    isLoading,
-    error,
-  } = useSWR(isReady && id ? `/api/routes/${id}` : null);
+  const { data, isLoading, error } = useSWR(
+    isReady && id ? `/api/routes/${id}` : null
+  );
   if (isLoading || error || !isReady || !id) return <Loader />;
 
   return (
@@ -29,7 +27,7 @@ export default function Route() {
         Login={<Login session={session} />}
       />
       <MainSection>
-        <RouteForm formName={"edit-route"} data={data} routeId={id} />
+        <RouteForm formName={"edit-route"} data={data} id={id} />
       </MainSection>
     </>
   );

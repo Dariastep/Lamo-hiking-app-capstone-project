@@ -4,14 +4,14 @@ export default function CommonButton({
   ButtonName,
   disabled,
   onClick,
-  isDeleteButton,
+  warningButton,
 }) {
   return (
     <StyledButton
       type="submit"
       disabled={disabled}
       onClick={onClick}
-      isDeleteButton={isDeleteButton}
+      warningButton={warningButton}
     >
       {ButtonName}
     </StyledButton>
@@ -21,7 +21,7 @@ export default function CommonButton({
 const StyledButton = styled.button`
   cursor: pointer;
   border-radius: 5px;
-  background-color: ${props => (props.isDeleteButton ? "#CE6D7F" : "var(--secondary-color)")};
+  background-color: ${props => (props.warningButton ? "#CE6D7F" : "var(--secondary-color)")};
   color: var(--primary-color);
   font-size: 1.1rem;
   margin: 1.5rem 1rem;
