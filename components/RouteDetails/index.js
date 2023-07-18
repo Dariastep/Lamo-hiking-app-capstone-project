@@ -11,11 +11,7 @@ import {
 import CommonButton from "../CommonButton";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import dynamic from "next/dynamic";
-// Import Leaflet and react-leaflet components dynamically
-const LeafletMap = dynamic(() => import("../LeafletMap"), {
-  ssr: false, // Disable server-side rendering
-});
+
 
 export default function RouteDetails({
   name,
@@ -45,7 +41,6 @@ export default function RouteDetails({
   }
   return (
     <RouteDetailsWrapper>
-      <LeafletMap />
       <ImageContainer>
         <StyledImage
           src={imageUrl || defaultImage}
