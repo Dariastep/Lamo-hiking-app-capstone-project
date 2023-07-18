@@ -7,6 +7,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
+import Layout from "../components/Layout/index.js";
 
 export default function Favorites() {
   const { data: session, status } = useSession();
@@ -17,27 +18,18 @@ export default function Favorites() {
   } else if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+  const headerProps = {
+    title: "Favorites",
+    BackButton: BackButton,
+    Login: <Login session={session} />,
+  };
   return (
-    <>
-      <Header
-        title="Favorites"
-        BackButton={BackButton}
-        Login={<Login session={session} />}
-      />
-      <MainSection>
-        {session ? (
-          <FavoritePage favoriteRoutes={favoriteRoutes} />
-        ) : (
-          <NonAuthorizedUser />
-        )}
-      </MainSection>
-    </>
+    <Layout headerProps={headerProps}>
+      {session ? (
+        <FavoritePage favoriteRoutes={favoriteRoutes} />
+      ) : (
+        <NonAuthorizedUser />
+      )}
+    </Layout>
   );
 }
-
-const MainSection = styled.div`
-  margin-top: 6rem;
-  display: flex;
-  flex-direction: column;
-`;

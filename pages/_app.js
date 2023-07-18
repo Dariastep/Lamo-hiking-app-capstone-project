@@ -1,8 +1,6 @@
 import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
-import NavigationBar from "../components/NavigationBar/index.js";
-import Layout from "../components/Layout/index.js";
 
 export default function App({
   Component,
@@ -21,10 +19,8 @@ export default function App({
           },
         }}
       >
-        <Layout>
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </Layout>
+        <GlobalStyle />
+        <Component {...pageProps} />
       </SWRConfig>
     </SessionProvider>
   );

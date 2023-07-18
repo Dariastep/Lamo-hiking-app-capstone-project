@@ -5,7 +5,7 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin: 6rem 0.5rem;
+  margin: 1rem 0.5rem;
   overflow: hidden;
   z-index: 1;
 `;

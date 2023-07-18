@@ -23,11 +23,11 @@ export default function RouteList({
       ) : searchResults.length > 0 ? (
         searchResults.map((route) => (
           <ListItem key={route.id}>
-            <RouteCard route={route} id={route.id} />
+            <RouteCard route={route} id={route._id} />
           </ListItem>
         ))
       ) : (
-        <ListItem>No matching route found.</ListItem>
+        <ListItem key="no-results">No matching route found.</ListItem>
       )}
     </List>
   );
