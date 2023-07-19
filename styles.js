@@ -7,8 +7,8 @@ export default createGlobalStyle`
   --secondary-color: #0496ff;
   --tercery-color: hsla(0, 0%, 80%, 0.80);
   --active-favorite-button-color: hsla(0, 0%, 90%, 0.80);
-  --action-color: #ff6700;
-  --main-text-color:#393838; 
+  --action-color: #E79D5D;
+  --main-text-color:#40474F; 
   --warning-color: #CE6D7F;
 }
   *,

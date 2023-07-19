@@ -6,12 +6,14 @@ import Avatar from "../Avatar/index.js";
 import useSWR from "swr";
 import Loader from "../Loader";
 import CommonButton from "../CommonButton";
+import Banner from "../Banner";
 
 export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [showNameInput, setShowNameInput] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     if (userProfile[0].name) {
@@ -51,6 +53,7 @@ export default function Profile({ userProfile, session }) {
 
         setEditMode(false);
         setShowNameInput(false);
+        setShowBanner(true);
       } else {
         console.error("Failed to save the information");
       }
@@ -97,8 +100,11 @@ export default function Profile({ userProfile, session }) {
   return (
     <>
       <ProfileWrapper>
-        <GreetText>{`Hello ${name}!`}</GreetText>
-        <P>{`You are signed in as ${session.user.email}`}</P>
+      {showBanner && <Banner bannerStatus="Name changed!" setShowBanner={setShowBanner} />}
+        <GreetWrapper>
+          <GreetText>{`Hello ${name}!`}</GreetText>
+          <P>{`You are signed in as ${session.user.email}`}</P>
+        </GreetWrapper>
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
@@ -174,4 +180,8 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+`;
+const GreetWrapper = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
 `;

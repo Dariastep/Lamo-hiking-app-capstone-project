@@ -68,6 +68,7 @@ export default function RouteForm({ formName, data, id }) {
       if (status === "success") {
         event.target.reset();
         setDescription("");
+        setShowBanner(true);
         router.push("/myRoutes");
       }
     }
@@ -81,90 +82,95 @@ export default function RouteForm({ formName, data, id }) {
   }
 
   return (
-    <FormContainer onSubmit={handleSubmit} aria-labelledby={formName}>
-      <FormLabel htmlFor="name">Route name</FormLabel>
-      <FormInput
-        id="name"
-        name="name"
-        type="text"
-        placeholder="e.g. Zugspitze via Höllental"
-        required
-        minLength="10"
-        maxLength="35"
-        autoComplete="on"
-        defaultValue={data?.name}
-      />
-      <FormLabel htmlFor="activity">Activity</FormLabel>
-      <FormSelect
-        id="activity"
-        name="activity"
-        required
-        defaultValue={data?.activity}
-      >
-        <option value="hiking">hiking</option>
-        <option value="trailrunning">trailrunning</option>
-        <option value="cycling">cycling</option>
-      </FormSelect>
-      <FormLabel htmlFor="difficulty">Difficulty</FormLabel>
-      <FormSelect
-        id="difficulty"
-        name="difficulty"
-        required
-        defaultValue={data?.difficulty}
-      >
-        <option value="easy">easy</option>
-        <option value="moderate">moderate</option>
-        <option value="difficult">difficult</option>
-      </FormSelect>
-      <FormLabel htmlFor="length">Length, km</FormLabel>
-      <FormInput
-        id="length"
-        name="length"
-        type="number"
-        autoComplete="on"
-        required
-        defaultValue={data?.length}
-      />
-      <FormLabel htmlFor="altitude">Altitude, hm</FormLabel>
-      <FormInput
-        id="altitude"
-        name="altitude"
-        type="number"
-        autoComplete="on"
-        required
-        defaultValue={data?.altitude}
-      />
-      <FormLabel htmlFor="description">Description</FormLabel>
-      <FormTextArea
-        id="description"
-        name="description"
-        placeholder={descriptonPlaceholder}
-        required
-        maxLength={maxDescriptionLength}
-        rows="4"
-        onChange={handleDescriptionChange}
-        defaultValue={data?.description}
-      />
-      <CharactersLeft>
-        {maxDescriptionLength - description.length} characters remaining
-      </CharactersLeft>
-      <FormLabel htmlFor="createdBy">Created by</FormLabel>
-      <FormInput
-        id="createdBy"
-        name="createdBy"
-        type="text"
-        readOnly
-        disabled
-        value={session?.user.email}
-      />{" "}
-      <ButtonContainer>
-        <CommonButton
-          ButtonName={data ? "Save changes" : "Create"}
-          disabled={isDisabled}
-          actionButton
-        ></CommonButton>
-      </ButtonContainer>
-    </FormContainer>
+    <>
+      {showBanner && (
+        <Banner bannerStatus="Route created!" setShowBanner={setShowBanner} />
+      )}
+      <FormContainer onSubmit={handleSubmit} aria-labelledby={formName}>
+        <FormLabel htmlFor="name">Route name</FormLabel>
+        <FormInput
+          id="name"
+          name="name"
+          type="text"
+          placeholder="e.g. Zugspitze via Höllental"
+          required
+          minLength="10"
+          maxLength="35"
+          autoComplete="on"
+          defaultValue={data?.name}
+        />
+        <FormLabel htmlFor="activity">Activity</FormLabel>
+        <FormSelect
+          id="activity"
+          name="activity"
+          required
+          defaultValue={data?.activity}
+        >
+          <option value="hiking">hiking</option>
+          <option value="trailrunning">trailrunning</option>
+          <option value="cycling">cycling</option>
+        </FormSelect>
+        <FormLabel htmlFor="difficulty">Difficulty</FormLabel>
+        <FormSelect
+          id="difficulty"
+          name="difficulty"
+          required
+          defaultValue={data?.difficulty}
+        >
+          <option value="easy">easy</option>
+          <option value="moderate">moderate</option>
+          <option value="difficult">difficult</option>
+        </FormSelect>
+        <FormLabel htmlFor="length">Length, km</FormLabel>
+        <FormInput
+          id="length"
+          name="length"
+          type="number"
+          autoComplete="on"
+          required
+          defaultValue={data?.length}
+        />
+        <FormLabel htmlFor="altitude">Altitude, hm</FormLabel>
+        <FormInput
+          id="altitude"
+          name="altitude"
+          type="number"
+          autoComplete="on"
+          required
+          defaultValue={data?.altitude}
+        />
+        <FormLabel htmlFor="description">Description</FormLabel>
+        <FormTextArea
+          id="description"
+          name="description"
+          placeholder={descriptonPlaceholder}
+          required
+          maxLength={maxDescriptionLength}
+          rows="4"
+          onChange={handleDescriptionChange}
+          defaultValue={data?.description}
+        />
+        <CharactersLeft>
+          {maxDescriptionLength - description.length} characters remaining
+        </CharactersLeft>
+        <FormLabel htmlFor="createdBy">Created by</FormLabel>
+        <FormInput
+          id="createdBy"
+          name="createdBy"
+          type="text"
+          readOnly
+          disabled
+          value={session?.user.email}
+        />{" "}
+        <ButtonContainer>
+          <CommonButton
+            ButtonName={data ? "Save changes" : "Create"}
+            disabled={isDisabled}
+            actionButton
+          ></CommonButton>
+        </ButtonContainer>
+      </FormContainer>
+    </>
   );
 }
 

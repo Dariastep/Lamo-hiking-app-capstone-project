@@ -23,7 +23,8 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
-
+  const [selectPosition, setSelectPosition] = useState(null);
+  
   function handleSearch(event) {
     const query = event.target.value;
     setSearchQuery(query);
@@ -43,22 +44,27 @@ export default function HomePage() {
 
   return (
     <Layout headerProps={headerProps}>
-      <SearchBar
-        searchQuery={searchQuery}
-        handleSearch={handleSearch}
-        searchResults={searchResults}
-      />
-      <MapWrapper>
-        <LeafletMap />{" "}
-      </MapWrapper>
-
-      <DropdownSearch />
-      <RouteList
-        routesData={routesData}
-        toggleFavorite={toggleFavorite}
-        searchQuery={searchQuery}
-        searchResults={searchResults}
-      />
+      <ContentWrapper>
+        <SearchBar
+          searchQuery={searchQuery}
+          handleSearch={handleSearch}
+          searchResults={searchResults}
+        />
+        <MapWrapper>
+          <LeafletMap selectPosition={selectPosition} />{" "}
+        </MapWrapper>
+<DropdownSearchWrapper>
+        <DropdownSearch
+          selectPosition={selectPosition}
+          setSelectPosition={setSelectPosition}
+        /></DropdownSearchWrapper>
+        <RouteList
+          routesData={routesData}
+          toggleFavorite={toggleFavorite}
+          searchQuery={searchQuery}
+          searchResults={searchResults}
+        />
+      </ContentWrapper>
     </Layout>
   );
 }
@@ -66,7 +72,15 @@ export default function HomePage() {
 const MapWrapper = styled.div`
   display: grid;
   flex-direction: column;
-  margin: 4rem 2rem;
+  margin: 4rem 0rem;
   justify-content: center;
   align-items: center;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const DropdownSearchWrapper = styled.div`
 `;
