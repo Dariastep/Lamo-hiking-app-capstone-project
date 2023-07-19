@@ -28,8 +28,7 @@ export default function RouteForm({ formName, data, id }) {
   async function createRoute(data) {
     try {
       data.createdBy = session.user.email;
-      data.lat = locationSelection[0];
-      data.lon=locationSelection[1];
+
       const response = await fetch("/api/routes/", {
         method: "POST",
         headers: {
@@ -47,7 +46,6 @@ export default function RouteForm({ formName, data, id }) {
     }
   }
   async function editRoute(data, id) {
-    
     try {
       const response = await fetch(`/api/routes/${id}`, {
         method: "PATCH",
@@ -70,6 +68,11 @@ export default function RouteForm({ formName, data, id }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+
+    if (selectPosition) {
+      data.lat = selectPosition.lat;
+      data.lon = selectPosition.lon;
+    }
     setIsDisabled(!isDisabled);
 
     if (formName === "create-route") {
@@ -79,6 +82,7 @@ export default function RouteForm({ formName, data, id }) {
         event.target.reset();
         setDescription("");
         router.push("/myRoutes");
+        setSelectPosition(null); 
       }
     }
 
@@ -175,9 +179,7 @@ export default function RouteForm({ formName, data, id }) {
           data={data}
         />
         <MapWrapper>
-        <LeafletMap
-  selectPosition={selectPosition} data={data}
-/>
+          <LeafletMap selectPosition={selectPosition} data={data} />
         </MapWrapper>
         <ButtonContainer>
           <CommonButton

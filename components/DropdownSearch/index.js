@@ -41,7 +41,10 @@ export default function DropdownSearch({
   }, [searchText]);
 
   function handleResultClick(item) {
-    console.log(item);
+    setSearchText(item.display_name);
+
+
+
     setSelectPosition({
       lat: item.lat,
       lon: item.lon,
@@ -57,7 +60,7 @@ export default function DropdownSearch({
         aria-label="search field"
         id="search"
         name="search"
-        defaultValue={data?.location || searchText}
+        defaultValue={searchText}
         onChange={(event) => {
           setSearchText(event.target.value);
         }}

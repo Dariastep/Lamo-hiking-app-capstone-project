@@ -15,7 +15,7 @@ export default function LeafletMap({ data, selectPosition }) {
     data?.lat || selectPosition?.lat,
     data?.lon || selectPosition?.lon,
   ];
-  console.log("pos", selectPosition);
+  console.log("pos", selectPosition?.lat, selectPosition?.lon);
   function ResetCenterView({ selectPosition }) {
     const map = useMap();
     useEffect(() => {
@@ -24,9 +24,6 @@ export default function LeafletMap({ data, selectPosition }) {
         map.setView(L.latLng(lat, lon), map.getZoom(), {
           animate: true,
         });
-        data.lat = lat;
-        data.lon = lon;
-        console.log(data.lat);
       }
     }, [selectPosition]);
 
