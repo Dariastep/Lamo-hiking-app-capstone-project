@@ -3,6 +3,12 @@ import CommonButton from "../CommonButton";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import DropdownSearch from "../DropdownSearch";
+// Import Leaflet and react-leaflet components dynamically
+const LeafletMap = dynamic(() => import("../LeafletMap"), {
+  ssr: false, // Disable server-side rendering
+});
+import dynamic from "next/dynamic";
 
 const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
@@ -13,6 +19,8 @@ export default function RouteForm({ formName, data, id }) {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const [location, setLocation] = useState(data?.location || {});
+  const [selectPosition, setSelectPosition] = useState(null);
 
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
@@ -60,6 +68,15 @@ export default function RouteForm({ formName, data, id }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.location = selectPosition?.display_name || "";
+
+    const hasLocation =
+      location && location.lat !== undefined && location.lon !== undefined;
+    if (hasLocation) {
+      data.latitude = location.lat;
+      data.longitude = location.lon;
+    }
+
     setIsDisabled(!isDisabled);
 
     if (formName === "create-route") {
@@ -158,7 +175,17 @@ export default function RouteForm({ formName, data, id }) {
           readOnly
           disabled
           value={session?.user.email}
-        />{" "}
+        />
+        <FormLabel htmlFor="search">Location</FormLabel>
+        <StyledDropdownSearch
+          selectPosition={selectPosition}
+          setSelectPosition={setSelectPosition}
+        />
+        <MapWrapper>
+        <LeafletMap
+  selectPosition={selectPosition}
+/>
+        </MapWrapper>
         <ButtonContainer>
           <CommonButton
             ButtonName={data ? "Save changes" : "Create"}
@@ -186,6 +213,9 @@ const FormInput = styled.input`
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   font-size: 1rem;
+  &:focus {
+    border: 1.25px solid var(--action-color);
+  }
 `;
 
 const FormSelect = styled.select`
@@ -193,6 +223,9 @@ const FormSelect = styled.select`
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   font-size: 1rem;
+  &:focus {
+    border: 1.25px solid var(--action-color);
+  }
 `;
 
 const FormTextArea = styled.textarea`
@@ -207,6 +240,9 @@ const FormTextArea = styled.textarea`
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif;
   }
+  &:focus {
+    border: 1.25px solid var(--action-color);
+  }
 `;
 const CharactersLeft = styled.p`
   text-align: right;
@@ -218,4 +254,15 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+const MapWrapper = styled.div`
+  display: grid;
+  flex-direction: column;
+  margin: 4rem 0rem;
+  justify-content: center;
+  align-items: center;
+`;
+const StyledDropdownSearch = styled(DropdownSearch)`
+  && {
+  }
 `;
