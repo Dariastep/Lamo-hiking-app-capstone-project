@@ -26,6 +26,7 @@ export default function LeafletMap({ data, selectPosition }) {
         });
         data.lat = lat;
         data.lon = lon;
+        console.log(data.lat);
       }
     }, [selectPosition]);
 
