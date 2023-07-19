@@ -83,9 +83,6 @@ export default function RouteForm({ formName, data, id }) {
 
   return (
     <>
-      {showBanner && (
-        <Banner bannerStatus="Route created!" setShowBanner={setShowBanner} />
-      )}
       <FormContainer onSubmit={handleSubmit} aria-labelledby={formName}>
         <FormLabel htmlFor="name">Route name</FormLabel>
         <FormInput

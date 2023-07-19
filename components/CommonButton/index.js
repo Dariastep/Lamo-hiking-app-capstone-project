@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function CommonButton({
   ButtonName,
-  disabled,
+  isDisabled,
   onClick,
   warningButton,
   loginButton,
@@ -11,7 +11,7 @@ export default function CommonButton({
   return (
     <StyledButton
       type="submit"
-      disabled={disabled}
+      isDisabled={isDisabled}
       onClick={onClick}
       warningButton={warningButton}
       loginButton={loginButton}
@@ -24,24 +24,28 @@ export default function CommonButton({
 
 const StyledButton = styled.button`
   cursor: pointer;
-  border-radius:   ${(props) =>
-      props.warningButton || props.loginButton ? "25px" : "10px" };
+  border-radius: ${(props) =>
+    props.warningButton || props.loginButton ? "25px" : "10px"};
   border: 1.3px solid
     ${(props) =>
       props.warningButton
         ? "var(--warning-color)"
-        : props.loginButton ?
-        "var(--secondary-color)" :
-        "var(--secondary-color)" };
+        : props.loginButton
+        ? "var(--secondary-color)"
+        : "var(--secondary-color)"};
   color: ${(props) =>
     props.warningButton
       ? "var(--warning-color)"
       : props.loginButton
-      ? "var(--secondary-color)" 
+      ? "var(--secondary-color)"
       : "var(--primary-color)"};
   font-size: 1.1rem;
-  background-color:  ${(props) =>
-      props.warningButton ? "var(--primary-color)" :  props.loginButton ? "var(--primary-color)"  :  "var(--secondary-color)"};
+  background-color: ${(props) =>
+    props.warningButton
+      ? "var(--primary-color)"
+      : props.loginButton
+      ? "var(--primary-color)"
+      : "var(--secondary-color)"};
   margin: 1.5rem 1rem;
   padding: 0.5rem 1rem;
   max-width: 13rem;

@@ -29,8 +29,8 @@ export default function LeafletMap({ selectPosition }) {
     <MapWrapper>
       <MapContainer
         center={position}
-        zoom={10}
-        style={{ height: "45vh", width: "45vh" }}
+        zoom={7}
+        style={{ height: "30vh", width: "100%" }}
         scrollWheelZoom
       >
         <TileLayer
@@ -47,4 +47,5 @@ export default function LeafletMap({ selectPosition }) {
 }
 const MapWrapper = styled.div`
   z-index: 1;
+  min-width: 300px;
 `;
