@@ -10,21 +10,27 @@ const icon = L.icon({
 });
 const position = [47.41, 21.031];
 
-function ResetCenterView({ selectPosition }) {
-  const map = useMap();
-  useEffect(() => {
-    if (selectPosition) {
-      const { lat, lon } = selectPosition;
-      map.setView(L.latLng(lat, lon), map.getZoom(), { animate: true });
-    }
-  }, [selectPosition]);
+export default function LeafletMap({ data, selectPosition }) {
+  const locationSelection = [
+    data?.lat || selectPosition?.lat,
+    data?.lon || selectPosition?.lon,
+  ];
+  console.log("pos", selectPosition);
+  function ResetCenterView({ selectPosition }) {
+    const map = useMap();
+    useEffect(() => {
+      if (selectPosition) {
+        const { lat, lon } = selectPosition;
+        map.setView(L.latLng(lat, lon), map.getZoom(), {
+          animate: true,
+        });
+        data.lat = lat;
+        data.lon = lon;
+      }
+    }, [selectPosition]);
 
-  return null;
-}
-
-export default function LeafletMap({ selectPosition }) {
-  const locationSelection = [selectPosition?.lat, selectPosition?.lon];
-
+    return null;
+  }
   return (
     <MapWrapper>
       <MapContainer

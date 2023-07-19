@@ -24,7 +24,7 @@ export default function HomePage() {
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
   const [selectPosition, setSelectPosition] = useState(null);
-  
+
   function handleSearch(event) {
     const query = event.target.value;
     setSearchQuery(query);
@@ -41,7 +41,7 @@ export default function HomePage() {
   }
 
   const headerProps = { title: <Logo />, Login: <Login session={session} /> };
-
+  
   return (
     <Layout headerProps={headerProps}>
       <ContentWrapper>
@@ -53,11 +53,12 @@ export default function HomePage() {
         <MapWrapper>
           <LeafletMap selectPosition={selectPosition} />{" "}
         </MapWrapper>
-<DropdownSearchWrapper>
-        <DropdownSearch
-          selectPosition={selectPosition}
-          setSelectPosition={setSelectPosition}
-        /></DropdownSearchWrapper>
+        <DropdownSearchWrapper>
+          <DropdownSearch
+            selectPosition={selectPosition}
+            setSelectPosition={setSelectPosition}
+          />
+        </DropdownSearchWrapper>
         <RouteList
           routesData={routesData}
           toggleFavorite={toggleFavorite}
@@ -82,5 +83,4 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const DropdownSearchWrapper = styled.div`
-`;
+const DropdownSearchWrapper = styled.div``;

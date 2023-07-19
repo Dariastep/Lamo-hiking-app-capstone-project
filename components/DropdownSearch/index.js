@@ -4,7 +4,11 @@ import placeholder from "../../public/icon-location.png";
 
 const NOMNATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
-export default function DropdownSearch({ selectPosition, setSelectPosition }) {
+export default function DropdownSearch({
+  data,
+  selectPosition,
+  setSelectPosition,
+}) {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
 
@@ -36,12 +40,12 @@ export default function DropdownSearch({ selectPosition, setSelectPosition }) {
     return () => clearTimeout(delayTimer);
   }, [searchText]);
 
-  function handleDropdownSearch(event) {
-    setSearchText(event.target.value);
-  }
-
   function handleResultClick(item) {
-    setSelectPosition(item);
+    console.log(item);
+    setSelectPosition({
+      lat: item.lat,
+      lon: item.lon,
+    });
     setListPlace([]);
   }
   return (
@@ -53,14 +57,16 @@ export default function DropdownSearch({ selectPosition, setSelectPosition }) {
         aria-label="search field"
         id="search"
         name="search"
-        value={ searchText}
-        onChange={handleDropdownSearch}
+        defaultValue={data?.location || searchText}
+        onChange={(event) => {
+          setSearchText(event.target.value);
+        }}
         placeholder="Search..."
       />
       {listPlace.length > 0 && searchText !== "" ? (
         <ul>
           {listPlace.map((item) => (
-            <div key={item?.display_name}>
+            <div key={item?.osm_id}>
               <li onClick={() => handleResultClick(item)}>
                 {item.display_name}
               </li>
