@@ -24,8 +24,7 @@ export default function CommonButton({
 
 const StyledButton = styled.button`
   cursor: pointer;
-  border-radius: ${(props) =>
-    props.warningButton || props.loginButton ? "25px" : "10px"};
+  border-radius: 10px;
   border: 1.3px solid
     ${(props) =>
       props.warningButton

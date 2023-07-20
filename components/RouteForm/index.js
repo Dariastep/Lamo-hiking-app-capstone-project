@@ -28,7 +28,6 @@ export default function RouteForm({ formName, data, id }) {
   async function createRoute(data) {
     try {
       data.createdBy = session.user.email;
-
       const response = await fetch("/api/routes/", {
         method: "POST",
         headers: {
@@ -109,7 +108,7 @@ export default function RouteForm({ formName, data, id }) {
           type="text"
           placeholder="e.g. Zugspitze via Höllental"
           required
-          minLength="10"
+          minLength="4"
           maxLength="35"
           autoComplete="on"
           defaultValue={data?.name}

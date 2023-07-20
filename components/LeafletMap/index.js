@@ -12,8 +12,8 @@ const position = [47.41, 21.031];
 
 export default function LeafletMap({ data, selectPosition }) {
   const locationSelection = [
-    data?.lat || selectPosition?.lat,
-    data?.lon || selectPosition?.lon,
+    data?.lat || selectPosition?.lat || position[0],
+    data?.lon || selectPosition?.lon || position[1],
   ];
 
   function ResetCenterView({ locationSelection }) {

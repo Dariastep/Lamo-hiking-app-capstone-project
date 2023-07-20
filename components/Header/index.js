@@ -15,10 +15,11 @@ const HeaderContainer = styled.div`
   left: 0;
   z-index: 5;
   width: 100%;
-  display: flex;
+  display: grid;
+  padding: 0.2rem 0.5rem;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
+  justify-items: center;
   background-color: var(--primary-color);
   height: 5rem;
 
@@ -27,19 +28,15 @@ const HeaderContainer = styled.div`
   }
 `;
 const SpaceLeft = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  grid-column: 1;
+  justify-self: start;
 `;
 const Title = styled.h1`
-  margin: 0;
-  text-align: center;
-  flex: 2;
+  grid-column: 2;
   color: var(--primary-color);
   font-weight: 550;
 `;
 const SpaceRight = styled.div`
-  flex: 1;
+  grid-column: 3;
+  justify-self: end;
 `;
