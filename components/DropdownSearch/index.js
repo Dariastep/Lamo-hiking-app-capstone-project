@@ -8,6 +8,8 @@ export default function DropdownSearch({
   data,
   selectPosition,
   setSelectPosition,
+  selectLocation,
+  setSelectLocation
 }) {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
@@ -31,6 +33,7 @@ export default function DropdownSearch({
         fetch(`${NOMNATIM_BASE_URL}${queryString}`, requestOptions)
           .then((response) => response.text())
           .then((result) => {
+            console.log(JSON.parse(result));
             setListPlace(JSON.parse(result));
           })
           .catch((error) => console.log("error", error));
@@ -42,9 +45,7 @@ export default function DropdownSearch({
 
   function handleResultClick(item) {
     setSearchText(item.display_name);
-
-
-
+    setSelectLocation(item.display_name)
     setSelectPosition({
       lat: item.lat,
       lon: item.lon,
@@ -60,7 +61,7 @@ export default function DropdownSearch({
         aria-label="search field"
         id="search"
         name="search"
-        defaultValue={searchText}
+        defaultValue={searchText || data?.location}
         onChange={(event) => {
           setSearchText(event.target.value);
         }}
@@ -70,9 +71,9 @@ export default function DropdownSearch({
         <ul>
           {listPlace.map((item) => (
             <div key={item?.osm_id}>
-              <li onClick={() => handleResultClick(item)}>
+              <ListItem onClick={() => handleResultClick(item)}>
                 {item.display_name}
-              </li>
+              </ListItem>
             </div>
           ))}
         </ul>
@@ -98,4 +99,7 @@ const SearchInput = styled.input`
   &:focus {
     border: 1.25px solid var(--action-color);
   }
+`;
+const ListItem = styled.li`
+  cursor: pointer;
 `;

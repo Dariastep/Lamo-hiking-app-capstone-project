@@ -20,7 +20,7 @@ export default function RouteForm({ formName, data, id }) {
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [selectPosition, setSelectPosition] = useState(null);
-
+  const [selectLocation, setSelectLocation] = useState("");
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
   }
@@ -73,6 +73,12 @@ export default function RouteForm({ formName, data, id }) {
       data.lat = selectPosition.lat;
       data.lon = selectPosition.lon;
     }
+
+    if (selectLocation) {
+      data.location = selectLocation;
+    }
+
+    console.log("data", data);
     setIsDisabled(!isDisabled);
 
     if (formName === "create-route") {
@@ -82,7 +88,7 @@ export default function RouteForm({ formName, data, id }) {
         event.target.reset();
         setDescription("");
         router.push("/myRoutes");
-        setSelectPosition(null); 
+        setSelectPosition(null);
       }
     }
 
@@ -177,6 +183,8 @@ export default function RouteForm({ formName, data, id }) {
           selectPosition={selectPosition}
           setSelectPosition={setSelectPosition}
           data={data}
+          selectLocation={selectLocation}
+          setSelectLocation={setSelectLocation}
         />
         <MapWrapper>
           <LeafletMap selectPosition={selectPosition} data={data} />
