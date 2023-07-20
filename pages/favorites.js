@@ -4,7 +4,7 @@ import BackButton from "../components/BackButton/index.js";
 import Login from "../components/Login/index.js";
 import Loader from "../components/Loader/index.js";
 import useSWR from "swr";
-import styled from "styled-components";
+
 import { useSession } from "next-auth/react";
 import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 import Layout from "../components/Layout/index.js";

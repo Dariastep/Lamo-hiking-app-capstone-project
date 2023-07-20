@@ -78,7 +78,6 @@ export default function RouteForm({ formName, data, id }) {
       data.location = selectLocation;
     }
 
-    console.log("data", data);
     setIsDisabled(!isDisabled);
 
     if (formName === "create-route") {
