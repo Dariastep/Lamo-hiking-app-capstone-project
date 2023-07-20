@@ -11,8 +11,16 @@ import {
 import CommonButton from "../CommonButton";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+// Import Leaflet and react-leaflet components dynamically
+const LeafletMap = dynamic(() => import("../LeafletMap"), {
+  ssr: false, // Disable server-side rendering
+});
+import dynamic from "next/dynamic";
+
+
 
 export default function RouteDetails({
+  data,
   name,
   activity,
   difficulty,
@@ -22,7 +30,10 @@ export default function RouteDetails({
   imageUrl,
   id,
   createdBy,
+  location,
   session,
+  lon,
+  lat,
 }) {
   const router = useRouter();
   function handleEdit() {
@@ -71,6 +82,11 @@ export default function RouteDetails({
           <p>{altitude}</p>
         </div>
       </RouteInfo>
+      <Description>Location:</Description>
+      <P>{location}</P>
+      <MapWrapper>
+          <LeafletMap data={data} />
+        </MapWrapper>
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
@@ -90,4 +106,14 @@ export default function RouteDetails({
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+`;
+const P = styled.p`
+  text-align: center;
+`;
+const MapWrapper = styled.div`
+  display: grid;
+  flex-direction: column;
+  margin: 4rem 0rem;
+  justify-content: center;
+  align-items: center;
 `;

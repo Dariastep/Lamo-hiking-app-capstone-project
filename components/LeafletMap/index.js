@@ -15,17 +15,29 @@ export default function LeafletMap({ data, selectPosition }) {
     data?.lat || selectPosition?.lat,
     data?.lon || selectPosition?.lon,
   ];
-  console.log("pos", selectPosition?.lat, selectPosition?.lon);
-  function ResetCenterView({ selectPosition }) {
+
+  function ResetCenterView({ locationSelection }) {
     const map = useMap();
     useEffect(() => {
-      if (selectPosition) {
-        const { lat, lon } = selectPosition;
-        map.setView(L.latLng(lat, lon), map.getZoom(), {
+      if (locationSelection) {
+        const [lat, lon]  = locationSelection;
+        map.setView(L.latLng(lat, lon), 10, {
           animate: true,
         });
       }
-    }, [selectPosition]);
+    }, [locationSelection]);
+
+
+    // useEffect-Hook zum Zentrieren der Karte bei Änderung der locationSelection
+  useEffect(() => {
+    if (selectPosition) {
+      const { lat, lon } = selectPosition;
+      map.setView(L.latLng(lat, lon), 20, {
+        animate: true,
+      });
+    }
+  }, [selectPosition]);
+
 
     return null;
   }
@@ -33,7 +45,7 @@ export default function LeafletMap({ data, selectPosition }) {
     <MapWrapper>
       <MapContainer
         center={position}
-        zoom={7}
+        zoom={10}
         style={{ height: "30vh", width: "100%" }}
         scrollWheelZoom
       >
@@ -41,10 +53,10 @@ export default function LeafletMap({ data, selectPosition }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://api.maptiler.com/maps/topo-v2/256/{z}/{x}/{y}.png?key=D60u8Jvr5i4pzOQvXsgs"
         />
-        {selectPosition && (
+        {locationSelection && (
           <Marker position={locationSelection} icon={icon}></Marker>
         )}
-        <ResetCenterView selectPosition={selectPosition} />
+        <ResetCenterView locationSelection={locationSelection} />
       </MapContainer>
     </MapWrapper>
   );

@@ -8,13 +8,9 @@ import { toggleFavorite } from "../utils/toggleFavorite.js";
 import Loader from "../components/Loader/index.js";
 import Login from "../components/Login/index.js";
 import { useSession } from "next-auth/react";
-import dynamic from "next/dynamic";
 import DropdownSearch from "../components/DropdownSearch/index.js";
 import Layout from "../components/Layout/index.js";
-// Import Leaflet and react-leaflet components dynamically
-const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
-  ssr: false, // Disable server-side rendering
-});
+
 
 export default function HomePage() {
   const { data: routesData, error } = useSWR("/api/routes", {
@@ -23,7 +19,6 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
-  const [selectPosition, setSelectPosition] = useState(null);
 
   function handleSearch(event) {
     const query = event.target.value;
@@ -50,15 +45,6 @@ export default function HomePage() {
           handleSearch={handleSearch}
           searchResults={searchResults}
         />
-        <MapWrapper>
-          <LeafletMap selectPosition={selectPosition} />{" "}
-        </MapWrapper>
-        <DropdownSearchWrapper>
-          <DropdownSearch
-            selectPosition={selectPosition}
-            setSelectPosition={setSelectPosition}
-          />
-        </DropdownSearchWrapper>
         <RouteList
           routesData={routesData}
           toggleFavorite={toggleFavorite}
@@ -70,17 +56,10 @@ export default function HomePage() {
   );
 }
 
-const MapWrapper = styled.div`
-  display: grid;
-  flex-direction: column;
-  margin: 4rem 0rem;
-  justify-content: center;
-  align-items: center;
-`;
+
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-const DropdownSearchWrapper = styled.div``;

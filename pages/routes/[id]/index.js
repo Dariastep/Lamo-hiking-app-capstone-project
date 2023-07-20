@@ -31,6 +31,9 @@ export default function Route() {
     description,
     imageUrl,
     createdBy,
+    location,
+    lon,
+    lat,
   } = route;
 
   const headerProps = {
@@ -41,6 +44,7 @@ export default function Route() {
   return (
     <Layout headerProps={headerProps}>
       <RouteDetails
+        data={route}
         name={name}
         activity={activity}
         difficulty={difficulty}
@@ -51,6 +55,9 @@ export default function Route() {
         id={id}
         createdBy={createdBy}
         session={session}
+        location={location}
+        lon={lon}
+        lat={lat}
       />
     </Layout>
   );

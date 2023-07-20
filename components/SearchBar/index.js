@@ -49,7 +49,7 @@ const SearchInput = styled.input`
   background-repeat: no-repeat;
   background-position: 0.5rem center;
   background-size: 1rem;
-  
+  margin: 0 auto;
 
   &:focus {
     outline: 1.25px solid var(--secondary-color);
