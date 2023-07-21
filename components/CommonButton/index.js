@@ -26,7 +26,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   border-radius: 10px;
   color: ${(props) =>
-   props.secondaryButton ? "var(--primary-color)" : "white"};
+    props.secondaryButton ? "var(--primary-color)" : "white"};
   border: 1.3px solid
     ${(props) =>
       props.warningButton ? "var(--warning-color)" : "var(--primary-color)"};
@@ -38,8 +38,8 @@ const StyledButton = styled.button`
       : props.secondaryButton
       ? "white"
       : "var(--primary-color)"};
-  margin: 1.5rem 1rem;
-  padding: 0.5rem 1rem;
+
+  padding: 0.5rem 0.7rem;
   max-width: 13rem;
   min-width: 5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function Login({ session }) {
   return (
-    <StyledSection>
+  <>
       {session ? ( // check if we have session data (= user is already signed in => display a logout button)
         <>
           <CommonButton ButtonName="Logout" onClick={signOut}  secondaryButton/>
@@ -14,13 +14,6 @@ export default function Login({ session }) {
         // no session data available yet, display a login button
         <CommonButton ButtonName="Login" onClick={() => signIn("github")} />
       )}
-    </StyledSection>
+    </>
   );
 }
-
-const StyledSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-`;

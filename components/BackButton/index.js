@@ -11,8 +11,6 @@ export default function BackButton() {
 }
 
 const BackLink = styled(Link)`
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: black;
   font-size: 1.5rem;

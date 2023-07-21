@@ -14,29 +14,32 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 5;
-  width: 100%;
-  display: grid;
-  padding: 0.2rem 0.5rem;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  justify-items: center;
   background-color: var(--main-background-color);
-  height: 5rem;
+  height: 6rem;
+  padding: 0 1rem;
+  width: 100vw;
 
   h1 {
     color: black;
   }
 `;
 const SpaceLeft = styled.div`
-  grid-column: 1;
-  justify-self: start;
+  flex: 1;
+  min-width: 5rem;
+  max-width: 13rem;
 `;
+
 const Title = styled.h1`
-  grid-column: 2;
   color: var(--secondary-color);
   font-weight: 550;
 `;
+
 const SpaceRight = styled.div`
-  grid-column: 3;
-  justify-self: end;
+  flex: 1;
+  display: flex;
+  min-width: 5.5rem;
+  max-width: 13rem;
+  justify-content: end;
 `;

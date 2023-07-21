@@ -31,11 +31,10 @@ export default function SearchBar({
 
 const SearchBarWrapper = styled.div`
   position: fixed;
-  top: 4rem;
   width: 100%;
-  padding-top: 2rem;
   z-index: 3;
-  background-color: var(--secondary-color);
+  background-color: var(--main-background-color);
+  margin: 1rem auto;
 `;
 
 const SearchInput = styled.input`
@@ -43,13 +42,15 @@ const SearchInput = styled.input`
   display: flex;
   height: 2.5rem;
   border-radius: 10px;
+  outline: 1.25px solid var(--primary-color);
   padding-left: 2.5rem;
   font-size: 1rem;
   background-image: url(${icon.src});
   background-repeat: no-repeat;
   background-position: 0.5rem center;
   background-size: 1rem;
-  margin: 0 auto;
+  
+
 
   &:focus {
     outline: 1.25px solid var(--primary-color);

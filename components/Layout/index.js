@@ -8,7 +8,7 @@ export default function Layout({ children, headerProps }) {
       <div>
         <Header {...headerProps} />
       </div>
-      <main>{children}</main>
+      <StyledMain>{children}</StyledMain>
       <div>
         <NavigationBar />
       </div>
@@ -17,6 +17,10 @@ export default function Layout({ children, headerProps }) {
 }
 const GridLayout = styled.div`
   display: grid;
-  grid-template-rows: 5rem auto 4.5rem;
+  grid-template-rows: 6rem auto 4.5rem;
+  
 `;
 
+const StyledMain = styled.main`
+ padding: 0 1rem;
+`;
