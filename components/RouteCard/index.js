@@ -46,7 +46,7 @@ export default function RouteCard({ route, id, toggleFavorite }) {
         </div>
       </RouteInfo>
       <StyledLink href={`routes/${id}`} passHref>
-        <CommonButton ButtonName="Details" />
+        <CommonButton ButtonName="Details" secondaryButton/>
       </StyledLink>
     </>
   );

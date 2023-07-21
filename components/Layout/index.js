@@ -5,29 +5,18 @@ import styled from "styled-components";
 export default function Layout({ children, headerProps }) {
   return (
     <GridLayout>
-      <HeaderWrapper>
+      <div>
         <Header {...headerProps} />
-      </HeaderWrapper>
-      <MainSection>{children}</MainSection>
-      <NavigationBarWrapper>
+      </div>
+      <main>{children}</main>
+      <div>
         <NavigationBar />
-      </NavigationBarWrapper>
+      </div>
     </GridLayout>
   );
 }
 const GridLayout = styled.div`
   display: grid;
-  grid-template-rows: 5rem auto 5rem;
+  grid-template-rows: 5rem auto 4.5rem;
 `;
 
-const HeaderWrapper = styled.div`
-  height: 5rem;
-`;
-
-const MainSection = styled.main`
-  padding: 1rem;
-`;
-
-const NavigationBarWrapper = styled.div`
-  height: 5rem;
-`;

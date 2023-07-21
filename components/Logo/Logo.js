@@ -10,7 +10,7 @@ export default function Logo() {
         width={24}
         role="img"
         aria-hidden="true"
-        fill={"var(--secondary-color)"}
+        fill={"var(--primary-color)"}
       >
         <title>image-filter-hdr</title>
         <path d="M14,6L10.25,11L13.1,14.8L11.5,16C9.81,13.75 7,10 7,10L1,18H23L14,6Z" />
@@ -30,7 +30,7 @@ const LogoIcon = styled.div`
   h1 {
     font-size: 1.25rem;
     margin: 0;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     font-weight: 700;
   }
 

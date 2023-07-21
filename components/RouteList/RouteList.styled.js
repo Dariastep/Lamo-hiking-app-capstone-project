@@ -34,10 +34,10 @@ export const Heading = styled.div`
   left: 0;
   width: 100%;
   z-index: 3;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   padding: 1rem;
 
   h1 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
   }
 `;

@@ -5,7 +5,7 @@ export default function CommonButton({
   isDisabled,
   onClick,
   warningButton,
-  loginButton,
+  secondaryButton,
   icon,
 }) {
   return (
@@ -14,7 +14,7 @@ export default function CommonButton({
       isDisabled={isDisabled}
       onClick={onClick}
       warningButton={warningButton}
-      loginButton={loginButton}
+      secondaryButton={secondaryButton}
     >
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {ButtonName}
@@ -25,26 +25,19 @@ export default function CommonButton({
 const StyledButton = styled.button`
   cursor: pointer;
   border-radius: 10px;
+  color: ${(props) =>
+   props.secondaryButton ? "var(--primary-color)" : "white"};
   border: 1.3px solid
     ${(props) =>
-      props.warningButton
-        ? "var(--warning-color)"
-        : props.loginButton
-        ? "var(--secondary-color)"
-        : "var(--secondary-color)"};
-  color: ${(props) =>
-    props.warningButton
-      ? "var(--warning-color)"
-      : props.loginButton
-      ? "var(--secondary-color)"
-      : "var(--primary-color)"};
+      props.warningButton ? "var(--warning-color)" : "var(--primary-color)"};
+
   font-size: 1.1rem;
   background-color: ${(props) =>
     props.warningButton
-      ? "var(--primary-color)"
-      : props.loginButton
-      ? "var(--primary-color)"
-      : "var(--secondary-color)"};
+      ? "var(--warning-color)"
+      : props.secondaryButton
+      ? "white"
+      : "var(--primary-color)"};
   margin: 1.5rem 1rem;
   padding: 0.5rem 1rem;
   max-width: 13rem;

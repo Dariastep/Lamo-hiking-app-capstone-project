@@ -20,7 +20,7 @@ const HeaderContainer = styled.div`
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   justify-items: center;
-  background-color: var(--primary-color);
+  background-color: var(--main-background-color);
   height: 5rem;
 
   h1 {
@@ -33,7 +33,7 @@ const SpaceLeft = styled.div`
 `;
 const Title = styled.h1`
   grid-column: 2;
-  color: var(--primary-color);
+  color: var(--secondary-color);
   font-weight: 550;
 `;
 const SpaceRight = styled.div`

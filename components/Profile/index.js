@@ -100,7 +100,9 @@ export default function Profile({ userProfile, session }) {
   return (
     <>
       <ProfileWrapper>
-      {showBanner && <Banner bannerStatus="Name changed!" setShowBanner={setShowBanner} />}
+        {showBanner && (
+          <Banner bannerStatus="Name changed!" setShowBanner={setShowBanner} />
+        )}
         <GreetWrapper>
           <GreetText>{`Hello ${name}!`}</GreetText>
           <P>{`You are signed in as ${session.user.email}`}</P>
@@ -109,7 +111,7 @@ export default function Profile({ userProfile, session }) {
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
         <ButtonWrapper>
-          <CommonButton onClick={handleEditClick} ButtonName="Change name" />
+          <CommonButton onClick={handleEditClick} ButtonName="Change name" secondaryButton />
         </ButtonWrapper>
         <ImageUploadForm handleAvatarChange={handleAvatarChange} />
         <PersonalInfoWrapper>
@@ -141,7 +143,7 @@ const GreetText = styled.h1`
   text-align: left;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 `;
 
 const P = styled.p`

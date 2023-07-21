@@ -9,7 +9,7 @@ export default function DropdownSearch({
   selectPosition,
   setSelectPosition,
   selectLocation,
-  setSelectLocation
+  setSelectLocation,
 }) {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
@@ -45,7 +45,7 @@ export default function DropdownSearch({
 
   function handleResultClick(item) {
     setSearchText(item.display_name);
-    setSelectLocation(item.display_name)
+    setSelectLocation(item.display_name);
     setSelectPosition({
       lat: item.lat,
       lon: item.lon,
@@ -91,7 +91,7 @@ const SearchInput = styled.input`
   background-size: 1rem;
   background-image: url(${placeholder.src});
 
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;

@@ -211,7 +211,7 @@ const FormLabel = styled.label`
 
 const FormInput = styled.input`
   padding: 0.5rem;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
   &:focus {
@@ -221,7 +221,7 @@ const FormInput = styled.input`
 
 const FormSelect = styled.select`
   padding: 0.5rem;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
   &:focus {
@@ -231,7 +231,7 @@ const FormSelect = styled.select`
 
 const FormTextArea = styled.textarea`
   padding: 0.5rem;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
   resize: none;

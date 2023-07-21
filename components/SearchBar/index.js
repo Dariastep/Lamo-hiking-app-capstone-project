@@ -35,7 +35,7 @@ const SearchBarWrapper = styled.div`
   width: 100%;
   padding-top: 2rem;
   z-index: 3;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 `;
 
 const SearchInput = styled.input`
@@ -52,7 +52,7 @@ const SearchInput = styled.input`
   margin: 0 auto;
 
   &:focus {
-    outline: 1.25px solid var(--secondary-color);
+    outline: 1.25px solid var(--primary-color);
   }
 
   /* Media query for small devices */

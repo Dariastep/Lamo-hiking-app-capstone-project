@@ -58,6 +58,7 @@ function ImageUploadForm({ handleAvatarChange }) {
         type="button"
         onClick={handleUploadClick}
         ButtonName="Change image"
+        secondaryButton
       />
       <Form onSubmit={submitImage}></Form>
     </>

@@ -43,12 +43,12 @@ export default function MyRoutes() {
       {session ? (
         <>
           <CommonButton
-            ButtonName="Create new route"
+            ButtonName="New route"
             onClick={handleCreateRoute}
             actionButton
             icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} >
             <title>plus</title>
-            <path fill="var(--main-text-color)" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+            <path fill="white" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
           </svg>}
           />
           {userRoutes.length > 0 ? (
