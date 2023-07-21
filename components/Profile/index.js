@@ -110,31 +110,30 @@ export default function Profile({ userProfile, session }) {
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
-        {editMode ? (
-          <Form onSubmit={handleSubmit}>
-            <ChangeWrapper>
-              <label htmlFor="name-change">Change name: </label>
-              <Input
-                type="text"
-                name="name-change"
-                value={name}
-                onChange={handleNameChange}
-              />
-            </ChangeWrapper>
-            <ChangeWrapper>
-              <label htmlFor="avatar-change">Change image: </label>
-              <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-            </ChangeWrapper>
-            <Button type="submit" ButtonName="Save" />
-          </Form>
-        ) : (
-          <Button onClick={handleEditClick} ButtonName="Edit" />
-        )}
+        <Grid>
+          {editMode ? (
+            <form onSubmit={handleSubmit}>
+              <Flex>
+                <Label htmlFor="name-change">Change name:</Label>
+                <Input
+                  type="text"
+                  name="name-change"
+                  value={name}
+                  onChange={handleNameChange}
+                />
+                <Label htmlFor="avatar-change">Change image:</Label>
+                <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+                <Button type="submit" ButtonName="Save" />
+              </Flex>
+            </form>
+          ) : (
+            <Button onClick={handleEditClick} ButtonName="Edit" />
+          )}
+        </Grid>
       </ProfileWrapper>
     </>
   );
 }
-
 const ProfileWrapper = styled.div`
   display: grid;
   flex-direction: column;
@@ -163,7 +162,6 @@ const AvatarWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
   padding: 0.5rem;
   border: 1px solid var(--primary-color);
   border-radius: 4px;
@@ -177,11 +175,17 @@ const GreetWrapper = styled.div`
   text-align: center;
   margin-bottom: 2rem;
 `;
-const ChangeWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+const Grid = styled.div``;
+
+const Label = styled.label`
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
-const Form = styled.form`
-  display: grid;
+
+const Flex = styled.div`
+  display: flex;
   flex-direction: column;
+  justify-content: left;
+  width: 80%;
+  margin: 0 auto;
 `;

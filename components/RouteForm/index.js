@@ -19,8 +19,8 @@ export default function RouteForm({ formName, data, id }) {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [selectPosition, setSelectPosition] = useState(null);
-  const [selectLocation, setSelectLocation] = useState("");
+  const [selectedPosition, setselectedPosition] = useState(null);
+  const [selectedLocation, setselectedLocation] = useState("");
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
   }
@@ -68,13 +68,13 @@ export default function RouteForm({ formName, data, id }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    if (selectPosition) {
-      data.lat = selectPosition.lat;
-      data.lon = selectPosition.lon;
+    if (selectedPosition) {
+      data.lat = selectedPosition.lat;
+      data.lon = selectedPosition.lon;
     }
 
-    if (selectLocation) {
-      data.location = selectLocation;
+    if (selectedLocation) {
+      data.location = selectedLocation;
     }
 
     setIsDisabled(!isDisabled);
@@ -86,7 +86,7 @@ export default function RouteForm({ formName, data, id }) {
         event.target.reset();
         setDescription("");
         router.push("/myRoutes");
-        setSelectPosition(null);
+        setselectedPosition(null);
       }
     }
 
@@ -178,14 +178,14 @@ export default function RouteForm({ formName, data, id }) {
         />
         <FormLabel htmlFor="search">Location</FormLabel>
         <StyledDropdownSearch
-          selectPosition={selectPosition}
-          setSelectPosition={setSelectPosition}
+          selectedPosition={selectedPosition}
+          setselectedPosition={setselectedPosition}
           data={data}
-          selectLocation={selectLocation}
-          setSelectLocation={setSelectLocation}
+          selectedLocation={selectedLocation}
+          setselectedLocation={setselectedLocation}
         />
         <MapWrapper>
-          <LeafletMap selectPosition={selectPosition} data={data} />
+          <LeafletMap selectedPosition={selectedPosition} data={data} />
         </MapWrapper>
         <ButtonContainer>
           <Button

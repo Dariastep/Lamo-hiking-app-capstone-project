@@ -5,10 +5,10 @@ import { NOMINATIM_BASE_URL } from "../../constants.js";
 
 export default function DropdownSearch({
   data,
-  selectPosition,
-  setSelectPosition,
-  selectLocation,
-  setSelectLocation,
+  selectedPosition,
+  setselectedPosition,
+  selectedLocation,
+  setselectedLocation,
 }) {
   const [searchTextInput, setSearchTextInput] = useState(data?.location || "");
   const [listPlace, setListPlace] = useState([]);
@@ -48,8 +48,8 @@ export default function DropdownSearch({
 
   const handleResultClick = (item) => {
     setSearchTextInput(item.display_name);
-    setSelectLocation(item.display_name);
-    setSelectPosition({
+    setselectedLocation(item.display_name);
+    setselectedPosition({
       lat: item.lat,
       lon: item.lon,
     });

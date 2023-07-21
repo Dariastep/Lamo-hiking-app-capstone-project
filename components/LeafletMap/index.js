@@ -10,34 +10,32 @@ const icon = L.icon({
 });
 const position = [47.41, 21.031];
 
-export default function LeafletMap({ data, selectPosition }) {
+export default function LeafletMap({ data, selectedPosition }) {
   const locationSelection = [
-    data?.lat || selectPosition?.lat || position[0],
-    data?.lon || selectPosition?.lon || position[1],
+    data?.lat || selectedPosition?.lat || position[0],
+    data?.lon || selectedPosition?.lon || position[1],
   ];
 
   function ResetCenterView({ locationSelection }) {
     const map = useMap();
     useEffect(() => {
       if (locationSelection) {
-        const [lat, lon]  = locationSelection;
+        const [lat, lon] = locationSelection;
         map.setView(L.latLng(lat, lon), 10, {
           animate: true,
         });
       }
     }, [locationSelection]);
 
-
     // useEffect-Hook zum Zentrieren der Karte bei Änderung der locationSelection
-  useEffect(() => {
-    if (selectPosition) {
-      const { lat, lon } = selectPosition;
-      map.setView(L.latLng(lat, lon), 20, {
-        animate: true,
-      });
-    }
-  }, [selectPosition]);
-
+    useEffect(() => {
+      if (selectedPosition) {
+        const { lat, lon } = selectedPosition;
+        map.setView(L.latLng(lat, lon), 20, {
+          animate: true,
+        });
+      }
+    }, [selectedPosition]);
 
     return null;
   }
