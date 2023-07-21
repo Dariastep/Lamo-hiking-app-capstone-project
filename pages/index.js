@@ -1,16 +1,14 @@
-import RouteList from "../components/RouteList/index.js";
-import { useState } from "react";
-import SearchBar from "../components/SearchBar";
 import styled from "styled-components";
+import RouteList from "../components/RouteList/index.js";
+import SearchBar from "../components/SearchBar";
 import Logo from "../components/Logo/Logo.js";
-import useSWR from "swr";
-import { toggleFavorite } from "../utils/toggleFavorite.js";
 import Loader from "../components/Loader/index.js";
 import Login from "../components/Login/index.js";
-import { useSession } from "next-auth/react";
-import DropdownSearch from "../components/DropdownSearch/index.js";
 import Layout from "../components/Layout/index.js";
-
+import useSWR from "swr";
+import { toggleFavorite } from "../utils/toggleFavorite.js";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function HomePage() {
   const { data: routesData, error } = useSWR("/api/routes", {
@@ -36,7 +34,7 @@ export default function HomePage() {
   }
 
   const headerProps = { title: <Logo />, Login: <Login session={session} /> };
-  
+
   return (
     <Layout headerProps={headerProps}>
       <ContentWrapper>
@@ -55,7 +53,6 @@ export default function HomePage() {
     </Layout>
   );
 }
-
 
 const ContentWrapper = styled.div`
   display: flex;

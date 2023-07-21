@@ -30,16 +30,22 @@ export default function SearchBar({
 }
 
 const SearchBarWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  z-index: 3;
+  position: sticky;
+  height: 5rem;
+  top: 6rem;
+  left: 0;
   background-color: var(--main-background-color);
-  margin: 1rem auto;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 `;
 
 const SearchInput = styled.input`
   border: 1px solid var(--tercery-color);
-  display: flex;
   height: 2.5rem;
   border-radius: 10px;
   outline: 1.25px solid var(--primary-color);
@@ -49,16 +55,12 @@ const SearchInput = styled.input`
   background-repeat: no-repeat;
   background-position: 0.5rem center;
   background-size: 1rem;
-  
+  width: 100%;
 
-
-  &:focus {
-    outline: 1.25px solid var(--primary-color);
-  }
 
   /* Media query for small devices */
   @media (max-width: 600px) {
-    width: 90%; /* Full width for small devices */
+    width: 85%; /* Full width for small devices */
   }
   @media (min-width: 600px) {
     width: 70%; /* Full width for small devices */

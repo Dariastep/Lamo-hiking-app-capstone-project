@@ -22,7 +22,7 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: 'Manrope', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--main-text-color);
     background: var(--main-background-color);
     overflow-y: scroll; 
@@ -39,8 +39,6 @@ export default createGlobalStyle`
   h1 {
   text-align: center;
   font-size: 1.25rem;
-  margin: 1rem auto;
-  width: 100%;
   font-weight: 500;
   }
 `;
