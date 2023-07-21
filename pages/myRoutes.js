@@ -1,6 +1,6 @@
 import BackButton from "../components/BackButton/index.js";
 import styled from "styled-components";
-import CommonButton from "../components/CommonButton/index.js";
+import Button from "../components/Button/index.js";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader/index.js";
@@ -38,35 +38,46 @@ export default function MyRoutes() {
 
   return (
     <Layout headerProps={headerProps}>
-       <ContentWrapper>
-      {" "}
-      {session ? (
-        <>
-          <CommonButton
-            ButtonName="New route"
-            onClick={handleCreateRoute}
-            actionButton
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} >
-            <title>plus</title>
-            <path fill="white" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-          </svg>}
-          />
-          {userRoutes.length > 0 ? (
-            <List role="list">
-              {userRoutes.map((route) => (
-                <ListItem key={route._id}>
-                  <RouteCard route={route} id={route._id} />
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <P>You have not created any routes yet.</P>
-          )}
-        </>
-      ) : (
-        <NonAuthorizedUser />
-      )}{" "}
-   </ContentWrapper> </Layout>
+      <ContentWrapper>
+        {" "}
+        {session ? (
+          <>
+            <Button
+              ButtonName="New route"
+              onClick={handleCreateRoute}
+              actionButton
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  height={24}
+                >
+                  <title>plus</title>
+                  <path
+                    fill="white"
+                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  />
+                </svg>
+              }
+            />
+            {userRoutes.length > 0 ? (
+              <List role="list">
+                {userRoutes.map((route) => (
+                  <ListItem key={route._id}>
+                    <RouteCard route={route} id={route._id} />
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <P>You have not created any routes yet.</P>
+            )}
+          </>
+        ) : (
+          <NonAuthorizedUser />
+        )}{" "}
+      </ContentWrapper>{" "}
+    </Layout>
   );
 }
 
@@ -74,9 +85,8 @@ const P = styled.p`
   text-align: center;
 `;
 const ContentWrapper = styled.div`
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

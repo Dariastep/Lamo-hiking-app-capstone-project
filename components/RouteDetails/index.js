@@ -8,7 +8,7 @@ import {
   RouteCardKey,
   Description,
 } from "./routeDetails.styled";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 // Import Leaflet and react-leaflet components dynamically
@@ -16,8 +16,6 @@ const LeafletMap = dynamic(() => import("../LeafletMap"), {
   ssr: false, // Disable server-side rendering
 });
 import dynamic from "next/dynamic";
-
-
 
 export default function RouteDetails({
   data,
@@ -85,18 +83,14 @@ export default function RouteDetails({
       <Description>Location:</Description>
       <P>{location}</P>
       <MapWrapper>
-          <LeafletMap data={data} />
-        </MapWrapper>
+        <LeafletMap data={data} />
+      </MapWrapper>
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
-          <CommonButton ButtonName=" Edit" onClick={handleEdit} />
-          <CommonButton
-            ButtonName="Delete"
-            onClick={deleteRoute}
-            warningButton
-          />
+          <Button ButtonName=" Edit" onClick={handleEdit} />
+          <Button ButtonName="Delete" onClick={deleteRoute} isWarningButton />
         </ButtonWrapper>
       ) : null}
     </RouteDetailsWrapper>
@@ -116,4 +110,5 @@ const MapWrapper = styled.div`
   margin: 4rem 0rem;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -188,11 +188,11 @@ export default function RouteForm({ formName, data, id }) {
           <LeafletMap selectPosition={selectPosition} data={data} />
         </MapWrapper>
         <ButtonContainer>
-          <CommonButton
+          <Button
             ButtonName={data ? "Save changes" : "Create"}
             disabled={isDisabled}
             actionButton
-          ></CommonButton>
+          ></Button>
         </ButtonContainer>
       </FormContainer>
     </>

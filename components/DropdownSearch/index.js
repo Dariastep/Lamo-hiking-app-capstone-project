@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import placeholder from "../../public/icon-location.png";
-
-const NOMNATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+import { NOMINATIM_BASE_URL } from "../../constants.js";
 
 export default function DropdownSearch({
   data,
@@ -11,47 +10,52 @@ export default function DropdownSearch({
   selectLocation,
   setSelectLocation,
 }) {
-  const [searchText, setSearchText] = useState("");
+  const [searchTextInput, setSearchTextInput] = useState(data?.location || "");
   const [listPlace, setListPlace] = useState([]);
+  const [timeoutId, setTimeoutId] = useState(null);
 
-  useEffect(() => {
-    let delayTimer;
+  async function getPlaceList(searchParam) {
+    const params = {
+      q: searchParam,
+      format: "json",
+      addressdetails: 1,
+      polygon_geojson: 0,
+    };
+    const queryString = new URLSearchParams(params).toString();
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        setListPlace(JSON.parse(result));
+      })
+      .catch((error) => console.error("error", error));
+  }
 
-    if (searchText !== "") {
-      delayTimer = setTimeout(() => {
-        const params = {
-          q: searchText,
-          format: "json",
-          addressdetails: 1,
-          polygon_geojson: 0,
-        };
-        const queryString = new URLSearchParams(params).toString();
-        const requestOptions = {
-          method: "GET",
-          redirect: "follow",
-        };
-        fetch(`${NOMNATIM_BASE_URL}${queryString}`, requestOptions)
-          .then((response) => response.text())
-          .then((result) => {
-            console.log(JSON.parse(result));
-            setListPlace(JSON.parse(result));
-          })
-          .catch((error) => console.log("error", error));
-      }, 1000);
-    }
+  async function handleSearchText(event) {
+    setSearchTextInput(event.target.value);
 
-    return () => clearTimeout(delayTimer);
-  }, [searchText]);
+    clearTimeout(timeoutId);
 
-  function handleResultClick(item) {
-    setSearchText(item.display_name);
+    const newTimeoutId = setTimeout(() => {
+      getPlaceList(event.target.value);
+    }, 2000);
+
+    setTimeoutId(newTimeoutId);
+  }
+
+  const handleResultClick = (item) => {
+    setSearchTextInput(item.display_name);
     setSelectLocation(item.display_name);
     setSelectPosition({
       lat: item.lat,
       lon: item.lon,
     });
     setListPlace([]);
-  }
+  };
+
   return (
     <>
       <SearchInput
@@ -61,13 +65,11 @@ export default function DropdownSearch({
         aria-label="search field"
         id="search"
         name="search"
-        defaultValue={searchText || data?.location}
-        onChange={(event) => {
-          setSearchText(event.target.value);
-        }}
+        value={searchTextInput}
+        onChange={handleSearchText}
         placeholder="Search..."
       />
-      {listPlace.length > 0 && searchText !== "" ? (
+      {listPlace.length > 0 && searchTextInput !== "" ? (
         <ul>
           {listPlace.map((item) => (
             <div key={item?.osm_id}>

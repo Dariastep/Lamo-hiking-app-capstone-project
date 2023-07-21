@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import defaultImage from "../../public/defaultImage.jpg";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
@@ -46,7 +46,7 @@ export default function RouteCard({ route, id, toggleFavorite }) {
         </div>
       </RouteInfo>
       <StyledLink href={`routes/${id}`} passHref>
-        <CommonButton ButtonName="Details" secondaryButton />
+        <Button ButtonName="Details" isSecondaryButton />
       </StyledLink>
     </Wrapper>
   );

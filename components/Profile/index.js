@@ -5,7 +5,7 @@ import ImageUploadForm from "../ImageUploadForm";
 import Avatar from "../Avatar/index.js";
 import useSWR from "swr";
 import Loader from "../Loader";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import Banner from "../Banner";
 
 export default function Profile({ userProfile, session }) {
@@ -110,40 +110,44 @@ export default function Profile({ userProfile, session }) {
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
-        <ButtonWrapper>
-          <CommonButton onClick={handleEditClick} ButtonName="Change name" secondaryButton />
-        </ButtonWrapper>
-        <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-        <PersonalInfoWrapper>
-          {editMode && (
-            <form onSubmit={handleSubmit}>
-              <InfoGrid>
-                {showNameInput && (
-                  <Input type="text" value={name} onChange={handleNameChange} />
-                )}
-              </InfoGrid>
-              <ButtonWrapper>
-                <CommonButton type="submit" ButtonName="Save" />
-              </ButtonWrapper>
-            </form>
-          )}
-        </PersonalInfoWrapper>
+        {editMode ? (
+          <Form onSubmit={handleSubmit}>
+            <ChangeWrapper>
+              <label htmlFor="name-change">Change name: </label>
+              <Input
+                type="text"
+                name="name-change"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </ChangeWrapper>
+            <ChangeWrapper>
+              <label htmlFor="avatar-change">Change image: </label>
+              <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+            </ChangeWrapper>
+            <Button type="submit" ButtonName="Save" />
+          </Form>
+        ) : (
+          <Button onClick={handleEditClick} ButtonName="Edit" />
+        )}
       </ProfileWrapper>
     </>
   );
 }
 
 const ProfileWrapper = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  gap: 1rem;
 `;
 const GreetText = styled.h1`
   text-align: left;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--primary-color);
+  margin-bottom: 1rem;
 `;
 
 const P = styled.p`
@@ -158,32 +162,26 @@ const AvatarWrapper = styled.div`
   width: 200px;
 `;
 
-const PersonalInfoWrapper = styled.div`
-  display: grid;
-  gap: 0.5rem;
-  align-items: center;
-`;
-
-const InfoGrid = styled.div`
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 0.5rem;
-  align-items: center;
-`;
-
 const Input = styled.input`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
+  font-size: 1rem;
+  &:focus {
+    border: 1.25px solid var(--action-color);
+  }
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-`;
 const GreetWrapper = styled.div`
   text-align: center;
   margin-bottom: 2rem;
+`;
+const ChangeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Form = styled.form`
+  display: grid;
+  flex-direction: column;
 `;

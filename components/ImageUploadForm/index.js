@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 // we are using useSWR to mutate the data once a file has been uploaded
 import useSWR from "swr";
-import CommonButton from "../CommonButton";
-import Banner from "../Banner"
+import Button from "../Button";
+import Banner from "../Banner";
 
 function ImageUploadForm({ handleAvatarChange }) {
   const { mutate } = useSWR("/api/images/");
@@ -46,7 +46,9 @@ function ImageUploadForm({ handleAvatarChange }) {
 
   return (
     <>
-      {showBanner && <Banner bannerStatus={bannerStatus} setShowBanner={setShowBanner} />}
+      {showBanner && (
+        <Banner bannerStatus={bannerStatus} setShowBanner={setShowBanner} />
+      )}
       {error && <p>{error.message}</p>}
       <FileInput
         type="file"
@@ -54,11 +56,11 @@ function ImageUploadForm({ handleAvatarChange }) {
         ref={fileInputRef}
         onChange={handleFileChange}
       />
-      <CommonButton
+      <Button
         type="button"
         onClick={handleUploadClick}
         ButtonName="Change image"
-        secondaryButton
+        isSecondaryButton
       />
       <Form onSubmit={submitImage}></Form>
     </>
@@ -70,7 +72,6 @@ const Form = styled.form`
   border: none;
 `;
 const FileInput = styled.input`
-  display: none;`
-;
-
+  display: none;
+`;
 export default ImageUploadForm;

@@ -20,7 +20,7 @@ export default function NonAuthorizedUser() {
           </svg>
         </IncognitoWrapper>
         <StyledH2>Hello, Stranger!</StyledH2>
-        <p>You are not authorized, please log in.</p>
+        <StyledP>You are not authorized, please log in.</StyledP>
         <Login />
       </Notification>
     </Wrapper>
@@ -44,15 +44,13 @@ const Notification = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const NotificationImage = styled.img`
-  width: 120px;
-  height: auto;
-  margin-bottom: 1rem;
-`;
 const IncognitoWrapper = styled.div`
   margin-bottom: 3rem;
 `;
 const StyledH2 = styled.h2`
-font-size:1.25rem;
-margin-bottom: 1rem;
-`
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+`;
+const StyledP = styled.p`
+  margin-bottom: 1rem;
+`;
