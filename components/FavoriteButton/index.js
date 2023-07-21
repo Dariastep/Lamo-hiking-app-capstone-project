@@ -48,12 +48,12 @@ export default function FavoriteButton({ id }) {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
+        viewBox="0 0 24 20"
         height={24}
         width={24}
         role="img"
         aria-hidden="true"
-        fill={isFavorite ? "var(--primary-color)" : "white"}
+        fill={isFavorite ? "var(--secondary-color)" : "#ACAEB0"}
       >
         <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
       </svg>
@@ -66,11 +66,9 @@ const Bookmark = styled.button`
   top: 1rem;
   right: 1rem;
   padding: 0.5rem;
-  background-color: transparent;
   border: none;
   z-index: 2;
   cursor: pointer;
   border-radius: 20%;
-  background-color: ${(props) =>
-    props.isFavorite ? "var(--secondary-color)" : "var(--tercery-color)"};
+  background-color: white;
 `;
