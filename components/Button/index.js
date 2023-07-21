@@ -40,7 +40,7 @@ const StyledButton = styled.button`
       : "var(--primary-color)"};
 
   padding: 0.5rem 0.7rem;
-  max-width: 13rem;
+  max-width: 9rem;
   min-width: 5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 

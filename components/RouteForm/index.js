@@ -214,9 +214,6 @@ const FormInput = styled.input`
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
-  &:focus {
-    border: 1.25px solid var(--action-color);
-  }
 `;
 
 const FormSelect = styled.select`
@@ -224,9 +221,6 @@ const FormSelect = styled.select`
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   font-size: 1rem;
-  &:focus {
-    border: 1.25px solid var(--action-color);
-  }
 `;
 
 const FormTextArea = styled.textarea`
@@ -235,14 +229,11 @@ const FormTextArea = styled.textarea`
   border-radius: 4px;
   font-size: 1rem;
   resize: none;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 
   ::placeholder {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-      sans-serif;
-  }
-  &:focus {
-    border: 1.25px solid var(--action-color);
+    font-family: Arial, Helvetica, sans-serif;
   }
 `;
 const CharactersLeft = styled.p`

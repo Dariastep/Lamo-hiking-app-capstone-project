@@ -167,7 +167,7 @@ const Input = styled.input`
   border-radius: 4px;
   font-size: 1rem;
   &:focus {
-    border: 1.25px solid var(--action-color);
+    border: 1px solid var(--action-color);
   }
 `;
 

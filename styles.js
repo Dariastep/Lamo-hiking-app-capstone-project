@@ -30,6 +30,7 @@ export default createGlobalStyle`
     // ---------nessessary, that <div id="__next" doesnt't have a fixed form"
     display: flex; 
     min-height: 100vh;
+
     }
 
   #__next {

@@ -62,4 +62,5 @@ export default function LeafletMap({ data, selectedPosition }) {
 const MapWrapper = styled.div`
   z-index: 1;
   min-width: 300px;
+  height: 100%;
 `;

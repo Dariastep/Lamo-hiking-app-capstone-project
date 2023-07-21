@@ -98,8 +98,11 @@ export default function RouteDetails({
 }
 
 const ButtonWrapper = styled.div`
+margin-top: 1rem;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 70%;
 `;
 const P = styled.p`
   text-align: center;
@@ -111,4 +114,5 @@ const MapWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin: 1rem;
 `;
