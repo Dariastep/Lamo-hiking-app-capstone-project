@@ -70,5 +70,5 @@ const Bookmark = styled.button`
   z-index: 2;
   cursor: pointer;
   border-radius: 20%;
-  background-color: white;
+  background-color: var(--main-background-color);
 `;
