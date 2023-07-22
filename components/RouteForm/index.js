@@ -88,7 +88,6 @@ export default function RouteForm({ formName, data, id }) {
         event.target.reset();
         setDescription("");
         setselectedPosition(null);
-        console.log("we are in success!");
         toast.success("Route is created successfully!", {
           position: "top-right",
           autoClose: 3000,
@@ -98,7 +97,7 @@ export default function RouteForm({ formName, data, id }) {
           draggable: true,
           progress: undefined,
         });
-        router.push("/myRoutes");
+        router.push("/myRoutes/");
       }
     }
 
