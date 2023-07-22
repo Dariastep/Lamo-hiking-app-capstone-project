@@ -16,6 +16,7 @@ const LeafletMap = dynamic(() => import("../LeafletMap"), {
   ssr: false, // Disable server-side rendering
 });
 import dynamic from "next/dynamic";
+import { toast } from "react-toastify";
 
 export default function RouteDetails({
   data,
@@ -42,6 +43,15 @@ export default function RouteDetails({
     const response = await fetch(`/api/routes/${id}`, { method: "DELETE" });
     if (response.ok) {
       await response.json();
+      toast.success("Route is deleted!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push("/myRoutes");
     } else {
       console.log(response.status);
@@ -98,7 +108,7 @@ export default function RouteDetails({
 }
 
 const ButtonWrapper = styled.div`
-margin-top: 1rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -9,6 +9,7 @@ const LeafletMap = dynamic(() => import("../LeafletMap"), {
   ssr: false, // Disable server-side rendering
 });
 import dynamic from "next/dynamic";
+import { toast } from "react-toastify";
 
 const descriptonPlaceholder =
   "Provide a description of the route. Include details such as the trail difficulty, terrain, notable landmarks, scenic views, and any important considerations or recommendations for hikers.";
@@ -21,6 +22,7 @@ export default function RouteForm({ formName, data, id }) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [selectedPosition, setselectedPosition] = useState(null);
   const [selectedLocation, setselectedLocation] = useState("");
+
   function handleDescriptionChange(event) {
     setDescription(event.target.value);
   }
@@ -85,14 +87,33 @@ export default function RouteForm({ formName, data, id }) {
       if (status === "success") {
         event.target.reset();
         setDescription("");
-        router.push("/myRoutes");
         setselectedPosition(null);
+        console.log("we are in success!");
+        toast.success("Route is created successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        router.push("/myRoutes");
       }
     }
 
     if (formName === "edit-route") {
       const { status } = await editRoute(data, id);
       if (status === "success") {
+        toast.success("Route is edited successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         router.push(`/routes/${id}`);
       }
     }
@@ -191,7 +212,6 @@ export default function RouteForm({ formName, data, id }) {
           <Button
             ButtonName={data ? "Save changes" : "Create"}
             disabled={isDisabled}
-            actionButton
           ></Button>
         </ButtonContainer>
       </FormContainer>

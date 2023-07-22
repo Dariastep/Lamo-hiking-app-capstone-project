@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import placeholder from "../../public/icon-location.png";
 import { NOMINATIM_BASE_URL } from "../../constants.js";
 

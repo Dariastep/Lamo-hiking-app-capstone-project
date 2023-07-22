@@ -6,6 +6,7 @@ import Avatar from "../Avatar/index.js";
 import useSWR from "swr";
 import Loader from "../Loader";
 import Button from "../Button";
+import { toast } from "react-toastify";
 
 export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
@@ -49,6 +50,15 @@ export default function Profile({ userProfile, session }) {
         mutate("/api/profile");
         setEditMode(false);
         setShowNameInput(false);
+        toast.success("Saved successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
         console.error("Failed to save the information");
       }
@@ -116,8 +126,9 @@ export default function Profile({ userProfile, session }) {
                   />
                   <Label htmlFor="avatar-change">Change image:</Label>
                   <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-                  <ButtonWrapper><Button type="submit" ButtonName="Save" /></ButtonWrapper>
-                 
+                  <ButtonWrapper>
+                    <Button type="submit" ButtonName="Save" />
+                  </ButtonWrapper>
                 </Flex>
               </form>
             </>
@@ -186,5 +197,5 @@ const Flex = styled.div`
   margin: 0 auto;
 `;
 const ButtonWrapper = styled.div`
- margin: 1rem auto;
+  margin: 1rem auto;
 `;
