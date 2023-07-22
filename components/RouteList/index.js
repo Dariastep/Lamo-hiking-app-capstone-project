@@ -12,7 +12,6 @@ export default function RouteList({
     <List role="list">
       {searchQuery === "" ? (
         <>
-          <SearchText>Start exploring</SearchText>
           {routesData.map((route) => (
             <ListItem key={route._id}>
               <RouteCard

@@ -26,13 +26,18 @@ export default function SearchBar({
             } found`
           : ""}
       </StyledP>
+      {searchQuery === "" ? (
+        <SearchText>Start exploring</SearchText>
+      ) : searchQuery !== "" && searchResults.length > 0 ? (
+        <SearchText>Search results</SearchText>
+      ) : null}
     </SearchBarWrapper>
   );
 }
 
 const SearchBarWrapper = styled.div`
   position: sticky;
-  height: 5rem;
+  height: 9rem;
   top: 6rem;
   left: 0;
   background-color: var(--main-background-color);
@@ -68,6 +73,7 @@ const SearchInput = styled.input`
 const StyledP = styled.p`
   text-align: center;
   margin-top: 0.5rem;
+  margin-bottom: 1rem;
   visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
 `;
 const SearchText = styled.h3`
@@ -75,8 +81,8 @@ const SearchText = styled.h3`
   margin-bottom: 0.5rem;
   width: 100%;
   color: var(--main-text-color);
-font-weight: 550;
-  
+  font-weight: 550;
+
   @media (max-width: 600px) {
     width: 85%; /* Full width for small devices */
   }
