@@ -6,8 +6,8 @@ export default createGlobalStyle`
 
   --primary-color: #0496FF; //brand color, blue
   --secondary-color: #0079D0; //accent-color, dark blue
-  --main-background-color: #FDFDFD; // whiteysh
-  --main-text-color: #010638; //dark grey
+  --main-background-color: #FCFCFC; // whiteysh
+  --main-text-color: #3E3E3F; //dark grey
   --warning-color: #cc2936;
   --success-color:#136f63;
 }

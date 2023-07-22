@@ -8,6 +8,7 @@ export default function SearchBar({
 }) {
   return (
     <SearchBarWrapper>
+      <SearchText>Search</SearchText>
       <SearchInput
         autoFocus={true}
         type="text"
@@ -16,7 +17,7 @@ export default function SearchBar({
         id="search"
         name="search"
         onChange={handleSearch}
-        placeholder="Search..."
+        placeholder="What do you want to do?"
       />
       <StyledP isVisible={searchQuery !== "" && searchResults.length > 0}>
         {searchResults.length > 0
@@ -41,7 +42,6 @@ const SearchBarWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 `;
 
 const SearchInput = styled.input`
@@ -57,7 +57,6 @@ const SearchInput = styled.input`
   background-size: 1rem;
   width: 100%;
 
-
   /* Media query for small devices */
   @media (max-width: 600px) {
     width: 85%; /* Full width for small devices */
@@ -70,4 +69,18 @@ const StyledP = styled.p`
   text-align: center;
   margin-top: 0.5rem;
   visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
+`;
+const SearchText = styled.h3`
+  text-align: left;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  color: var(--main-text-color);
+font-weight: 550;
+  
+  @media (max-width: 600px) {
+    width: 85%; /* Full width for small devices */
+  }
+  @media (min-width: 600px) {
+    width: 70%; /* Full width for small devices */
+  }
 `;
