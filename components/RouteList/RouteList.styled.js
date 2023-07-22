@@ -27,4 +27,6 @@ export const ListItem = styled.li`
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;
-
+export const P = styled.p`
+  text-align: center;
+`;

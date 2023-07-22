@@ -1,6 +1,6 @@
 import RouteCard from "../RouteCard/index.js";
-import { ListItem, List } from "./RouteList.styled.js";
-import styled from "styled-components";
+import { ListItem, List, P } from "./RouteList.styled.js";
+
 
 export default function RouteList({
   routesData,
@@ -29,7 +29,7 @@ export default function RouteList({
           </ListItem>
         ))
       ) : (
-        <ListItem key="no-results">No matching route found.</ListItem>
+        <P key="no-results">No matching route found.</P>
       )}
     </List>
   );
