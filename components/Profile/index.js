@@ -6,14 +6,12 @@ import Avatar from "../Avatar/index.js";
 import useSWR from "swr";
 import Loader from "../Loader";
 import Button from "../Button";
-import Snackbar from "../Snackbar";
 
 export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [showNameInput, setShowNameInput] = useState(false);
-  const [showSnackbar, setShowSnackbar] = useState(false);
 
   useEffect(() => {
     if (userProfile[0].name) {
@@ -51,10 +49,6 @@ export default function Profile({ userProfile, session }) {
         mutate("/api/profile");
         setEditMode(false);
         setShowNameInput(false);
-        setShowSnackbar(true);
-        setTimeout(() => {
-          setShowSnackbar(false);
-        }, 2000);
       } else {
         console.error("Failed to save the information");
       }
@@ -100,9 +94,6 @@ export default function Profile({ userProfile, session }) {
   }
   return (
     <>
-      {showSnackbar && (
-        <Snackbar type="success" message="Saved successfully!" />
-      )}
       <ProfileWrapper>
         <GreetWrapper>
           <GreetText>{`Hello ${name}!`}</GreetText>
@@ -113,20 +104,23 @@ export default function Profile({ userProfile, session }) {
         </AvatarWrapper>
         <Grid>
           {editMode ? (
-            <form onSubmit={handleSubmit}>
-              <Flex>
-                <Label htmlFor="name-change">Change name:</Label>
-                <Input
-                  type="text"
-                  name="name-change"
-                  value={name}
-                  onChange={handleNameChange}
-                />
-                <Label htmlFor="avatar-change">Change image:</Label>
-                <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-                <Button type="submit" ButtonName="Save" />
-              </Flex>
-            </form>
+            <>
+              <form onSubmit={handleSubmit}>
+                <Flex>
+                  <Label htmlFor="name-change">Change name:</Label>
+                  <Input
+                    type="text"
+                    name="name-change"
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                  <Label htmlFor="avatar-change">Change image:</Label>
+                  <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+                  <ButtonWrapper><Button type="submit" ButtonName="Save" /></ButtonWrapper>
+                 
+                </Flex>
+              </form>
+            </>
           ) : (
             <Button onClick={handleEditClick} ButtonName="Edit" />
           )}
@@ -190,4 +184,7 @@ const Flex = styled.div`
   justify-content: left;
   width: 80%;
   margin: 0 auto;
+`;
+const ButtonWrapper = styled.div`
+ margin: 1rem auto;
 `;
