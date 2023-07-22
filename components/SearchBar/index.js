@@ -66,7 +66,7 @@ const SearchInput = styled.input`
     width: 85%; /* Full width for small devices */
   }
   @media (min-width: 600px) {
-    width: 70%; /* Full width for small devices */
+    width: 50%; /* Full width for small devices */
   }
 `;
 const StyledP = styled.p`
@@ -86,6 +86,6 @@ const SearchText = styled.h3`
     width: 85%; /* Full width for small devices */
   }
   @media (min-width: 600px) {
-    width: 70%; /* Full width for small devices */
+    width: 50%; /* Full width for small devices */
   }
 `;

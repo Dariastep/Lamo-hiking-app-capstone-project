@@ -15,7 +15,7 @@ export default createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
-    margin:0;
+    margin:0 ;
     padding: 0;
     
   }
@@ -28,14 +28,14 @@ export default createGlobalStyle`
     overflow-y: scroll; 
 
     // ---------nessessary, that <div id="__next" doesnt't have a fixed form"
-   /*  display: flex; 
-    min-height: 100vh; */
+    display: flex; 
+    min-height: 100vh; 
 
     }
-/* 
+
   #__next {
   flex: 1 1 auto;
-  } */
+  } 
 // ------
   h1 {
   text-align: center;
