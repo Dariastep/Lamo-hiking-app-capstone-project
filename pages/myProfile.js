@@ -7,6 +7,7 @@ import Login from "../components/Login/index.js";
 import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 import Layout from "../components/Layout/index.js";
 
+
 export default function MyProfile() {
   const { data: session } = useSession();
   const { data: userProfile, error } = useSWR("api/profile");

@@ -20,6 +20,7 @@ const HeaderContainer = styled.div`
   height: 6rem;
   padding: 0 1rem;
   width: 100vw;
+ 
 
   h1 {
     color: black;

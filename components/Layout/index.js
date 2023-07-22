@@ -5,9 +5,9 @@ import styled from "styled-components";
 export default function Layout({ children, headerProps }) {
   return (
     <GridLayout>
-      <div>
+      <HeaderWrapper>
         <Header {...headerProps} />
-      </div>
+      </HeaderWrapper>
       <StyledMain>{children}</StyledMain>
       <div>
         <NavigationBar />
@@ -18,9 +18,11 @@ export default function Layout({ children, headerProps }) {
 const GridLayout = styled.div`
   display: grid;
   grid-template-rows: 6rem auto 4.5rem;
-  
+  width: 100%;
 `;
 
 const StyledMain = styled.main`
  padding: 0 1rem;
 `;
+const HeaderWrapper = styled.div`
+ `

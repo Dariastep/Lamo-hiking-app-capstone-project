@@ -6,14 +6,14 @@ import Avatar from "../Avatar/index.js";
 import useSWR from "swr";
 import Loader from "../Loader";
 import Button from "../Button";
-import Banner from "../Banner";
+import Snackbar from "../Snackbar";
 
 export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [showNameInput, setShowNameInput] = useState(false);
-  const [showBanner, setShowBanner] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   useEffect(() => {
     if (userProfile[0].name) {
@@ -48,12 +48,13 @@ export default function Profile({ userProfile, session }) {
 
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name
-
         mutate("/api/profile");
-
         setEditMode(false);
         setShowNameInput(false);
-        setShowBanner(true);
+        setShowSnackbar(true);
+        setTimeout(() => {
+          setShowSnackbar(false);
+        }, 2000);
       } else {
         console.error("Failed to save the information");
       }
@@ -99,10 +100,10 @@ export default function Profile({ userProfile, session }) {
   }
   return (
     <>
+      {showSnackbar && (
+        <Snackbar type="success" message="Saved successfully!" />
+      )}
       <ProfileWrapper>
-        {showBanner && (
-          <Banner bannerStatus="Name changed!" setShowBanner={setShowBanner} />
-        )}
         <GreetWrapper>
           <GreetText>{`Hello ${name}!`}</GreetText>
           <P>{`You are signed in as ${session.user.email}`}</P>
@@ -147,6 +148,7 @@ const GreetText = styled.h1`
   font-weight: 600;
   color: var(--primary-color);
   margin-bottom: 1rem;
+  margin-top: 4rem;
 `;
 
 const P = styled.p`

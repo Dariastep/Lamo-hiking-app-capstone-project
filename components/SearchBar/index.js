@@ -50,10 +50,9 @@ const SearchBarWrapper = styled.div`
 `;
 
 const SearchInput = styled.input`
-  border: 1px solid var(--tercery-color);
   height: 2.5rem;
   border-radius: 10px;
-  outline: 1.25px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
   padding-left: 2.5rem;
   font-size: 1rem;
   background-image: url(${icon.src});

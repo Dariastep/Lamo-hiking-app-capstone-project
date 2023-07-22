@@ -250,7 +250,7 @@ const ButtonContainer = styled.div`
 const MapWrapper = styled.div`
   display: grid;
   flex-direction: column;
-  margin: 4rem 0rem;
+  margin: 1rem 0rem;
   justify-content: center;
   align-items: center;
 `;

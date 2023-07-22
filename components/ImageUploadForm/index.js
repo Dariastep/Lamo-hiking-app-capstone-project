@@ -3,7 +3,7 @@ import styled from "styled-components";
 // we are using useSWR to mutate the data once a file has been uploaded
 import useSWR from "swr";
 import Button from "../Button";
-import Banner from "../Banner";
+import Banner from "../Snackbar";
 
 function ImageUploadForm({ handleAvatarChange }) {
   const { mutate } = useSWR("/api/images/");
@@ -60,7 +60,7 @@ function ImageUploadForm({ handleAvatarChange }) {
         type="button"
         onClick={handleUploadClick}
         ButtonName="Change image"
-        isSecondaryButton
+        secondaryButton
       />
       <Form onSubmit={submitImage}></Form>
     </>

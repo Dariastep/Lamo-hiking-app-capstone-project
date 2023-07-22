@@ -34,16 +34,3 @@ export default function RouteList({
     </List>
   );
 }
-const SearchText = styled.h3`
-  text-align: left;
-  margin: 2rem auto 0.5rem;
-  color: var(--main-text-color);
-  margin-left: 1rem;
-
-  @media (max-width: 600px) {
-    width: 85%; /* Full width for small devices */
-  }
-  @media (min-width: 600px) {
-    width: 70%; /* Full width for small devices */
-  }
-`;

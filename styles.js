@@ -9,7 +9,7 @@ export default createGlobalStyle`
   --main-background-color: #FCFCFC; // whiteysh
   --main-text-color: #3E3E3F; //dark grey
   --warning-color: #cc2936;
-  --success-color:#136f63;
+  --success-color:#4CBB17;
 }
   *,
   *::before,
@@ -28,14 +28,14 @@ export default createGlobalStyle`
     overflow-y: scroll; 
 
     // ---------nessessary, that <div id="__next" doesnt't have a fixed form"
-    display: flex; 
-    min-height: 100vh;
+   /*  display: flex; 
+    min-height: 100vh; */
 
     }
-
+/* 
   #__next {
   flex: 1 1 auto;
-  }
+  } */
 // ------
   h1 {
   text-align: center;
