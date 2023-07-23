@@ -29,7 +29,7 @@ export default function RouteList({
           </ListItem>
         ))
       ) : (
-        <P key="no-results">No matching route found.</P>
+        <P key="no-results">No matching routes found.</P>
       )}
     </List>
   );

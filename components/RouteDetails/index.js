@@ -118,11 +118,10 @@ const P = styled.p`
   text-align: center;
 `;
 const MapWrapper = styled.div`
-  display: grid;
+  display: flex;
   flex-direction: column;
-  margin: 4rem 0rem;
+  margin: 1rem 0rem;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin: 1rem;
+  
 `;

@@ -1,7 +1,7 @@
 import RouteCard from "../RouteCard";
 import SearchBar from "../SearchBar";
-import { ListItem, List } from "../RouteList/RouteList.styled.js";
-import { useState, useEffect } from "react";
+import { ListItem, List, P } from "../RouteList/RouteList.styled.js";
+import { useState } from "react";
 
 import { toggleFavorite } from "../../utils/toggleFavorite.js";
 
@@ -45,9 +45,7 @@ export default function FavoritePage({ favoriteRoutes }) {
               </ListItem>
             ))
           ) : (
-            <ListItem>
-              <p>No favorite routes found.</p>
-            </ListItem>
+            <P>No favorite routes found.</P>
           )
         ) : searchResults.length > 0 ? (
           searchResults.map((favoriteRoute) => (
@@ -65,9 +63,7 @@ export default function FavoritePage({ favoriteRoutes }) {
             </ListItem>
           ))
         ) : (
-          <ListItem>
-            <p>No matching favorite routes found.</p>
-          </ListItem>
+          <P>No matching favorite routes found.</P>
         )}
       </List>
     </>

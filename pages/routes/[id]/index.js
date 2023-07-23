@@ -2,11 +2,9 @@ import { useRouter } from "next/router";
 import RouteDetails from "../../../components/RouteDetails/index.js";
 import useSWR from "swr";
 import Loader from "../../../components/Loader/index.js";
-import Header from "../../../components/Header/index.js";
 import BackButton from "../../../components/BackButton/index.js";
 import { useSession } from "next-auth/react";
 import Login from "../../../components/Login/index.js";
-import styled from "styled-components";
 import Layout from "../../../components/Layout/index.js";
 
 export default function Route() {
