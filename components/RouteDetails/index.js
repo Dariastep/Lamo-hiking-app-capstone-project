@@ -17,6 +17,7 @@ const LeafletMap = dynamic(() => import("../LeafletMap"), {
 });
 import dynamic from "next/dynamic";
 import { toast } from "react-toastify";
+import Weather from "../Weather";
 
 export default function RouteDetails({
   data,
@@ -95,6 +96,7 @@ export default function RouteDetails({
       <MapWrapper>
         <LeafletMap data={data} />
       </MapWrapper>
+      <Weather lat={lat} lon={lon}/>
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
