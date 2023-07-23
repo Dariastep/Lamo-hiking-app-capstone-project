@@ -6,6 +6,15 @@ import Button from "../Button";
 import defaultImage from "../../public/defaultImage.jpg";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
+
+  function truncateLocation(location, maxLength) {
+    if (!location) return ""; 
+    if (location.length <= maxLength) {
+      return location;
+    } else {
+      return location.slice(0, maxLength) + "...";
+    }
+  }
   return (
     <Wrapper>
       <ImageContainer>
@@ -45,6 +54,8 @@ export default function RouteCard({ route, id, toggleFavorite }) {
           <p>{route.altitude} hm</p>
         </div>
       </RouteInfo>
+      <div><RouteLocation>Location:</RouteLocation>
+        <p>{truncateLocation(route.location, 30)}</p></div>
       <StyledLink href={`routes/${id}`} passHref>
         <Button ButtonName="Details" isSecondaryButton />
       </StyledLink>
@@ -75,6 +86,12 @@ const RouteInfo = styled.div`
 const RouteCardKey = styled.p`
   font-weight: bold;
   margin: 0;
+`;
+const RouteLocation = styled.p`
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  
 `;
 export const StyledLink = styled(Link)`
   text-decoration: none;
