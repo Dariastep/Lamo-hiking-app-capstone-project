@@ -88,10 +88,7 @@ export default function Profile({ userProfile, session }) {
         setAvatar(imageURL);
         mutate();
       } else {
-        console.error(
-          "Unfortunately failed to update avatar in MongoDB",
-          error
-        );
+        console.log("Unfortunately failed to update avatar in MongoDB");
       }
     } catch (error) {
       console.error("Failed to update avatar in MongoDB", error);

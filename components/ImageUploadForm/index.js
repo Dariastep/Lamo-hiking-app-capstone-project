@@ -1,14 +1,11 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
-import Button from "../Button";
 
-function ImageUploadForm({ handleAvatarChange }) {
-  const [bannerStatus, setBannerStatus] = useState("");
+export default function ImageUploadForm({ handleAvatarChange }) {
   const [error, setError] = useState(undefined);
   const fileInputRef = useRef(null);
 
   async function submitImage(formData) {
-    setBannerStatus("Uploading...");
     try {
       const response = await fetch("/api/images/upload", {
         method: "post",
@@ -17,7 +14,6 @@ function ImageUploadForm({ handleAvatarChange }) {
       if (response.status === 201) {
         const result = await response.json();
         const imageURL = result.url;
-        setBannerStatus("New avatar changed!");
         handleAvatarChange(imageURL);
       }
     } catch (error) {
@@ -27,7 +23,6 @@ function ImageUploadForm({ handleAvatarChange }) {
 
   function handleUploadClick() {
     fileInputRef.current.click();
-    console.log("we are in handle upload click");
   }
 
   function handleFileChange(event) {
@@ -36,7 +31,7 @@ function ImageUploadForm({ handleAvatarChange }) {
       const formData = new FormData();
       formData.append("file", file);
       submitImage(formData);
-      console.log("we are in handleFileChange");
+      handleUploadClick();
     }
   }
 
@@ -49,18 +44,8 @@ function ImageUploadForm({ handleAvatarChange }) {
         ref={fileInputRef}
         onChange={handleFileChange}
       />
-      <Button
-        type="button"
-        onClick={handleUploadClick}
-        ButtonName="Change image"
-        isSecondaryButton
-      />
     </>
   );
 }
 
-const FileInput = styled.input`
-  display: none;
-`;
-
-export default ImageUploadForm;
+const FileInput = styled.input``;
