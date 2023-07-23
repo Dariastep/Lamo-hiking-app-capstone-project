@@ -26,9 +26,9 @@ export default function MyRoutes() {
     return <Loader />;
   }
 
-  const userRoutes = routes.filter(
-    (route) => route.createdBy === session?.user.email
-  );
+  const userRoutes = routes
+    .filter((route) => route.createdBy === session?.user.email)
+    .reverse();
 
   const headerProps = {
     title: "My Routes",
@@ -57,26 +57,28 @@ export default function MyRoutes() {
           <NonAuthorizedUser />
         )}
       </ContentWrapper>
-      <FixedButtonContainer>
-        <Button
-          ButtonName="New route"
-          onClick={handleCreateRoute}
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width={24}
-              height={24}
-            >
-              <title>plus</title>
-              <path
-                fill="white"
-                d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-              />
-            </svg>
-          }
-        />
-      </FixedButtonContainer>
+      {session && (
+        <FixedButtonContainer>
+          <Button
+            ButtonName="New route"
+            onClick={handleCreateRoute}
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width={24}
+                height={24}
+              >
+                <title>plus</title>
+                <path
+                  fill="white"
+                  d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                />
+              </svg>
+            }
+          />
+        </FixedButtonContainer>
+      )}
     </Layout>
   );
 }
@@ -94,13 +96,16 @@ const ContentWrapper = styled.div`
 
 const FixedButtonContainer = styled.div`
   position: fixed;
-  bottom: 5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 4.5rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
   z-index: 5;
-  padding: 0.75rem;
-  border-radius: 10px;
-  background: radial-gradient(rgba(252, 252, 252, 1), rgba(252, 252, 252, 0));
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 252, 252, 0) 0%,
+    rgba(252, 252, 252, 1) 60%
+  );
 `;
-
-const StyledButton = styled.button``;
