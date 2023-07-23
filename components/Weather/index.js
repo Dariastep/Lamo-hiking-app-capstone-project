@@ -47,11 +47,11 @@ export default function Weather({ lat, lon }) {
       <WeatherDescription>{weatherData.weather[0].description}</WeatherDescription>
       <AdditionalInfo>
         <div>
-          <InfoLabel>Humidity</InfoLabel>
+          <InfoLabel>Humidity 💧</InfoLabel>
           <InfoValue>{weatherData.main.humidity}%</InfoValue>
         </div>
         <div>
-          <InfoLabel>Wind Speed</InfoLabel>
+          <InfoLabel>Wind Speed 🌬️</InfoLabel>
           <InfoValue>{weatherData.wind.speed} m/s</InfoValue>
         </div>
         <div>
@@ -101,7 +101,6 @@ const AdditionalInfo = styled.div`
 
 const InfoLabel = styled.p`
   font-weight: bold;
- 
 `;
 
 const InfoValue = styled.p`
