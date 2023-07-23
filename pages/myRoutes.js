@@ -61,7 +61,6 @@ export default function MyRoutes() {
         <Button
           ButtonName="New route"
           onClick={handleCreateRoute}
-          isRoundedButton // Set the prop for rounded button
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,20 +94,13 @@ const ContentWrapper = styled.div`
 
 const FixedButtonContainer = styled.div`
   position: fixed;
-  bottom: 5.5rem;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(1rem);
-  padding: 0.5rem;
-  border-radius: ${(props) => (props.isRoundedButton ? "50px" : "10px")};
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: radial-gradient(rgba(252, 252, 252, 1), rgba(252, 252, 252, 0));
 `;
 
-const StyledButton = styled.button`
-  /* Your button styles here */
-`;
-
-const IconWrapper = styled.div`
-  display: inline-block;`
+const StyledButton = styled.button``;

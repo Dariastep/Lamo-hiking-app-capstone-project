@@ -6,7 +6,7 @@ export default function Button({
   onClick,
   isWarningButton,
   isSecondaryButton,
-  isRoundedButton,
+
   icon,
 }) {
   return (
@@ -16,7 +16,6 @@ export default function Button({
       onClick={onClick}
       isWarningButton={isWarningButton}
       isSecondaryButton={isSecondaryButton}
-      isRoundedButton={isRoundedButton}
     >
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {ButtonName}
@@ -26,9 +25,8 @@ export default function Button({
 
 const StyledButton = styled.button`
   cursor: pointer;
-  border-radius: ${(props) => {
-props.isRoundedButton ? "50px" :  "10px"}};
- 
+  border-radius: 10px;
+
   color: ${(props) =>
     props.isSecondaryButton ? "var(--primary-color)" : "white"};
   border: 1.3px solid
