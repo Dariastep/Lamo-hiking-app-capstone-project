@@ -3,6 +3,11 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const providers = [
+  GithubProvider({
+    clientId: process.env.GITHUB_ID,
+    clientSecret: process.env.GITHUB_SECRET,
+  }),
+
   CredentialsProvider({
     name: "Credentials",
     credentials: {
@@ -11,10 +16,7 @@ const providers = [
     },
     async authorize(credentials) {
       // Implement your custom logic for validating credentials and signing in here
-      if (
-        credentials.username === "lamo" &&
-        credentials.password === "lamo"
-      ) {
+      if (credentials.username === "lamo" && credentials.password === "lamo") {
         return {
           id: "1",
           name: "Daria",
@@ -24,11 +26,6 @@ const providers = [
         return null;
       }
     },
-  }),
-
-  GithubProvider({
-    clientId: process.env.GITHUB_ID,
-    clientSecret: process.env.GITHUB_SECRET,
   }),
 ];
 
