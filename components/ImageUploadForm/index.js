@@ -48,4 +48,22 @@ export default function ImageUploadForm({ handleAvatarChange }) {
   );
 }
 
-const FileInput = styled.input``;
+
+const FileInputWrapper = styled.label`
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;`
+
+
+const FileInput = styled.input`
+ padding: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  &:focus {
+    border: 1px solid var(--action-color);
+  }
+`;
