@@ -1,26 +1,27 @@
-import Image from "next/image";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { mutate } from "swr";
 import ImageUploadForm from "../ImageUploadForm";
 import Avatar from "../Avatar/index.js";
-import AvatarImage from "../../public/avatar.jpg";
 import useSWR from "swr";
 import Loader from "../Loader";
+import Button from "../Button";
+import { toast } from "react-toastify";
 
-export default function Profile({ userProfile }) {
+export default function Profile({ userProfile, session }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const [showNameInput, setShowNameInput] = useState(false);
 
   useEffect(() => {
-    if (userProfile[0].name && userProfile[0].email) {
+    if (userProfile[0].name) {
       setName(userProfile[0].name);
       setAvatar(userProfile[0].avatar);
     } else {
       // Set default name and email if there is no data in the database
-      setName("ChangeTheName");
-      setAvatar(AvatarImage);
+      setName("Stranger");
+      setAvatar(null);
     }
   }, [userProfile[0]]);
 
@@ -46,10 +47,18 @@ export default function Profile({ userProfile }) {
 
       if (response.ok) {
         userProfile.name = name; // Update the userProfile object with the new name
-
         mutate("/api/profile");
-
         setEditMode(false);
+        setShowNameInput(false);
+        toast.success("Saved successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
         console.error("Failed to save the information");
       }
@@ -79,10 +88,7 @@ export default function Profile({ userProfile }) {
         setAvatar(imageURL);
         mutate();
       } else {
-        console.error(
-          "Unfortunately failed to update avatar in MongoDB",
-          error
-        );
+        console.log("Unfortunately failed to update avatar in MongoDB");
       }
     } catch (error) {
       console.error("Failed to update avatar in MongoDB", error);
@@ -91,51 +97,65 @@ export default function Profile({ userProfile }) {
 
   function handleEditClick() {
     setEditMode(true); // Turn on editing mode when Edit button is clicked
+    setShowNameInput(true); // Show the name input field
   }
   return (
     <>
       <ProfileWrapper>
+        <GreetWrapper>
+          <GreetText>{`Hello ${name}!`}</GreetText>
+          <P>{`You are signed in as ${session.user.email}`}</P>
+        </GreetWrapper>
         <AvatarWrapper>
           <Avatar data={data} error={error} avatar={avatar} />
         </AvatarWrapper>
-        <PersonalInfoWrapper>
+        <Grid>
           {editMode ? (
-            <form onSubmit={handleSubmit}>
-              <InfoGrid>
-                <label>Name:</label>
-                <Input type="text" value={name} onChange={handleNameChange} />
-              </InfoGrid>
-              <ButtonWrapper>
-                <Button type="submit">Save</Button>
-              </ButtonWrapper>
-            </form>
-          ) : (
             <>
-              <InfoGrid>
-                <label>Name:</label>
-                <div>{name}</div>
-              </InfoGrid>
-              <ButtonWrapper>
-                <Button onClick={handleEditClick}>Edit</Button>
-              </ButtonWrapper>
+              <form onSubmit={handleSubmit}>
+                <Flex>
+                  <Label htmlFor="name-change">Change name:</Label>
+                  <Input
+                    type="text"
+                    name="name-change"
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                  <Label htmlFor="avatar-change">Change image:</Label>
+                  <ImageUploadForm handleAvatarChange={handleAvatarChange} />
+                  <ButtonWrapper>
+                    <Button type="submit" ButtonName="Save" />
+                  </ButtonWrapper>
+                </Flex>
+              </form>
             </>
+          ) : (
+            <Button onClick={handleEditClick} ButtonName="Edit" />
           )}
-        </PersonalInfoWrapper>
+        </Grid>
       </ProfileWrapper>
-      <StyledUpload>
-        <ImageUploadForm handleAvatarChange={handleAvatarChange} />
-      </StyledUpload>
     </>
   );
 }
-
 const ProfileWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  flex-direction: column;
   align-items: center;
   justify-items: center;
-  margin-top: 2rem;
+  gap: 1rem;
+`;
+const GreetText = styled.h1`
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  margin-top: 4rem;
+`;
+
+const P = styled.p`
+  text-align: left;
+  font-size: 1rem;
 `;
 
 const AvatarWrapper = styled.div`
@@ -145,46 +165,34 @@ const AvatarWrapper = styled.div`
   width: 200px;
 `;
 
-const StyledImage = styled(Image)`
-  display: block;
-`;
-
-const PersonalInfoWrapper = styled.div`
-  display: grid;
-  gap: 1rem;
-  align-items: center;
-`;
-
-const InfoGrid = styled.div`
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 1rem;
-  align-items: center;
-`;
-
 const Input = styled.input`
-  width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
+  font-size: 1rem;
+  &:focus {
+    border: 1px solid var(--action-color);
+  }
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+const GreetWrapper = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+const Grid = styled.div``;
+
+const Label = styled.label`
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 80%;
+  margin: 0 auto;
 `;
-const StyledUpload = styled.div`
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 4rem;
+const ButtonWrapper = styled.div`
+  margin: 1rem auto;
 `;

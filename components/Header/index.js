@@ -14,13 +14,14 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 5;
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  background-color: var(--primary-color);
-  height: 5rem;
+  background-color: var(--main-background-color);
+  height: 6rem;
+  padding: 0 1rem;
+  width: 100vw;
+  justify-content: center; 
+  
 
   h1 {
     color: black;
@@ -28,17 +29,19 @@ const HeaderContainer = styled.div`
 `;
 const SpaceLeft = styled.div`
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  min-width: 5rem;
+  max-width: 13rem;
 `;
+
 const Title = styled.h1`
-  margin: 0;
-  text-align: center;
-  flex: 2;
-  color: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: 550;
 `;
+
 const SpaceRight = styled.div`
   flex: 1;
+  display: flex;
+  min-width: 5.5rem;
+  max-width: 13rem;
+  justify-content: end;
 `;

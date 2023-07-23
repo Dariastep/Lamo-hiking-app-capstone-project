@@ -9,11 +9,11 @@ export const Heading = styled.div`
   left: 0;
   width: 100%;
   z-index: 3;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   padding: 1rem;
 
   h1 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
   }
 `;
 
@@ -44,7 +44,7 @@ export const RouteDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem;
-  margin: 7rem 1rem 3rem;
+  margin: 1rem 1rem 3rem;
   justify-content: center;
   align-items: center;
 `;

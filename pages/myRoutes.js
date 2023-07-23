@@ -1,7 +1,6 @@
-import Header from "../components/Header/index.js";
 import BackButton from "../components/BackButton/index.js";
 import styled from "styled-components";
-import CommonButton from "../components/CommonButton/index.js";
+import Button from "../components/Button/index.js";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader/index.js";
@@ -10,6 +9,7 @@ import { useSession } from "next-auth/react";
 import NonAuthorizedUser from "../components/NonAuthorizedUser/index.js";
 import { List, ListItem } from "../components/RouteList/RouteList.styled.js";
 import RouteCard from "../components/RouteCard/index.js";
+import Layout from "../components/Layout/index.js";
 
 export default function MyRoutes() {
   const { data: session } = useSession();
@@ -26,23 +26,21 @@ export default function MyRoutes() {
     return <Loader />;
   }
 
-  const userRoutes = routes.filter(
-    (route) => route.createdBy === session?.user.email
-  );
+  const userRoutes = routes
+    .filter((route) => route.createdBy === session?.user.email)
+    .reverse();
+
+  const headerProps = {
+    title: "My Routes",
+    BackButton: BackButton,
+    Login: <Login session={session} />,
+  };
+
   return (
-    <>
-      <Header
-        title="My Routes"
-        BackButton={BackButton}
-        Login={<Login session={session} />}
-      />
-      <MainSection>
+    <Layout headerProps={headerProps}>
+      <ContentWrapper>
         {session ? (
           <>
-            <CommonButton
-              ButtonName="Create new route"
-              onClick={handleCreateRoute}
-            />
             {userRoutes.length > 0 ? (
               <List role="list">
                 {userRoutes.map((route) => (
@@ -57,18 +55,57 @@ export default function MyRoutes() {
           </>
         ) : (
           <NonAuthorizedUser />
-        )}{" "}
-      </MainSection>
-    </>
+        )}
+      </ContentWrapper>
+      {session && (
+        <FixedButtonContainer>
+          <Button
+            ButtonName="New route"
+            onClick={handleCreateRoute}
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width={24}
+                height={24}
+              >
+                <title>plus</title>
+                <path
+                  fill="white"
+                  d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                />
+              </svg>
+            }
+          />
+        </FixedButtonContainer>
+      )}
+    </Layout>
   );
 }
 
-const MainSection = styled.div`
-  margin-top: 6rem;
-  display: flex;
-  flex-direction: column;
-`;
-
 const P = styled.p`
   text-align: center;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FixedButtonContainer = styled.div`
+  position: fixed;
+  bottom: 4.5rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 5;
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 252, 252, 0) 0%,
+    rgba(252, 252, 252, 1) 60%
+  );
 `;

@@ -30,8 +30,11 @@ const LogoIcon = styled.div`
   h1 {
     font-size: 1.25rem;
     margin: 0;
-    color: var(--secondary-color);
+    color: var(--secondary-color) !important;
     font-weight: 700;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
   }
 
   svg {

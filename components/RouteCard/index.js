@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import defaultImage from "../../public/defaultImage.jpg";
 
 export default function RouteCard({ route, id, toggleFavorite }) {
   return (
-    <>
+    <Wrapper>
       <ImageContainer>
         <StyledImage
           src={route.imageUrl || defaultImage}
@@ -46,9 +46,9 @@ export default function RouteCard({ route, id, toggleFavorite }) {
         </div>
       </RouteInfo>
       <StyledLink href={`routes/${id}`} passHref>
-        <CommonButton ButtonName="Details" />
+        <Button ButtonName="Details" isSecondaryButton />
       </StyledLink>
-    </>
+    </Wrapper>
   );
 }
 const ImageContainer = styled.div`
@@ -57,7 +57,7 @@ const ImageContainer = styled.div`
 `;
 const RouteCardHeading = styled.h2`
   font-size: 1.25rem;
-  margin: 1rem;
+  font-weight: 550;
   text-align: center;
 `;
 const StyledImage = styled(Image)`
@@ -84,4 +84,9 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     color: inherit;
   }
+`;
+const Wrapper = styled.div`
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
 `;

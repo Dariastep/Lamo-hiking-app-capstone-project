@@ -8,11 +8,18 @@ import {
   RouteCardKey,
   Description,
 } from "./routeDetails.styled";
-import CommonButton from "../CommonButton";
+import Button from "../Button";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+// Import Leaflet and react-leaflet components dynamically
+const LeafletMap = dynamic(() => import("../LeafletMap"), {
+  ssr: false, // Disable server-side rendering
+});
+import dynamic from "next/dynamic";
+import { toast } from "react-toastify";
 
 export default function RouteDetails({
+  data,
   name,
   activity,
   difficulty,
@@ -22,7 +29,10 @@ export default function RouteDetails({
   imageUrl,
   id,
   createdBy,
+  location,
   session,
+  lon,
+  lat,
 }) {
   const router = useRouter();
   function handleEdit() {
@@ -33,6 +43,15 @@ export default function RouteDetails({
     const response = await fetch(`/api/routes/${id}`, { method: "DELETE" });
     if (response.ok) {
       await response.json();
+      toast.success("Route is deleted!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push("/myRoutes");
     } else {
       console.log(response.status);
@@ -49,6 +68,7 @@ export default function RouteDetails({
         />
         <FavoriteButton id={id} />
       </ImageContainer>
+
       <RouteInfo>
         <div>
           <RouteCardKey>Activity:</RouteCardKey>
@@ -70,16 +90,17 @@ export default function RouteDetails({
           <p>{altitude}</p>
         </div>
       </RouteInfo>
+      <Description>Location:</Description>
+      <P>{location}</P>
+      <MapWrapper>
+        <LeafletMap data={data} />
+      </MapWrapper>
       <Description>Description:</Description>
       <p>{description}</p>
       {session && session.user.email === createdBy ? (
         <ButtonWrapper>
-          <CommonButton ButtonName="Edit" onClick={handleEdit} />
-          <CommonButton
-            ButtonName="Delete"
-            onClick={deleteRoute}
-            warningButton
-          />
+          <Button ButtonName=" Edit" onClick={handleEdit} />
+          <Button ButtonName="Delete" onClick={deleteRoute} isWarningButton />
         </ButtonWrapper>
       ) : null}
     </RouteDetailsWrapper>
@@ -87,6 +108,20 @@ export default function RouteDetails({
 }
 
 const ButtonWrapper = styled.div`
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 70%;
+`;
+const P = styled.p`
+  text-align: center;
+`;
+const MapWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  
 `;

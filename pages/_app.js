@@ -1,8 +1,9 @@
-
 import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
-import NavigationBar from "../components/NavigationBar/index.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
 
 export default function App({
   Component,
@@ -22,9 +23,26 @@ export default function App({
         }}
       >
         <GlobalStyle />
+        <StyledToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Component {...pageProps} />
-        <NavigationBar />
       </SWRConfig>
     </SessionProvider>
   );
 }
+
+const StyledToastContainer = styled(ToastContainer)`
+  top: 6rem;
+  width: 80%;
+  right: 0;
+  left: auto;
+`;

@@ -1,35 +1,18 @@
-import { useState } from "react";
 import RouteCard from "../RouteCard/index.js";
-import SearchBar from "../SearchBar/index.js";
-import { ListItem, List } from "./RouteList.styled.js";
+import { ListItem, List, P } from "./RouteList.styled.js";
+
 
 export default function RouteList({
   routesData,
   toggleFavorite = { toggleFavorite },
+  searchQuery,
+  searchResults,
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  function handleSearch(event) {
-    event.preventDefault();
-    const query = event.target.value;
-    setSearchQuery(query);
-
-    const results = routesData.filter((route) =>
-      route.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setSearchResults(results);
-  }
   return (
-    <>
-      <SearchBar
-        searchQuery={searchQuery}
-        handleSearch={handleSearch}
-        searchResults={searchResults}
-      />
-      <List role="list">
-        {searchQuery === "" ? (
-          routesData.map((route) => (
+    <List role="list">
+      {searchQuery === "" ? (
+        <>
+          {routesData.map((route) => (
             <ListItem key={route._id}>
               <RouteCard
                 route={route}
@@ -37,17 +20,17 @@ export default function RouteList({
                 toggleFavorite={toggleFavorite}
               />
             </ListItem>
-          ))
-        ) : searchResults.length > 0 ? (
-          searchResults.map((route) => (
-            <ListItem key={route.id}>
-              <RouteCard route={route} id={route.id} />
-            </ListItem>
-          ))
-        ) : (
-          <ListItem>No matching route found.</ListItem>
-        )}
-      </List>
-    </>
+          ))}
+        </>
+      ) : searchResults.length > 0 ? (
+        searchResults.map((route) => (
+          <ListItem key={route.id}>
+            <RouteCard route={route} id={route._id} />
+          </ListItem>
+        ))
+      ) : (
+        <P key="no-results">No matching routes found.</P>
+      )}
+    </List>
   );
 }
