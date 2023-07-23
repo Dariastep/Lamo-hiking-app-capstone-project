@@ -3,8 +3,8 @@ import Loader from "../Loader";
 import styled from "styled-components";
 
 async function fetchWeatherData(lat, lon) {
-  const apiKey = process.env.WEATHER_API_KEY; // API key from OpenWeatherMap
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric`;
 
   try {
     const response = await fetch(url);
