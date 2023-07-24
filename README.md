@@ -11,6 +11,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
   
 ## Demo
  You can find the hosted version on [Vercel](https://capstone-project-gules.vercel.app).
+ 
 **Important**:This demo is optimized for mobile screens.
 
 https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/2088ff98-5f28-42ba-9858-ae0620017f44
