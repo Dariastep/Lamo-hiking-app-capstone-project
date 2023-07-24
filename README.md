@@ -11,9 +11,13 @@ Implemented features:
 - Route Wishlist: Users can add routes to their wishlist (only for authorized users)
   
 ## Demo
-ps://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/f97ec043-f88c-4d42-8561-5e6637858b16
+
+https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/2088ff98-5f28-42ba-9858-ae0620017f44
+
 ![Screenshot 2023-07-24 at 08 09 05](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/ada9ba31-b53b-47af-8f5d-20bb988b268f)
-![Lamo_prototype-photos](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/a48f59ea-91c4-45c4-9554-c428163f56f3)
+
+![Lamo_prototype-photos](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/bbe81665-8e8c-46e6-baf0-bebefe234128)
+
 
 ### Tech stack
 - React
