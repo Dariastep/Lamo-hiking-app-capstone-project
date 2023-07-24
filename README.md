@@ -1,4 +1,4 @@
-# 🥾 Lamo: Your Ultimate Hiking Companion (My Capstone Project) 🥾
+### 🥾 Lamo: Your Ultimate Hiking Companion (My Capstone Project) 🥾
 
 Welcome to Lamo, the app that will elevate your hiking adventures to new heights! Discover thrilling trails, find their difficulty level, length, and altitude, and stay up-to-date with real-time weather information – all in one place. Can't find the perfect route? No worries, create your own custom path! Whether you're a seasoned hiker or just starting your journey, Lamo simplifies the planning process, ensuring you have a seamless and enjoyable hiking experience. So, put on your boots, download Lamo, and dive into the great outdoors like never before! Happy hiking! 🏞️
 
@@ -9,7 +9,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Route creation, editing and deleting (only for authorized users, who created this route)
 - Route Wishlist: Users can add routes to their wishlist (only for authorized users)
   
-## Demo
+### Demo
  You can find the hosted version on [Vercel](https://capstone-project-gules.vercel.app).
  
 **Important**:This demo is optimized for mobile screens.
