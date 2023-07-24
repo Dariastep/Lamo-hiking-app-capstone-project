@@ -1,24 +1,43 @@
-# New Project
+# 🥾 Lamo: Your Ultimate Hiking Companion (My Capstone Project) 🥾
 
-This project was created from the neue fische next template.
+Welcome to Lamo, the app that will elevate your hiking adventures to new heights! Discover thrilling trails, find their difficulty level, length, and altitude, and stay up-to-date with real-time weather information – all in one place. Can't find the perfect route? No worries, create your own custom path! Whether you're a seasoned hiker or just starting your journey, Lamo simplifies the planning process, ensuring you have a seamless and enjoyable hiking experience. So, put on your boots, download Lamo, and dive into the great outdoors like never before! Happy hiking! 🏞️
 
-## Development
+Implemented features:
 
-### CodeSandbox
+- Discover exciting trails
+- Real-time weather of the route
+- Implemented map
+- Route creation, editing and deleting (only for authorized users, who created this route)
+- Route Wishlist: Users can add routes to their wishlist (only for authorized users)
+  
+## Demo
+- ps://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/f97ec043-f88c-4d42-8561-5e6637858b16
+- ![Screenshot 2023-07-24 at 08 09 05](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/ada9ba31-b53b-47af-8f5d-20bb988b268f)
+- ![Lamo_prototype-photos](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/a48f59ea-91c4-45c4-9554-c428163f56f3)
 
-Select the "Browser" tab to view this project. If this project contains tests, select the "Tests" tab to check your progress.
+### Tech stack
+- React
+- Next.js
+- React Testing Library
+- Jest
+- Styled Components
+- Node.js
+- MongoDB Atlas
+- Mongoose
+- Cloudinary API
+- NextAuth API
+- Leaflet API
+- Nominatiim: Geocoding API
+- Weather API
+  
+### How to setup?
 
-> 💡 Please note that Next.js support on CodeSandbox is not great.
+- Clone this repository
+- Use .env.example to create your own .env inside the root folder
+- Add your API keys from Cloudinary, NextAuth, Leaflet, Nominatim, Weather API(from OpenWeatherMap).
+- Inside root folder install all dependencies via $ npm install
+- Run app in development mode via $ npm run dev
+- Client: http://localhost:3000/
+- Run tests via $ npm run test
+- Run Storybook with $ npm run storybook
 
-### Local development
-
-To run project commands locally, you need to install the dependencies using `npm i` first.
-
-You can then use the following commands:
-
-- `npm run dev` to start the development server
-- `npm run build` to create a production build
-- `npm run start` to start the production build
-- `npm run test` to run the tests in watch mode (if available)
-
-> 💡 This project requires a bundler. You can use `npm run dev` to start the development server. You can then view the project in the browser at `http://localhost:3000`. The Live Preview Extension for Visual Studio Code will **not** work for this project.
