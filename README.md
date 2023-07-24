@@ -16,8 +16,6 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 
 https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/2088ff98-5f28-42ba-9858-ae0620017f44
 
-![Screenshot 2023-07-24 at 08 09 05](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/ada9ba31-b53b-47af-8f5d-20bb988b268f)
-
 ![Lamo_prototype-photos](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/bbe81665-8e8c-46e6-baf0-bebefe234128)
 
 ### Tech stack
