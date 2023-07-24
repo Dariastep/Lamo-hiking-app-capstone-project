@@ -18,7 +18,8 @@ https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/2
 
 ![Lamo_prototype-photos](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/bbe81665-8e8c-46e6-baf0-bebefe234128)
 
-
+You can find the hosted version on Vercel: capstone-project-gules.vercel.app
+Important: This demo is optimized for mobile screen.
 ### Tech stack
 - React
 - Next.js
