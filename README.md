@@ -8,6 +8,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Implemented map
 - Route creation, editing and deleting (only for authorized users, who created this route)
 - Route Wishlist: Users can add routes to their wishlist (only for authorized users)
+- Authorization with Google or Github
   
 ### Demo
  You can find the hosted version on [Vercel](https://lamo-hiking-app.vercel.app).
