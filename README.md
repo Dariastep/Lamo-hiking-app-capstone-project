@@ -10,7 +10,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Route Wishlist: Users can add routes to their wishlist (only for authorized users)
   
 ### Demo
- You can find the hosted version on [Vercel](https://capstone-project-gules.vercel.app).
+ You can find the hosted version on [Vercel](https:lamo-hiking-app.vercel.app).
  
 **Important**:This demo is optimized for mobile screens.
 
