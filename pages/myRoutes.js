@@ -38,7 +38,7 @@ export default function MyRoutes() {
 
   return (
     <Layout headerProps={headerProps}>
-      <ContentWrapper>
+      <>
         {session ? (
           <>
             {userRoutes.length > 0 ? (
@@ -56,7 +56,7 @@ export default function MyRoutes() {
         ) : (
           <NonAuthorizedUser />
         )}
-      </ContentWrapper>
+      </>
       {session && (
         <FixedButtonContainer>
           <Button
@@ -85,13 +85,6 @@ export default function MyRoutes() {
 
 const P = styled.p`
   text-align: center;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const FixedButtonContainer = styled.div`
