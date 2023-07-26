@@ -51,17 +51,7 @@ export default function FavoritePage({ favoriteRoutes, session }) {
         ) : searchResults.length > 0 ? (
           searchResults.map((favoriteRoute) => (
             <ListItem key={favoriteRoute._id} id={favoriteRoute._id}>
-              <RouteCard
-              session={session}
-                route={favoriteRoute}
-                id={favoriteRoute._id}
-                toggleFavorite={() =>
-                  toggleFavorite({
-                    id: favoriteRoute._id,
-                    isFavorite: favoriteRoute.isFavorite,
-                  })
-                }
-              />
+              <RouteCard route={favoriteRoute} id={favoriteRoute._id} />
             </ListItem>
           ))
         ) : (
