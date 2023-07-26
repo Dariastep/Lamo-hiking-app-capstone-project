@@ -17,6 +17,7 @@
     "flowbite-react": "^0.4.11",
     "formidable": "^2.0.1",
     "leaflet": "^1.9.4",
+    "leaflet-routing-machine": "^3.2.12",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
     "next": "13.3.0",
