@@ -7,8 +7,8 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Real-time weather of the route
 - Implemented map
 - Route creation, editing and deleting (only for authorized users, who created this route)
-- Route Wishlist: Users can add routes to their wishlist (only for authorized users)
-- Authorization with Google or Github
+- Route Wishlist: users can add routes to their wishlist (only for authorized users)
+- Authorization with Google and Github
   
 ### Demo
  You can find the hosted version on [Vercel](https://lamo-hiking-app.vercel.app).
@@ -29,6 +29,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Mongoose
 - Cloudinary API
 - NextAuth API
+- OAuth API
 - Leaflet API
 - Nominatiim: Geocoding API
 - Weather API
@@ -37,7 +38,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 
 - Clone this repository
 - Use .env.example to create your own .env inside the root folder
-- Add your API keys from Cloudinary, NextAuth, Leaflet, Nominatim, Weather API(from OpenWeatherMap).
+- Add your API keys from Cloudinary, NextAuth,OAuth, Leaflet, Nominatim, Weather API(from OpenWeatherMap).
 - Inside root folder install all dependencies via $ npm install
 - Run app in development mode via $ npm run dev
 - Client: http://localhost:3000/
