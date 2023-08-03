@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { signIn, useSession } from "next-auth/react";
 
 export default function FavoriteButton({ id }) {
+  const { data: session } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
+  
   // Beim Laden der Seite den Favoritenstatus aus der Datenbank abrufen
   useEffect(() => {
     async function fetchFavoriteStatus() {
@@ -21,7 +24,12 @@ export default function FavoriteButton({ id }) {
     fetchFavoriteStatus();
   }, [id]);
 
+
   async function handleFavoriteClick() {
+    if (!session) {
+      signIn();
+      return;
+    }
     try {
       const response = await fetch(`/api/routes/${id}`, {
         method: "PATCH",

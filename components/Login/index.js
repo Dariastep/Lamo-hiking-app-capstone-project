@@ -1,6 +1,5 @@
 import { signIn, signOut } from "next-auth/react";
 import Button from "../Button";
-import styled from "styled-components";
 
 export default function Login({ session }) {
   return (
@@ -11,7 +10,7 @@ export default function Login({ session }) {
         </>
       ) : (
         // no session data available yet, display a login button
-        <Button ButtonName="Login" onClick={() => signIn("github")} />
+        <Button ButtonName="Login" onClick={signIn} />
       )}
     </>
   );

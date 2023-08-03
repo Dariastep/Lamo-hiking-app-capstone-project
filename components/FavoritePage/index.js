@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { toggleFavorite } from "../../utils/toggleFavorite.js";
 
-export default function FavoritePage({ favoriteRoutes }) {
+export default function FavoritePage({ favoriteRoutes, session }) {
   /* Search Bar states */
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -39,6 +39,7 @@ export default function FavoritePage({ favoriteRoutes }) {
                     toggleFavorite({
                       id: favoriteRoute._id,
                       isFavorite: favoriteRoute.isFavorite,
+                      session: session,
                     })
                   }
                 />
@@ -50,16 +51,7 @@ export default function FavoritePage({ favoriteRoutes }) {
         ) : searchResults.length > 0 ? (
           searchResults.map((favoriteRoute) => (
             <ListItem key={favoriteRoute._id} id={favoriteRoute._id}>
-              <RouteCard
-                route={favoriteRoute}
-                id={favoriteRoute._id}
-                toggleFavorite={() =>
-                  toggleFavorite({
-                    id: favoriteRoute._id,
-                    isFavorite: favoriteRoute.isFavorite,
-                  })
-                }
-              />
+              <RouteCard route={favoriteRoute} id={favoriteRoute._id} />
             </ListItem>
           ))
         ) : (

@@ -5,10 +5,9 @@ import FavoriteButton from "../FavoriteButton";
 import Button from "../Button";
 import defaultImage from "../../public/defaultImage.jpg";
 
-export default function RouteCard({ route, id, toggleFavorite }) {
-
+export default function RouteCard({ route, id }) {
   function truncateLocation(location, maxLength) {
-    if (!location) return ""; 
+    if (!location) return "";
     if (location.length <= maxLength) {
       return location;
     } else {
@@ -25,11 +24,7 @@ export default function RouteCard({ route, id, toggleFavorite }) {
           height={100}
           priority
         />
-        <FavoriteButton
-          id={id}
-          toggleFavorite={toggleFavorite}
-          isFavorite={route.isFavorite}
-        />
+        <FavoriteButton id={id} />
       </ImageContainer>
       <RouteCardHeading>{route.name}</RouteCardHeading>
 
@@ -54,8 +49,10 @@ export default function RouteCard({ route, id, toggleFavorite }) {
           <p>{route.altitude} hm</p>
         </div>
       </RouteInfo>
-      <div><RouteLocation>Location:</RouteLocation>
-        <p>{truncateLocation(route.location, 30)}</p></div>
+      <div>
+        <RouteLocation>Location:</RouteLocation>
+        <p>{truncateLocation(route.location, 30)}</p>
+      </div>
       <StyledLink href={`routes/${id}`} passHref>
         <Button ButtonName="Details" isSecondaryButton />
       </StyledLink>
@@ -91,7 +88,6 @@ const RouteLocation = styled.p`
   font-weight: bold;
   margin: 0;
   text-align: center;
-  
 `;
 export const StyledLink = styled(Link)`
   text-decoration: none;
