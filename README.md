@@ -11,12 +11,14 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Authorization with Google and Github
   
 ### Demo
- You can find the hosted version on [Vercel](https://lamo-hiking-app.vercel.app).
+ You can find the hosted version on [Vercel](https://lamo-hiking-app.vercel.app).<br>
 **Important**:This demo is optimized for mobile screens.
 
 [https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/2088ff98-5f28-42ba-9858-ae0620017f44](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/3da057b6-18c0-4b44-b6b0-6c1e528d51ac)
 
 ![Lamo_photos_prototype](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/a15b4763-9104-49e9-8fbc-06dc3a33f1d9)
+|![Lamo-app-edit](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/72beaae6-26c8-4459-8725-c10ac81564c8) |![Lamo-app-login](https://github.com/Dariastep/Lamo-hiking-app-capstone-project/assets/123622878/52c363e9-73a4-4717-989d-af518ed5c3d3) |
+|---|---|
 
 ### Tech stack
 - React
