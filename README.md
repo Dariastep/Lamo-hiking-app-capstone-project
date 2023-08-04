@@ -7,7 +7,7 @@ Welcome to Lamo, the app that will elevate your hiking adventures to new heights
 - Real-time weather of the route
 - Implemented map
 - Route creation, editing and deleting (only for authorized users, who created this route)
-- Route Wishlist: users can add routes to their wishlist (only for authorized users)
+- Route wishlist: users can add routes to their wishlist (only for authorized users)
 - Authorization with Google and Github
   
 ### Demo
